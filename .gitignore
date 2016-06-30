@@ -4,3 +4,14 @@
 Homestead.yaml
 Homestead.json
 .env
+
+### PhpStorm ###
+/*.iml
+## Directory-based project format:
+.idea/
+## File-based project format:
+*.ipr
+*.iws
+## Plugin-specific files:
+# IntelliJ
+out/
