@@ -75,6 +75,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ url('enfermedades') }}">
+                        <i class="ti-headphone-alt"></i>
+                        <p>Enfermedades</p>
+                    </a>
+                </li>
+                <li>
                     <a href="icons.html">
                         <i class="ti-pencil-alt2"></i>
                         <p>Icons</p>
