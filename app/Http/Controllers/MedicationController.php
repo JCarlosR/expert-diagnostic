@@ -108,7 +108,7 @@ class MedicationController extends Controller
 
         $medication->save();
 
-        return redirect('medicamentos');
+        return response()->json(['error' => false, 'message' => 'Enfermedad modificada correctamente']);
     }
 
     public function delete( Request $request )

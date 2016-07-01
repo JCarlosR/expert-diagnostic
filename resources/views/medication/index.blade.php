@@ -86,7 +86,7 @@
                             {!! $medications->render() !!}
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -147,9 +147,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Editar medicamento</h4>
                 </div>
-
-
-                <form action="{{ url('/medicamentos/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formEditar" action="{{ url('/medicamentos/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
@@ -185,14 +183,11 @@
                             <div class="col-md-2" id="newImage">
                                 <input type="hidden" name="oldImage">
                             </div>
-
                         </div>
-
                     </div>
-
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar medicamento</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar medicamento</button>
                     </div>
                 </form>
             </div>
