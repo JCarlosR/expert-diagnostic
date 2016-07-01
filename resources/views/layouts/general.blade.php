@@ -31,6 +31,8 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet">
 
+    @yield('styles')
+
 </head>
 <body>
 
@@ -57,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/pacientes') }}">
                         <i class="ti-user"></i>
                         <p>Pacientes</p>
                     </a>
@@ -108,7 +110,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="#">@yield('title')</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -182,9 +184,6 @@
     </div>
 </div>
 
-
-</body>
-
 <!--   Core JS Files   -->
 <script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -225,5 +224,7 @@
 
     });
 </script>
+@yield('scripts')
 
+</body>
 </html>
