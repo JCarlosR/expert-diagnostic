@@ -8655,12 +8655,23 @@ input.ct-danger + span + label + span.switch-right {
   width: auto;
   line-height: inherit;
 }
+
 .bootstrap-datetimepicker-widget .picker-switch td span {
   line-height: 2.5;
   height: 2.5em;
   width: 100%;
   border-radius: 4px;
   margin: 2px 0px !important;
+}
+.card .image {
+  width: 40px;
+  overflow: hidden;
+  height: 40px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 .bootstrap-datetimepicker-widget table {
   width: 100%;

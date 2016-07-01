@@ -1,7 +1,5 @@
 @extends('layouts.general')
 
-@section('title', 'Dashboard')
-
 @section('content')
     <div class="content">
         <div class="container-fluid">
