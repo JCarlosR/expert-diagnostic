@@ -86,7 +86,7 @@
                             {!! $medications->render() !!}
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
