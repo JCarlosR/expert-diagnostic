@@ -26,8 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('enfermedades', 'DiseaseController@index');
     Route::get('enfermedad/nueva', 'DiseaseController@create');
     Route::post('enfermedad/registrar', 'DiseaseController@store');
-    Route::post('enfermedad/editar', 'DiseaseController@edit');
-    Route::post('enfermedad/eliminar', 'DiseaseController@delete');
+    Route::post('enfermedad/modificar', 'DiseaseController@edit');
+    Route::get('enfermedad/eliminar/{id}', 'DiseaseController@delete');
 
 // Diagnostic routes
 });
