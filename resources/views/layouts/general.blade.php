@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('assets/img/favicon.png') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Paper Dashboard by Creative Tim</title>
+    <title>Expert Diagnostic</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -44,52 +44,52 @@
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                <a href="#" class="simple-text">
+                    Expert Diagnostic
                 </a>
             </div>
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.html">
+                    <a href="{{ url('/home') }}">
                         <i class="ti-panel"></i>
-                        <p>Dashboard</p>
+                        <p>Inicio</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="{{ url('/') }}">
                         <i class="ti-user"></i>
-                        <p>User Profile</p>
+                        <p>Pacientes</p>
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="{{ url('/') }}">
                         <i class="ti-view-list-alt"></i>
-                        <p>Table List</p>
+                        <p>Síntomas</p>
                     </a>
                 </li>
                 <li>
-                    <a href="typography.html">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
+                    <a href="{{ url('/') }}">
+                        <i class="ti-agenda"></i>
+                        <p>Enfermedades</p>
                     </a>
                 </li>
                 <li>
-                    <a href="icons.html">
+                    <a href="{{ url('/') }}">
                         <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
+                        <p>Tratamientos</p>
                     </a>
                 </li>
                 <li>
-                    <a href="maps.html">
+                    <a href="{{ url('/') }}">
                         <i class="ti-map"></i>
-                        <p>Maps</p>
+                        <p>Diagnóstico</p>
                     </a>
                 </li>
                 <li>
-                    <a href="notifications.html">
-                        <i class="ti-bell"></i>
-                        <p>Notifications</p>
+                    <a href="{{ url('/') }}">
+                        <i class="ti-blackboard"></i>
+                        <p>Medicamentos</p>
                     </a>
                 </li>
             </ul>
@@ -113,29 +113,31 @@
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-panel"></i>
-                                <p>Stats</p>
+                                <p>Diagnóstico</p>
                             </a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-bell"></i>
-                                <p class="notification">5</p>
-                                <p>Notifications</p>
+                                <p class="notification">4</p>
+                                <p>Notificaciones</p>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
+                                <li><a href="#">Notificación 1</a></li>
+                                <li><a href="#">Notificación 2</a></li>
+                                <li><a href="#">Notificación 3</a></li>
+                                <li><a href="#">Notificación 4</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-settings"></i>
-                                <p>Settings</p>
+                                <p>Configuración</p>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('/logout') }}">Cerrar sesión</a></li>
+                            </ul>
                         </li>
                     </ul>
 
@@ -151,24 +153,24 @@
                     <ul>
 
                         <li>
-                            <a href="http://www.creative-tim.com">
-                                Creative Tim
+                            <a href="#">
+                                Enigmatic Team
                             </a>
                         </li>
                         <li>
-                            <a href="http://blog.creative-tim.com">
-                                Blog
+                            <a href="https://www.youtube.com/user/SorcJC" target="_blank">
+                                Youtube
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.creative-tim.com/license">
-                                Licenses
+                            <a href="#">
+                                Acerca de
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, desarrollado con <i class="fa fa-heart heart"></i> por <a href="#">Enigmatic Team</a>
                 </div>
             </div>
         </footer>
@@ -208,7 +210,7 @@
 
         $.notify({
             icon: 'ti-gift',
-            message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
+            message: "Bienvenido a <b>Expert Diagnostic</b> - su sistema experto de diagnóstico médico !"
 
         },{
             type: 'success',
