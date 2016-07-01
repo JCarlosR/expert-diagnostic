@@ -30,10 +30,27 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo paciente</button>
+                    <br>
+                    <br>
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Listado de pacientes</h4>
                         </div>
+
+                        @if( $errors->count() > 0 )
+                            <div class="col-sm-12">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>Lo sentimos! </strong>Por favor revise los siguientes errores.
+                                    @foreach($errors->all() as $message)
+                                        <p>{{$message}}</p>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+
+
+
                         <div class="content table-responsive table-full-width">
                             <table class="table table-striped mytable">
                                 <thead>
@@ -72,7 +89,7 @@
                                                     data-image="{{ $patient->image }}"
                                                     data-birthdate="{{ $patient->birthdate }}"
                                                     data-comment="{{ $patient->comment }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                            <button type="button"  class="btn btn-danger" data-delete="{{ $patient->id }}" data-name="{{ $patient->name }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                            <button type="button"  class="btn btn-danger" data-delete="{{ $patient->id }}" data-name="{{ $patient->name }}" data-surname="{{ $patient->surname }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -86,6 +103,84 @@
         </div>
     </div>
 
+    <div id="modalNuevo" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo paciente</h4>
+                </div>
+
+
+                <form action="{{ url('/pacientes/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="name">Nombres <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="name" name="name" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="surname">Apellidos <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="surname" name="surname" class="form-control inside" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="address">Dirección <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="address" name="address" class="form-control inside" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="city">Ciudad <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="city" name="city" class="form-control inside" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="country">País <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="country" name="country" class="form-control inside" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                            <div class="col-md-5">
+                                <input type="file" name="image" class="form-control inside" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="comment">Comentario </label>
+                            <div class="col-md-8">
+                                <input type="text" id="comment" name="comment" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="birthdate">Fecha de nacimiento <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="date" id="birthdate" name="birthdate" class="form-control inside" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        <button type="submit" class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div id="modalEditar" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -93,7 +188,8 @@
                     <h4 class="modal-title">Editar paciente</h4>
                 </div>
 
-                <form action="{{ url('') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+
+                <form action="{{ url('/pacientes/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
@@ -108,28 +204,28 @@
                         <div class="form-group">
                             <label class="control-label col-md-3" for="surname">Apellidos <span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="surname" name="surname" class="form-control">
+                                <input type="text" id="surname" name="surname" class="form-control inside">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-3" for="address">Dirección <span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="address" name="address" class="form-control">
+                                <input type="text" id="address" name="address" class="form-control inside">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="city">Dirección <span class="required">*</span></label>
+                            <label class="control-label col-md-3" for="city">Ciudad <span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="city" name="city" class="form-control">
+                                <input type="text" id="city" name="city" class="form-control inside">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="country">Dirección <span class="required">*</span></label>
+                            <label class="control-label col-md-3" for="country">País <span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="country" name="country" class="form-control">
+                                <input type="text" id="country" name="country" class="form-control inside">
                             </div>
                         </div>
 
@@ -149,21 +245,21 @@
                         <div class="form-group">
                             <label class="control-label col-md-3" for="comment">Comentario <span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" id="comment" name="comment" class="form-control">
+                                <input type="text" id="comment" name="comment" class="form-control inside">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-3" for="birthdate">Fecha de nacimiento <span class="required">*</span></label>
                             <div class="col-md-8">
-                                <input type="date" id="birthdate" name="birthdate" class="form-control">
+                                <input type="date" id="birthdate" name="birthdate" class="form-control inside">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group text-center">
-                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Guardar paciente</button>
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        <button type="submit" class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
             </div>
@@ -174,24 +270,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar producto</h4>
+                    <h4 class="modal-title">Eliminar paciente</h4>
                 </div>
-                <form action="{{ url('producto/eliminar') }}" method="POST">
+                <form action="{{ url('pacientes/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
                         <div class="form-group">
-                            <label for="nombreEliminar">¿Desea eliminar el siguiente producto?</label>
+                            <label for="nombreEliminar">¿Desea eliminar el siguiente paciente?</label>
                             <input type="text" readonly class="form-control" name="nombreEliminar"/>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="btn-group pull-left">
-                            <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Cancelar</button>
+                            <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
                         </div>
                         <div class="btn-group pull-right">
-                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Aceptar</button>
+                            <button type="submit" class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
                         </div>
                     </div>
                 </form>

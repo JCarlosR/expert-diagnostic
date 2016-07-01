@@ -4,20 +4,18 @@ function principal()
 {
     $('.mytable').footable();
 
+    $modalNuevo = $('#modalNuevo');
     $modalEditar = $('#modalEditar');
     $modalEliminar = $('#modalEliminar');
 
     $('[data-id]').on('click', mostrarEditar);
-    //$('[data-delete]').on('click', mostrarEliminar);
+    $('[data-delete]').on('click', mostrarEliminar);
 
-
+    $('#btnNew').on('click', mostrarNuevo);
 }
 
 function mostrarEditar() {
 
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    
     $modalEditar = $('#modalEditar');
     var id = $(this).data('id');
     $modalEditar.find('[name="id"]').val(id);
@@ -49,4 +47,19 @@ function mostrarEditar() {
     $modalEditar.find('[name="birthdate"]').val(birthdate);
 
     $modalEditar.modal('show');
+}
+
+function mostrarEliminar() {
+    var id = $(this).data('delete');
+    $modalEliminar.find('[name="id"]').val(id);
+
+    var name = $(this).data('name');
+    var surname = $(this).data('surname');
+    $modalEliminar.find('[name="nombreEliminar"]').val(name+" "+surname);
+
+    $modalEliminar.modal('show');
+}
+
+function mostrarNuevo() {
+    $modalNuevo.modal('show');
 }
