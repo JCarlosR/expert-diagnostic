@@ -76,10 +76,10 @@
                                         <td ><img src="{{ asset('diseases/images') }}/{{ $disease->image }} " class="img-responsive image"></td>
                                         <td>{{$disease->description}}</td>
                                         <td>
-                                            <button type="submit" class="btn btn-success" data-id="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-description="{{ $disease->description }}" data-image="{{ $disease ->image }}">
+                                            <button type="button" class="btn btn-success" data-edit="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-description="{{ $disease->description }}" data-image="{{ $disease ->image }}">
                                                 <i class="fa fa-pencil"></i>Editar
                                             </button>
-                                            <button type="submit" class="btn btn-danger"  data-delete="{{ $disease->id }}" data-name="{{ $disease->name }}">
+                                            <button type="button" class="btn btn-danger"  data-delete="{{ $disease->id }}" data-name="{{ $disease->name }}">
                                                 <i class="fa fa-trash"></i>Eliminar
                                             </button>
 
@@ -104,14 +104,14 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ url('enfermedad/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <form id="form" action="{{ url('enfermedad/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
 
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="name">Nombre*</label>
-                                <input type="text" id="name" name="name" class="form-control inside in-input">
+                                <input type="text" id="name" name="name" class="form-control inside in-input" required>
                             </div>
                         </div>
 
@@ -119,7 +119,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="image">Nueva Imagen</label>
-                                <input type="file" name="image" class="form-control inside in-input" accept="image/*">
+                                <input type="file" id="image" name="image" class="form-control inside in-input" accept="image/*">
                             </div>
                         </div>
 
@@ -141,7 +141,7 @@
 
                         <div class="form-group text-center">
                             <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Guardar cambios</button>
+                            <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Guardar cambios</button>
                         </div>
                     </form>
                 </div>
@@ -155,7 +155,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Eliminar enfermedad</h4>
                 </div>
-                <form action="{{ url('enfermedad/eliminar') }}" method="POST">
+                <form id="form-delete" action="{{ url('enfermedad/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -168,7 +168,7 @@
                     <div class="modal-footer">
                         <div class="form-group text-center">
                             <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Cancelar</button>
-                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Aceptar</button>
+                            <button type="button" class="btn btn-primary" id="accept"><span class="glyphicon glyphicon-ok-circle"></span> Aceptar</button>
                         </div>
                     </div>
                 </form>

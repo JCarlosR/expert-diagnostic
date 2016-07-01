@@ -20,7 +20,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col col-md-8 col-md-offset-2">
-                    <form method="post" action="{{url('enfermedad/registrar')}}" enctype="multipart/form-data">
+                    <form id="form" method="post" action="{{url('enfermedad/registrar')}}" enctype="multipart/form-data">
+                        <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
+
                         <div class="col-md-12 text-center">
                             <h3>Registrar enfermedad</h3>
                         </div>
@@ -56,4 +58,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('diseases/js/create.js') }}"></script>
 @endsection

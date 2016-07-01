@@ -13,7 +13,7 @@ class DiseaseController extends Controller
 {
     public function index()
     {
-        $diseases = Disease::paginate(3);
+        $diseases = Disease::orderby('name','asc')->paginate(3);
         return view('diseases.index')->with(compact('diseases'));
     }
 
@@ -29,6 +29,8 @@ class DiseaseController extends Controller
         if ( $validator->fails() )
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
+        if ( strlen($request->get('name'))<4 )
+            return response()->json(['error' => true, 'message' => 'El nomnre de la enfermedad debe tener mínimo 3 caracteres']);
 
         $disease_test = Disease::where('name',$request->get('name'))->first();
 
@@ -63,12 +65,14 @@ class DiseaseController extends Controller
         if ( $validator->fails() )
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
-
         $disease_test = Disease::where('name',$request->get('name'))->first();
 
         if($disease_test != null)
             if( $disease_test->id != $request->get('id') )
                 return response()->json(['error' => true, 'message' => 'Ya existe una enfermedad registrada con ese nombre']);
+
+        if ( strlen($request->get('name'))<4 )
+            return response()->json(['error' => true, 'message' => 'El nomnre de la enfermedad debe tener mínimo 3 caracteres']);
 
         $disease = Disease::find( $request->get('id'));
 
@@ -85,18 +89,19 @@ class DiseaseController extends Controller
             $request->file('image')->move($path, $fileName);
             $disease->image = $fileName;
         }
-
         $disease->save();
 
         return response()->json(['error' => false, 'message' => 'Enfermedad modificada correctamente']);
     }
 
-    public function delete( Request $request )
+    public function delete( $id )
     {
-        $disease = Disease::find($request->get('id'));
+        $disease = Disease::find($id);
         $fileName = $disease->image;
         $path = public_path().'/diseases/images';
-        File::delete($path,$fileName);
+
+        if($disease->image != '0.png' )
+            File::delete($path.'/'.$fileName);
 
         $disease->delete();
 
