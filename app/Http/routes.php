@@ -16,5 +16,6 @@ Route::get('/home', 'HomeController@index');
 
 // Disease routes
     Route::get('enfermedades', 'DiseaseController@index');
+    Route::get('enfermedad/nueva', 'DiseaseController@create');
 
 // Diagnostic routes
