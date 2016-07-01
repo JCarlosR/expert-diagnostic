@@ -11,7 +11,6 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
 
@@ -71,13 +70,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
-                        <i class="ti-agenda"></i>
+                    <a href="{{ url('enfermedades') }}">
+                        <i class="ti-headphone-alt"></i>
                         <p>Enfermedades</p>
                     </a>
                 </li>
                 <li>
+                    <a href="icons.html">
                     <a href="{{ url('/') }}">
+
                         <i class="ti-pencil-alt2"></i>
                         <p>Tratamientos</p>
                     </a>
@@ -148,12 +149,10 @@
         </nav>
 
         @yield('content')
-
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
                     <ul>
-
                         <li>
                             <a href="#">
                                 Enigmatic Team
@@ -176,7 +175,6 @@
                 </div>
             </div>
         </footer>
-
     </div>
 </div>
 
@@ -201,6 +199,8 @@
 
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('assets/js/demo.js') }}"></script>
+
+@yield('scripts');
 
 <script type="text/javascript">
     $(document).ready(function(){
