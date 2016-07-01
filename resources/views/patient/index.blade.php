@@ -234,11 +234,9 @@
                             <div class="col-md-5">
                                 <input type="file" name="image" class="form-control inside" accept="image/*">
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
-                                <div class="col-md-2" id="newImage">
-                                    <input type="hidden" name="oldImage">
-                                </div>
+                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                            <div class="col-md-2" id="newImage">
+                                <input type="hidden" name="oldImage">
                             </div>
                         </div>
 

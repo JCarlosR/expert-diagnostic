@@ -90,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/medicamentos') }}">
                         <i class="ti-blackboard"></i>
                         <p>Medicamentos</p>
                     </a>
