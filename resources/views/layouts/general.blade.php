@@ -51,7 +51,7 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="{{ url('/home') }}">
                         <i class="ti-panel"></i>
                         <p>Inicio</p>
@@ -76,9 +76,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="icons.html">
                     <a href="{{ url('/') }}">
-
                         <i class="ti-pencil-alt2"></i>
                         <p>Tratamientos</p>
                     </a>
@@ -143,7 +141,6 @@
                             </ul>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
@@ -191,32 +188,46 @@
 <!--  Notifications Plugin    -->
 <script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 <script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
 
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('assets/js/demo.js') }}"></script>
 
-@yield('scripts');
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
+@section('scripts')
+    <script>
+    $(document).ready(function () {
         demo.initChartist();
 
         $.notify({
             icon: 'ti-gift',
             message: "Bienvenido a <b>Expert Diagnostic</b> - su sistema experto de diagnóstico médico !"
 
-        },{
+        }, {
             type: 'success',
             timer: 4000
         });
-
     });
+    </script>
+@show
+
+<script>
+    $(document).ready(function () {
+        // Set the active class
+        $('ul.nav>li>a').each(function (i, e) {
+            if ( $(e).attr('href') == removeParamsUrl(window.location.href) )
+                $(e).parent().addClass('active');
+        });
+    });
+    function removeParamsUrl(url)
+    {
+        // there are params?
+        if (url.indexOf('?') == -1)
+            return url;
+
+        // get the part before ?
+        return url.split("?")[0];
+    }
 </script>
 
 </body>
