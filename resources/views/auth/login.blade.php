@@ -1,66 +1,87 @@
-@extends('layouts.app')
+@extends('layouts.bg')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i> Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+    <nav class="navbar navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url('/login') }}">Expert Diagnostic</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            Registro
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+
+    <div class="wrapper wrapper-full-page">
+        <div class="full-page login-page" data-color="" data-image="{{ asset('assets/img/background/background-2.jpg') }}">
+            <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+
+                            <form method="POST" action="{{ url('/login') }}">
+                                {{ csrf_field() }}
+
+                                <div class="card" data-background="color" data-color="blue">
+                                    <div class="header">
+                                        <h3 class="title">Inicio de sesión</h3>
+                                    </div>
+                                    <div class="content">
+                                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" value="{{ old('email') }}" placeholder="Ingrese su email" class="form-control input-no-border">
+                                            @if ($errors->has('email'))
+                                                <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group"{{ $errors->has('password') ? ' has-error' : '' }}>
+                                            <label for="password">Contraseña</label>
+                                            <input type="password" name="password" value="{{ old('password') }}" placeholder="Su contraseña" class="form-control input-no-border" autocomplete="new-password">
+                                            @if ($errors->has('password'))
+                                                <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="footer text-center">
+                                        <button type="submit" class="btn btn-fill btn-wd ">Ingresar</button>
+                                        <div class="forgot">
+                                            <a href="#">Olvidó su contraseña?</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer footer-transparent">
+                <div class="container">
+                    <div class="copyright">
+                        &copy; <script>document.write(new Date().getFullYear())</script>, desarrollado por <a href="#">Enigmatic Team</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
-</div>
 @endsection
