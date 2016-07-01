@@ -2,7 +2,6 @@ $(document).on('ready', principal);
 
 function principal()
 {
-    //FooTable
     $('.mytable').footable();
 
     $modalEditar = $('#modalEditar');
