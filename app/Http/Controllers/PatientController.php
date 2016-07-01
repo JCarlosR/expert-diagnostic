@@ -3,28 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Patient;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        
-        return view('patient.index');
+        $patients = Patient::orderBy('id', 'asc')->paginate(5);
+        //dd($patients);
+        return view('patient.index')->with(compact('patients'));;
     }
 }
