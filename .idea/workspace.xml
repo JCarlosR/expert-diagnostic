@@ -87,8 +87,8 @@
       <file leaf-file-name="patient.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/patient/js/patient.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+            <state relative-caret-position="538">
+              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -489,12 +489,12 @@
       <option name="presentableId" value="Default" />
       <updated>1467329780779</updated>
       <workItem from="1467333868825" duration="13277000" />
-      <workItem from="1467376519045" duration="7092000" />
+      <workItem from="1467376519045" duration="7213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20369000" />
+    <option name="totallyTimeSpent" value="20490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="0" />
@@ -791,8 +791,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/patient/js/patient.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        <state relative-caret-position="538">
+          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
           <folding />
         </state>
       </provider>
