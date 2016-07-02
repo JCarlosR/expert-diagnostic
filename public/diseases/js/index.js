@@ -1,6 +1,7 @@
 $(document).on('ready', principal);
 
 var $modalEditar;
+var $modalWatch;
 var $modalEliminar;
 
 function principal()
@@ -9,9 +10,11 @@ function principal()
 
     $modalEditar = $('#modalEditar');
     $modalEliminar = $('#modalEliminar');
+    $modalWatch = $('#modalWatch');
 
     $('[data-edit]').on('click', mostrarEditar);
     $('[data-delete]').on('click', mostrarEliminar);
+    $('[data-watch]').on('click', mostrarVideo);
     $('#form').on('submit', registerDisease);
 }
 
@@ -88,6 +91,14 @@ function mostrarEliminar() {
             });
 
     });
+}
+
+function mostrarVideo()
+{
+    var video = $(this).data('video');
+    $('#iframe').attr('src',video);
+
+    $modalWatch.modal('show');
 }
 
 function showmessage( message, error )

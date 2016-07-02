@@ -30,7 +30,7 @@ class DiseaseController extends Controller
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
         if ( strlen($request->get('name'))<4 )
-            return response()->json(['error' => true, 'message' => 'El nomnre de la enfermedad debe tener mínimo 3 caracteres']);
+            return response()->json(['error' => true, 'message' => 'El nombre de la enfermedad debe tener mínimo 3 caracteres']);
 
         $disease_test = Disease::where('name',$request->get('name'))->first();
 
@@ -39,6 +39,7 @@ class DiseaseController extends Controller
 
         $disease = Disease::create([
             'name'=>$request->get('name'),
+            'video'=>$request->get('video'),
             'description'=>$request->get('description')
         ]);
 
@@ -77,6 +78,7 @@ class DiseaseController extends Controller
         $disease = Disease::find( $request->get('id'));
 
         $disease->name = $request->get('name');
+        $disease->video = $request->get('video');
         $disease->description = $request->get('description');
 
         if( $request->file('image') )

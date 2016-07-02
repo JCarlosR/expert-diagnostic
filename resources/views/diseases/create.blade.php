@@ -43,6 +43,13 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
+                                <label for="">Url de vídeo*</label>
+                                <input type="text" id="video" name="video" value="{{ old('video') }}" class="form-control inside in-input" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 <label for="">Descripción</label>
                                 <textarea name="description" id="description" class="form-control no-resize inside in-input">{{ old('name') }}</textarea>
                             </div>

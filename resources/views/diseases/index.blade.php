@@ -65,6 +65,7 @@
                                 <tr>
                                     <th>Enfermedad</th>
                                     <th data-type="html"> Imagen </th>
+                                    <th data-type="html"> Vídeo </th>
                                     <th data-hide="all" data-breakpoints="all" data-title="Descripción"></th>
                                     <th data-type="html">Opciones</th>
                                 </tr>
@@ -74,6 +75,11 @@
                                     <tr>
                                         <td>{{ $disease->name }}</td>
                                         <td ><img src="{{ asset('diseases/images') }}/{{ $disease->image }} " class="img-responsive image"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-success" data-watch="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-video="{{ $disease->video }}">
+                                                <i class="fa fa-eye"></i>Visualizar
+                                            </button>
+                                        </td>
                                         <td>{{$disease->description}}</td>
                                         <td>
                                             <button type="button" class="btn btn-success" data-edit="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-description="{{ $disease->description }}" data-image="{{ $disease ->image }}">
@@ -107,41 +113,40 @@
                     <form id="form" action="{{ url('enfermedad/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                         <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
-
-                        <div class="col-md-12">
-                            <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-12">
                                 <label for="name">Nombre*</label>
                                 <input type="text" id="name" name="name" class="form-control inside in-input" required>
                             </div>
                         </div>
 
-
-                        <div class="col-md-8">
-                            <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-8">
                                 <label for="image">Nueva Imagen</label>
                                 <input type="file" id="image" name="image" class="form-control inside in-input" accept="image/*">
                             </div>
                         </div>
 
-                        <div class="col-md-3 col-md-offset-1">
-                            <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-3 col-md-offset-1">
                                 <label for="oldImage">Imagen anterior</label>
                                 <div id="oldImage"> </div>
                                 <input type="hidden" name="oldImage">
                             </div>
                         </div>
 
-
-                        <div class="col-md-12">
-                            <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-12">
                                 <label for="description">Descripción</label>
                                 <textarea name="description" id="description" class="form-control no-resize inside in-input"></textarea>
                             </div>
                         </div>
 
                         <div class="form-group text-center">
-                            <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                            <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Guardar cambios</button>
+                            <div class="col-md-12">
+                                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Guardar cambios</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -172,6 +177,25 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalWatch" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" name=""><span name="title"></span> </h4>
+                </div>
+                <div class="modal-body">
+                    <iframe width="854" id="iframe" height="480" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
