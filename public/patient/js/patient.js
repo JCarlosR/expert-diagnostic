@@ -1,7 +1,6 @@
 $(document).on('ready', principal);
 
-function principal()
-{
+function principal(){
     $('.mytable').footable();
 
     $modalNuevo = $('#modalNuevo');
@@ -140,8 +139,7 @@ function mostrarNuevo() {
     $modalNuevo.modal('show');
 }
 
-function showmessage( message, error )
-{
+function showmessage( message, error ){
     var icon = 'ti-thumb-up';
     var type = 'success';
     if( error==1 )
