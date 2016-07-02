@@ -30,7 +30,6 @@ Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
 
 // Disease routes
     Route::get('enfermedades', 'DiseaseController@index');
-    Route::get('enfermedad/nueva', 'DiseaseController@create');
     Route::post('enfermedad/registrar', 'DiseaseController@store');
     Route::post('enfermedad/modificar', 'DiseaseController@edit');
     Route::get('enfermedad/eliminar/{id}', 'DiseaseController@delete');

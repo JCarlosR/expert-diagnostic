@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-3">
-                        <h2><a href="{{ url('enfermedad/nueva') }}" class="btn btn-success"><i class="fa fa-plus-square-o"></i> Nueva enfermedad</a></h2>
+                        <h2><a data-registrar class="btn btn-success"><i class="fa fa-plus-square-o"></i> Nueva enfermedad</a></h2>
                     </div>
                     <div class="col-md-9 form-inline margen">
                         <div class="col-md-8 input-group ">
@@ -103,6 +103,58 @@
         </div>
     </div>
 
+    <div id="modalRegistrar" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Registrar enfermedad</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formRegistrar" action="{{ url('enfermedad/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                        <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="id" />
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="">Nombre*</label>
+                                <input type="text" id="name" name="name" class="form-control inside in-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label>Imagen</label>
+                                <input type="file" class="form-control inside in-input" name="image" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="">Url de vídeo*</label>
+                                <input type="text" id="video" name="video" class="form-control inside in-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="">Descripción</label>
+                                <textarea name="description" id="description" class="form-control no-resize inside in-input"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <div class="col-md-12">
+                                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Registrar </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="modalEditar" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -111,7 +163,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="form" action="{{ url('enfermedad/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                    <form id="formModificar" action="{{ url('enfermedad/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                         <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
                         <div class="form-group">
@@ -151,7 +203,7 @@
                         <div class="form-group text-center">
                             <div class="col-md-12">
                                 <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                                <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Guardar cambios</button>
+                                <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Modificar </button>
                             </div>
                         </div>
                     </form>
