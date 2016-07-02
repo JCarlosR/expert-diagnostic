@@ -198,7 +198,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group text-center">
-                        <button class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                        <button class="btn btn-primary" id="exit" ><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
                     </div>
                 </div>
 

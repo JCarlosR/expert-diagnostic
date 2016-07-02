@@ -102,6 +102,10 @@ function mostrarVideo()
     $('#iframe').attr('src',video);
 
     $modalWatch.modal('show');
+
+    $('#exit').on('click', function() {
+        location.reload();
+    });
 }
 
 function showmessage( message, error )
