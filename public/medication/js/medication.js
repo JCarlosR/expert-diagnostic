@@ -11,16 +11,15 @@ function principal()
     $('[data-id]').on('click', mostrarEditar);
     $('[data-delete]').on('click', mostrarEliminar);
 
-    $('#formEditar').on('submit', updatePatient);
-    $('#formRegistrar').on('submit', registerPatient);
-    $('#formEliminar').on('submit', deletePatient);
-
+    $('#formEditar').on('submit', updateMedication);
+    $('#formRegistrar').on('submit', registerMedication);
+    $('#formEliminar').on('submit', deleteMedication);
     $('#btnNew').on('click', mostrarNuevo);
 }
 
-function deletePatient() {
+function deleteMedication() {
     event.preventDefault();
-    var url =  '../public/pacientes/eliminar';
+    var url =  '../public/medicamentos/eliminar';
     $.ajax({
         url: url,
         data: new FormData(this),
@@ -42,9 +41,9 @@ function deletePatient() {
         });
 }
 
-function updatePatient() {
+function updateMedication() {
     event.preventDefault();
-    var url =  '../public/pacientes/modificar';
+    var url =  '../public/medicamentos/modificar';
     $.ajax({
         url: url,
         data: new FormData(this),
@@ -66,9 +65,9 @@ function updatePatient() {
         });
 }
 
-function registerPatient() {
+function registerMedication() {
     event.preventDefault();
-    var url =  '../public/pacientes/registrar';
+    var url =  '../public/medicamentos/registrar';
     $.ajax({
         url: url,
         data: new FormData(this),
@@ -85,7 +84,7 @@ function registerPatient() {
                 showmessage(response.message,0);
                 setTimeout(function(){
                     location.reload();
-                }, 2000);
+                }, 3000);
             }
         });
 }
@@ -96,31 +95,19 @@ function mostrarEditar() {
     var id = $(this).data('id');
     $modalEditar.find('[name="id"]').val(id);
 
-    var name = $(this).data('name');
+    var name = $(this).data('trade_name');
     $modalEditar.find('[name="name"]').val(name);
 
-    var description = $(this).data('surname');
-    $modalEditar.find('[name="surname"]').val(description);
+    var component = $(this).data('active_component');
+    $modalEditar.find('[name="component"]').val(component);
 
-    var price = $(this).data('address');
-    $modalEditar.find('[name="address"]').val(price);
+    var description = $(this).data('description');
+    $modalEditar.find('[name="description"]').val(description);
 
-    var brand = $(this).data('city');
-    $modalEditar.find('[name="city"]').val(brand);
-
-    var exemplar = $(this).data('country');
-    $modalEditar.find('[name="country"]').val(exemplar);
-    
     var image = $(this).data('image');
     $modalEditar.find('[name="newImage"]').val(image);
-    var image_url = '../public/patient/images/'+image;
+    var image_url = '../public/medication/images/'+image;
     $("#newImage").html('<img src="'+image_url+'" class="img-responsive image"> ');
-
-    var comment = $(this).data('comment');
-    $modalEditar.find('[name="comment"]').val(comment);
-
-    var birthdate = $(this).data('birthdate');
-    $modalEditar.find('[name="birthdate"]').val(birthdate);
 
     $modalEditar.modal('show');
 }
@@ -130,8 +117,7 @@ function mostrarEliminar() {
     $modalEliminar.find('[name="id"]').val(id);
 
     var name = $(this).data('name');
-    var surname = $(this).data('surname');
-    $modalEliminar.find('[name="nombreEliminar"]').val(name+" "+surname);
+    $modalEliminar.find('[name="nombreEliminar"]').val(name);
 
     $modalEliminar.modal('show');
 }
@@ -156,6 +142,6 @@ function showmessage( message, error )
 
     },{
         type: type,
-        timer: 300
+        timer: 500
     });
 }

@@ -111,7 +111,7 @@
                 </div>
 
 
-                <form action="{{ url('/pacientes/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formRegistrar" action="{{ url('/pacientes/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -174,7 +174,7 @@
 
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
             </div>
@@ -189,7 +189,7 @@
                 </div>
 
 
-                <form action="{{ url('/pacientes/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formEditar" action="{{ url('/pacientes/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
@@ -234,11 +234,9 @@
                             <div class="col-md-5">
                                 <input type="file" name="image" class="form-control inside" accept="image/*">
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
-                                <div class="col-md-2" id="newImage">
-                                    <input type="hidden" name="oldImage">
-                                </div>
+                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                            <div class="col-md-2" id="newImage">
+                                <input type="hidden" name="oldImage">
                             </div>
                         </div>
 
@@ -259,7 +257,7 @@
 
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
             </div>
@@ -272,7 +270,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Eliminar paciente</h4>
                 </div>
-                <form action="{{ url('pacientes/eliminar') }}" method="POST">
+                <form id="formEliminar" action="{{ url('pacientes/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -287,7 +285,7 @@
                             <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
                         </div>
                         <div class="btn-group pull-right">
-                            <button type="submit" class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
+                            <button class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
                         </div>
                     </div>
                 </form>
