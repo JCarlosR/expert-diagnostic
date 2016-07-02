@@ -82,7 +82,8 @@
                                         </td>
                                         <td>{{$disease->description}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-success" data-edit="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-description="{{ $disease->description }}" data-image="{{ $disease ->image }}">
+                                            <button type="button" class="btn btn-success" data-edit="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-description="{{ $disease->description }}"
+                                                    data-image="{{ $disease ->image }}" data-video="{{ $disease ->video }}">
                                                 <i class="fa fa-pencil"></i>Editar
                                             </button>
                                             <button type="button" class="btn btn-danger"  data-delete="{{ $disease->id }}" data-name="{{ $disease->name }}">
@@ -125,13 +126,18 @@
                                 <label for="image">Nueva Imagen</label>
                                 <input type="file" id="image" name="image" class="form-control inside in-input" accept="image/*">
                             </div>
-                        </div>
 
-                        <div class="form-group">
                             <div class="col-md-3 col-md-offset-1">
                                 <label for="oldImage">Imagen anterior</label>
                                 <div id="oldImage"> </div>
                                 <input type="hidden" name="oldImage">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="">Url de vídeo*</label>
+                                <input type="text" id="video" name="video"  class="form-control inside in-input" required>
                             </div>
                         </div>
 
@@ -192,7 +198,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group text-center">
-                        <button class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                        <button class="btn btn-primary" id="exit" ><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
                     </div>
                 </div>
 
