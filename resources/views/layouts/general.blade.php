@@ -11,7 +11,6 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
 
@@ -30,6 +29,8 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet">
+
+    @yield('styles')
 
 </head>
 <body>
@@ -50,14 +51,18 @@
             </div>
 
             <ul class="nav">
+<<<<<<< HEAD
                 <li @yield('home')>
+=======
+                <li>
+>>>>>>> 8e9cd69742d96c8ab01bc9d58b291844deb5b6c8
                     <a href="{{ url('/home') }}">
                         <i class="ti-panel"></i>
                         <p>Inicio</p>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/pacientes') }}">
                         <i class="ti-user"></i>
                         <p>Pacientes</p>
                     </a>
@@ -69,8 +74,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
-                        <i class="ti-agenda"></i>
+                    <a href="{{ url('enfermedades') }}">
+                        <i class="ti-headphone-alt"></i>
                         <p>Enfermedades</p>
                     </a>
                 </li>
@@ -87,7 +92,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/medicamentos') }}">
                         <i class="ti-blackboard"></i>
                         <p>Medicamentos</p>
                     </a>
@@ -106,7 +111,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="#">@yield('title')</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -140,18 +145,15 @@
                             </ul>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
 
         @yield('content')
-
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
                     <ul>
-
                         <li>
                             <a href="#">
                                 Enigmatic Team
@@ -174,12 +176,8 @@
                 </div>
             </div>
         </footer>
-
     </div>
 </div>
-
-
-</body>
 
 <!--   Core JS Files   -->
 <script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
@@ -194,32 +192,50 @@
 <!--  Notifications Plugin    -->
 <script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 <script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
 
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('assets/js/demo.js') }}"></script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-
+@section('scripts')
+    <script>
+    $(document).ready(function () {
         demo.initChartist();
 
         $.notify({
             icon: 'ti-gift',
             message: "Bienvenido a <b>Expert Diagnostic</b> - su sistema experto de diagnóstico médico !"
 
-        },{
+        }, {
             type: 'success',
             timer: 4000
         });
-
     });
+    </script>
+@show
+
+<script>
+    $(document).ready(function () {
+        // Set the active class
+        $('ul.nav>li>a').each(function (i, e) {
+            if ( $(e).attr('href') == removeParamsUrl(window.location.href) )
+                $(e).parent().addClass('active');
+        });
+    });
+    function removeParamsUrl(url)
+    {
+        // there are params?
+        if (url.indexOf('?') == -1)
+            return url;
+
+        // get the part before ?
+        return url.split("?")[0];
+    }
 </script>
 
 @yield('scripts')
 
+
+</body>
 </html>

@@ -15,8 +15,16 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         $this->call(UsersTableSeeder::class);
 
+
         //Juarez
         $this->call(SintomasTableSeeder::class);
+
+        $this->call(DiseasesTableSeeder::class);
+
+        $this->call(PatientsTableSeeder::class);
+
+        $this->call(MedicationsTableSeeder::class);
+
         Model::reguard();
     }
 }
