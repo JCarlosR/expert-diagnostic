@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Disease extends Model
 {
-    protected $fillable = ['name','description','image'];
+    protected $fillable = ['name','description','image','video'];
 }

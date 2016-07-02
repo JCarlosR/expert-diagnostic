@@ -51,7 +51,7 @@
             </div>
 
             <ul class="nav">
-                <li>
+                <li @yield('home')>
                     <a href="{{ url('/home') }}">
                         <i class="ti-panel"></i>
                         <p>Inicio</p>
@@ -63,8 +63,8 @@
                         <p>Pacientes</p>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ url('/') }}">
+                <li @yield('symptom')>
+                    <a href="{{ url('/symptom') }}">
                         <i class="ti-view-list-alt"></i>
                         <p>Síntomas</p>
                     </a>
@@ -229,6 +229,7 @@
         return url.split("?")[0];
     }
 </script>
+
 
 </body>
 </html>
