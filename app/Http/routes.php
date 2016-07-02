@@ -16,11 +16,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/pacientes/modificar', 'PatientController@edit');
     Route::post('/pacientes/eliminar', 'PatientController@delete');
 
-// Symptom routes
-Route::get('/symptom', 'SymptomController@index');
-Route::post('/registrar/symptom', 'SymptomController@postSymptom');
-Route::put('/modificar/symptom', 'SymptomController@putSymptom');
-Route::post('/eliminar/symptom', 'SymptomController@deleteSymptom');
+// symptom routes
+Route::get('symptom', 'SymptomController@index');
+Route::post('/symptom/registrar', 'SymptomController@postSymptom');
+Route::post('/symptom/modificar', 'SymptomController@putSymptom');
+Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
 
 // Medication routes
     Route::get('/medicamentos', 'MedicationController@index');

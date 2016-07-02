@@ -13,7 +13,7 @@ class CreateSintomasTable extends Migration
     public function up()
     {
         Schema::create('symptom', function (Blueprint $table) {
-            $table->increments('symptom_id');
+            $table->increments('id');
             $table->string('descripcion');
             $table->string('imagen');
             $table->timestamps();
