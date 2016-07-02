@@ -11,7 +11,83 @@ function principal()
     $('[data-id]').on('click', mostrarEditar);
     $('[data-delete]').on('click', mostrarEliminar);
 
+    $('#formEditar').on('submit', updatePatient);
+    $('#formRegistrar').on('submit', registerPatient);
+    $('#formEliminar').on('submit', deletePatient);
+
     $('#btnNew').on('click', mostrarNuevo);
+}
+
+function deletePatient() {
+    event.preventDefault();
+    var url =  '../public/pacientes/eliminar';
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
+
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 3000);
+            }
+        });
+}
+
+function updatePatient() {
+    event.preventDefault();
+    var url =  '../public/pacientes/modificar';
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
+
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 3000);
+            }
+        });
+}
+
+function registerPatient() {
+    event.preventDefault();
+    var url =  '../public/pacientes/registrar';
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
+
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 2000);
+            }
+        });
 }
 
 function mostrarEditar() {
@@ -62,4 +138,24 @@ function mostrarEliminar() {
 
 function mostrarNuevo() {
     $modalNuevo.modal('show');
+}
+
+function showmessage( message, error )
+{
+    var icon = 'ti-thumb-up';
+    var type = 'success';
+    if( error==1 )
+    {
+        icon = 'ti-thumb-down';
+        type = 'danger';
+    }
+
+    $.notify({
+        icon: icon,
+        message: '<b>'+message+'</b>'
+
+    },{
+        type: type,
+        timer: 300
+    });
 }

@@ -51,7 +51,9 @@ function registerDisease()
                 showmessage(response.message,1);
             else{
                 showmessage(response.message,0);
-                location.reload();
+                setTimeout(function(){
+                    location.reload();
+                }, 2000);
             }
         });
 }
@@ -81,7 +83,7 @@ function mostrarEliminar() {
                     showmessage(response.message,0);
                     setTimeout(function(){
                         location.reload();
-                    }, 1000);
+                    }, 3000);
                 }
             });
 

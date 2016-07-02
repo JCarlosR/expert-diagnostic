@@ -19,34 +19,40 @@ class PatientController extends Controller
 
     public function store( Request $request )
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3',
-            'surname'=>'required|min:3',
-            'address'=>'required|min:3',
-            'city'=>'required|min:2',
-            'country'=>'required|min:3',
-            'image'=>'image'
-        ],[
-            'image.image'=>'Solo se permiten imágenes',
-            'name.required'=>'Es necesario ingresar el nombre del paciente',
-            'surname.required'=>'Es necesario ingresar el apellido del paciente',
-            'address.required'=>'Es necesario ingresar la dirección del paciente',
-            'city.required'=>'Es necesario ingresar la ciudad del paciente',
-            'country.required'=>'Es necesario ingresar el país del paciente',
-            'name.min'=>'El nombre del paciente debe tener mas de 3 caracteres',
-            'surname.min'=>'El apellido del paciente debe tener mas de 3 caracteres',
-            'address.min'=>'La dirección del paciente debe tener mas de 3 caracteres',
-            'city.min'=>'La ciudad del paciente debe tener mas de 2 caracteres',
-            'country.min'=>'El país del paciente debe tener mas de 3 caracteres'
-        ]);
+        $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
-        if ($validator->fails())
-        {
-            $data['errors'] = $validator->errors();
-            return redirect('pacientes')
-                ->withInput($request->all())
-                ->with($data);
-        }
+        if ( $validator->fails() )
+            return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
+
+        if ($request->get('name') == null OR $request->get('name') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
+
+        if ($request->get('surname') == null OR $request->get('surname') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el apellido del paciente']);
+
+        if($request->get('address') == null OR $request->get('address') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la dirección del paciente']);
+
+        if($request->get('city') == null OR $request->get('city') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la ciudad del paciente']);
+
+        if($request->get('country') == null OR $request->get('country') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el país del paciente']);
+
+        if ( strlen($request->get('name'))<3 )
+            return response()->json(['error' => true, 'message' => 'El nombre del paciente debe tener como mínimo 3 caracteres']);
+
+        if ( strlen($request->get('surname'))<4 )
+            return response()->json(['error' => true, 'message' => 'El apellido del paciente debe tener como mínimo 3 caracteres']);
+
+        if ( strlen($request->get('address'))<4 )
+            return response()->json(['error' => true, 'message' => 'La dirección del paciente debe tener como mínimo 3 caracteres']);
+
+        if ( strlen($request->get('city'))<3 )
+            return response()->json(['error' => true, 'message' => 'La ciudad del paciente debe tener como mínimo 2 caracteres']);
+
+        if ( strlen($request->get('country'))<3 )
+            return response()->json(['error' => true, 'message' => 'El país del paciente debe tener como mínimo 2 caracteres']);
 
         $patient = Patient::create([
             'name' => $request->get('name'),
@@ -72,39 +78,45 @@ class PatientController extends Controller
 
         $patient->save();
 
-        return redirect('pacientes');
+        return response()->json(['error' => false, 'message' => 'Paciente registrado correctamente']);
     }
 
     public function edit( Request $request )
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3',
-            'surname'=>'required|min:3',
-            'address'=>'required|min:3',
-            'city'=>'required|min:2',
-            'country'=>'required|min:3',
-            'image'=>'image'
-        ],[
-            'image.image'=>'Solo se permiten imágenes',
-            'name.required'=>'Es necesario ingresar el nombre del paciente',
-            'surname.required'=>'Es necesario ingresar el apellido del paciente',
-            'address.required'=>'Es necesario ingresar la dirección del paciente',
-            'city.required'=>'Es necesario ingresar la ciudad del paciente',
-            'country.required'=>'Es necesario ingresar el país del paciente',
-            'name.min'=>'El nombre del paciente debe tener mas de 3 caracteres',
-            'surname.min'=>'El apellido del paciente debe tener mas de 3 caracteres',
-            'address.min'=>'La dirección del paciente debe tener mas de 3 caracteres',
-            'city.min'=>'La ciudad del paciente debe tener mas de 2 caracteres',
-            'country.min'=>'El país del paciente debe tener mas de 3 caracteres'
-        ]);
+        $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
-        if ($validator->fails())
-        {
-            $data['errors'] = $validator->errors();
-            return redirect('pacientes')
-                ->withInput($request->all())
-                ->with($data);
-        }
+        if ( $validator->fails() )
+            return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
+
+        if ($request->get('name') == null OR $request->get('name') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
+
+        if ($request->get('surname') == null OR $request->get('surname') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el apellido del paciente']);
+
+        if($request->get('address') == null OR $request->get('address') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la dirección del paciente']);
+
+        if($request->get('city') == null OR $request->get('city') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la ciudad del paciente']);
+
+        if($request->get('country') == null OR $request->get('country') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el país del paciente']);
+
+        if ( strlen($request->get('name'))<3 )
+            return response()->json(['error' => true, 'message' => 'El nombre del paciente debe tener como mínimo 2 caracteres']);
+
+        if ( strlen($request->get('surname'))<4 )
+            return response()->json(['error' => true, 'message' => 'El apellido del paciente debe tener como mínimo 3 caracteres']);
+
+        if ( strlen($request->get('address'))<4 )
+            return response()->json(['error' => true, 'message' => 'La dirección del paciente debe tener como mínimo 3 caracteres']);
+
+        if ( strlen($request->get('city'))<3 )
+            return response()->json(['error' => true, 'message' => 'La ciudad del paciente debe tener como mínimo 2 caracteres']);
+
+        if ( strlen($request->get('country'))<3 )
+            return response()->json(['error' => true, 'message' => 'El país del paciente debe tener como mínimo 2 caracteres']);
 
         $patient = Patient::find( $request->get('id') );
         $patient->name = $request->get('name');
@@ -128,33 +140,20 @@ class PatientController extends Controller
 
         $patient->save();
 
-        return redirect('pacientes');
+        return response()->json(['error' => false, 'message' => 'Paciente modificado correctamente']);
     }
 
     public function delete( Request $request )
     {
-        $validator = Validator::make($request->all(), [
-            'id' => 'exists:patients,id'
-        ],[
-            'id.exists' => 'El paciente no puede ser eliminado porque no existe.'
-        ]);
-        //Validacion que no exista en otra tabla
-        //$customer_ = Output::where('customer_id', $request->get('id'))->first();
-        //dd($customer_);
-        if ($validator->fails())
-        {
-            $data['errors'] = $validator->errors();
-//            if( $customer_ != null )
-//                $data['errors']->add("id", "No puede eliminar el cliente seleccionado, porque tiene salidas registradase.");
+        $paciente = Patient::find($request->get('id'));
 
-            return redirect('pacientes')
-                ->withInput($request->all())
-                ->with($data);
-        }
+        if($paciente == null)
+            return response()->json(['error' => true, 'message' => 'No existe el paciente especificado.']);
+
         $patient = Patient::find($request->get('id'));
         $patient->delete();
 
-        return redirect('pacientes');
+        return response()->json(['error' => false, 'message' => 'Paciente eliminado correctamente.']);
         
     }
 }

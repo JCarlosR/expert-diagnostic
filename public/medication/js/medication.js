@@ -12,7 +12,33 @@ function principal()
     $('[data-delete]').on('click', mostrarEliminar);
 
     $('#formEditar').on('submit', updateMedication);
+    $('#formRegistrar').on('submit', registerMedication);
+    $('#formEliminar').on('submit', deleteMedication);
     $('#btnNew').on('click', mostrarNuevo);
+}
+
+function deleteMedication() {
+    event.preventDefault();
+    var url =  '../public/medicamentos/eliminar';
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
+
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 3000);
+            }
+        });
 }
 
 function updateMedication() {
@@ -32,7 +58,33 @@ function updateMedication() {
                 showmessage(response.message,1);
             else{
                 showmessage(response.message,0);
-                location.reload();
+                setTimeout(function(){
+                    location.reload();
+                }, 3000);
+            }
+        });
+}
+
+function registerMedication() {
+    event.preventDefault();
+    var url =  '../public/medicamentos/registrar';
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
+
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 3000);
             }
         });
 }

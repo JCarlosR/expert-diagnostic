@@ -19,28 +19,29 @@ class MedicationController extends Controller
 
     public function store( Request $request )
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3',
-            'component'=>'required|min:3',
-            'description'=>'required|min:3',
-            'image'=>'image'
-        ],[
-            'image.image'=>'Solo se permiten imágenes',
-            'name.required'=>'Es necesario ingresar el nombre del medicamento',
-            'component.required'=>'Es necesario ingresar el prinicipio activo del medicamento',
-            'description.required'=>'Es necesario ingresar la descripción del medicamento',
-            'name.min'=>'El nombre del medicamento debe tener mas de 3 caracteres',
-            'description.min'=>'La descripción del medicamento debe tener mas de 3 caracteres',
-            'component.min'=>'El prinicipio activo del medicamento debe tener mas de 3 caracteres'
-        ]);
+        $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
-        if ($validator->fails())
-        {
-            $data['errors'] = $validator->errors();
-            return redirect('medicamentos')
-                ->withInput($request->all())
-                ->with($data);
-        }
+        if ( $validator->fails() )
+            return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
+
+        if($request->get('name') == null OR $request->get('name') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del medicamento.']);
+
+        if($request->get('component') == null OR $request->get('component') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el principio activo del medicamento.']);
+
+        if($request->get('description') == null OR $request->get('description') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripción del medicamento.']);
+
+        if ( strlen($request->get('name'))<4 )
+            return response()->json(['error' => true, 'message' => 'El nombre del medicamento debe tener mínimo 3 caracteres.']);
+
+        if ( strlen($request->get('component'))<4 )
+            return response()->json(['error' => true, 'message' => 'El principio activo del medicamento debe tener mínimo 3 caracteres.']);
+
+        if ( strlen($request->get('description'))<4 )
+            return response()->json(['error' => true, 'message' => 'La descripción del medicamento debe tener mínimo 3 caracteres.']);
+
 
         $medication = Medication::create([
             'trade_name' => $request->get('name'),
@@ -62,34 +63,34 @@ class MedicationController extends Controller
 
         $medication->save();
 
-        return redirect('medicamentos');
+        return response()->json(['error' => false, 'message' => 'Medicamento registrado correctamente']);
     }
 
     public function edit( Request $request )
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3',
-            'component'=>'required|min:3',
-            'description'=>'required|min:3',
-            'image'=>'image'
-        ],[
-            'image.image'=>'Solo se permiten imágenes',
-            'name.required'=>'Es necesario ingresar el nombre del medicamento',
-            'component.required'=>'Es necesario ingresar el prinicipio activo del medicamento',
-            'description.required'=>'Es necesario ingresar la descripción del medicamento',
-            'name.min'=>'El nombre del medicamento debe tener mas de 3 caracteres',
-            'description.min'=>'La descripción del medicamento debe tener mas de 3 caracteres',
-            'component.min'=>'El prinicipio activo del medicamento debe tener mas de 3 caracteres'
-        ]);
+        $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
-        if ($validator->fails())
-        {
-            $data['errors'] = $validator->errors();
-            return redirect('medicamentos')
-                ->withInput($request->all())
-                ->with($data);
-        }
+        if ( $validator->fails() )
+            return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
+        if($request->get('name') == null OR $request->get('name') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del medicamento.']);
+        
+        if($request->get('component') == null OR $request->get('component') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el principio activo del medicamento.']);
+
+        if($request->get('description') == null OR $request->get('description') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripción del medicamento.']);
+        
+        if ( strlen($request->get('name'))<4 )
+            return response()->json(['error' => true, 'message' => 'El nombre del medicamento debe tener mínimo 3 caracteres.']);
+
+        if ( strlen($request->get('component'))<4 )
+            return response()->json(['error' => true, 'message' => 'El principio activo del medicamento debe tener mínimo 3 caracteres.']);
+
+        if ( strlen($request->get('description'))<4 )
+            return response()->json(['error' => true, 'message' => 'La descripción del medicamento debe tener mínimo 3 caracteres.']);
+        
         $medication = Medication::find( $request->get('id') );
         $medication->trade_name = $request->get('name');
         $medication->active_component = $request->get('component');
@@ -108,33 +109,20 @@ class MedicationController extends Controller
 
         $medication->save();
 
-        return response()->json(['error' => false, 'message' => 'Enfermedad modificada correctamente']);
+        return response()->json(['error' => false, 'message' => 'Medicamento modificado correctamente']);
     }
 
     public function delete( Request $request )
     {
-        $validator = Validator::make($request->all(), [
-            'id' => 'exists:medications,id'
-        ],[
-            'id.exists' => 'El medicamento no puede ser eliminado porque no existe.'
-        ]);
-        //Validacion que no exista en otra tabla
-        //$customer_ = Output::where('customer_id', $request->get('id'))->first();
-        //dd($customer_);
-        if ($validator->fails())
-        {
-            $data['errors'] = $validator->errors();
-//            if( $customer_ != null )
-//                $data['errors']->add("id", "No puede eliminar el cliente seleccionado, porque tiene salidas registradase.");
+        $medicamento = Medication::find($request->get('id'));
 
-            return redirect('medicamentos')
-                ->withInput($request->all())
-                ->with($data);
-        }
+        if($medicamento == null)
+            return response()->json(['error' => true, 'message' => 'No existe el medicamento especificado.']);
+
         $medication = Medication::find($request->get('id'));
         $medication->delete();
 
-        return redirect('medicamentos');
+        return response()->json(['error' => false, 'message' => 'Medicamento eliminado correctamente']);
         
     }
 }

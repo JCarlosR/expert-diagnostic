@@ -98,7 +98,7 @@
                     <h4 class="modal-title">Nuevo medicamento</h4>
                 </div>
 
-                <form action="{{ url('/medicamentos/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form action="{{ url('/medicamentos/registrar') }}" id="formRegistrar" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -134,7 +134,7 @@
 
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar medicamento</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar medicamento</button>
                     </div>
                 </form>
             </div>
@@ -144,6 +144,16 @@
     <div id="modalEditar" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
+                @if( $errors->count() > 0 )
+                    <div class="col-sm-12">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Lo sentimos! </strong>Por favor revise los siguientes errores.
+                            @foreach($errors->all() as $message)
+                                <p>{{$message}}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
                 <div class="modal-header">
                     <h4 class="modal-title">Editar medicamento</h4>
                 </div>
@@ -200,7 +210,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Eliminar medicamento</h4>
                 </div>
-                <form action="{{ url('medicamentos/eliminar') }}" method="POST">
+                <form id="formEliminar" action="{{ url('medicamentos/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -215,7 +225,7 @@
                             <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
                         </div>
                         <div class="btn-group pull-right">
-                            <button type="submit" class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
+                            <button id="accept" class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
                         </div>
                     </div>
                 </form>
