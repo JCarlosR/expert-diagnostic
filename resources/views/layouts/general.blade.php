@@ -51,11 +51,7 @@
             </div>
 
             <ul class="nav">
-<<<<<<< HEAD
                 <li @yield('home')>
-=======
-                <li>
->>>>>>> 8e9cd69742d96c8ab01bc9d58b291844deb5b6c8
                     <a href="{{ url('/home') }}">
                         <i class="ti-panel"></i>
                         <p>Inicio</p>
@@ -233,8 +229,6 @@
         return url.split("?")[0];
     }
 </script>
-
-@yield('scripts')
 
 
 </body>
