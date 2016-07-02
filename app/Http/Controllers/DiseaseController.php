@@ -32,14 +32,26 @@ class DiseaseController extends Controller
         if ( strlen($request->get('name'))<4 )
             return response()->json(['error' => true, 'message' => 'El nombre de la enfermedad debe tener mínimo 3 caracteres']);
 
+        if ( strlen($request->get('name'))<1 )
+            return response()->json(['error' => true, 'message' => 'Es obligatorio ingresar el nombre de la enfermedad']);
+
         $disease_test = Disease::where('name',$request->get('name'))->first();
 
         if($disease_test != null)
             return response()->json(['error' => true, 'message' => 'Ya existe una enfermedad registrada con ese nombre']);
 
+        $pos = 0;
+        $string = $request->get('video');
+
+        for( $i=0;$i<strlen($string); $i++)
+            if( substr($string,$i,1) == '=')
+                $pos=$i;
+
+        $ulr_part = substr($string,$pos+1,strlen($string)-$pos);
+
         $disease = Disease::create([
             'name'=>$request->get('name'),
-            'video'=>$request->get('video'),
+            'video'=>'https://www.youtube.com/embed/'.$ulr_part,
             'description'=>$request->get('description')
         ]);
 
@@ -75,10 +87,33 @@ class DiseaseController extends Controller
         if ( strlen($request->get('name'))<4 )
             return response()->json(['error' => true, 'message' => 'El nomnre de la enfermedad debe tener mínimo 3 caracteres']);
 
+        if ( strlen($request->get('name'))<1 )
+            return response()->json(['error' => true, 'message' => 'Es obligatorio ingresar el nombre de la enfermedad']);
+
+        if ( strlen($request->get('video'))<1 )
+            return response()->json(['error' => true, 'message' => 'Es obligatorio ingresar el url del vídeo']);
+
         $disease = Disease::find( $request->get('id'));
 
+        $flag = 0;
+        $pos = 0;
+        $string = $request->get('video');
+
+        for( $i=0;$i<strlen($string); $i++)
+            if( substr($string,$i,1) == '=')
+                $flag = 1;
+
+        if( $flag ==1 )
+        {
+            for ($i = 0; $i < strlen($string); $i++)
+                if (substr($string, $i, 1) == '=')
+                    $pos = $i;
+            $ulr_part = substr($string, $pos + 1, strlen($string) - $pos);
+            $disease->video = 'https://www.youtube.com/embed/'.$ulr_part;
+        }else
+            $disease->video = $string;
+
         $disease->name = $request->get('name');
-        $disease->video = $request->get('video');
         $disease->description = $request->get('description');
 
         if( $request->file('image') )

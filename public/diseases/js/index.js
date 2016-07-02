@@ -28,6 +28,9 @@ function mostrarEditar() {
     var description = $(this).data('description');
     $modalEditar.find('[name="description"]').val(description);
 
+    var video = $(this).data('video');
+    $modalEditar.find('[name="video"]').val(video);
+
     var image = $(this).data('image');
     $modalEditar.find('[name="oldImage"]').val(image);
     var image_url = '../public/diseases/images/'+image;
