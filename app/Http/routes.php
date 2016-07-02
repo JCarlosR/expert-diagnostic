@@ -17,6 +17,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/pacientes/eliminar', 'PatientController@delete');
 
 // Symptom routes
+Route::get('/symptom', 'SymptomController@index');
+Route::post('/registrar/symptom', 'SymptomController@postSymptom');
+Route::put('/modificar/symptom', 'SymptomController@putSymptom');
+Route::post('/eliminar/symptom', 'SymptomController@deleteSymptom');
 
 // Medication routes
     Route::get('/medicamentos', 'MedicationController@index');

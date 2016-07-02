@@ -1,5 +1,6 @@
 @extends('layouts.general')
 
+@section('home','class="active"')
 @section('title', 'Dashboard')
 
 @section('content')
