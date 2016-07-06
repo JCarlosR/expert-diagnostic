@@ -21,7 +21,6 @@
             width: 40px;
         }
     </style>
-    <link rel="stylesheet" href="{{asset('assets/css/footable.bootstrap.min.css')}}">
 @endsection
 
 @section('content')
@@ -55,6 +54,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Nombre</th>
                                     <th>Descripcion</th>
                                     <th data-type="html">Imagen</th>
                                     <th data-type="html">Opciones</th>
@@ -64,12 +64,13 @@
                                 @foreach($sintomas as $sintoma)
                                     <tr>
                                         <td>{{ $sintoma->id }}</td>
+                                        <td>{{ $sintoma->name }}</td>
                                         <td>{{ $sintoma->descripcion }}</td>
                                         <td><img src="{{ asset('symptoms/images') }}/{{ $sintoma->imagen }} " class="image"></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-id="{{ $sintoma->id }}"
+                                            <button type="button" class="btn btn-primary" data-id="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}"
                                                     data-description="{{ $sintoma->descripcion }}" data-image="{{ $sintoma->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                            <button type="button"  class="btn btn-danger" data-delete="{{ $sintoma->id }}" data-description="{{ $sintoma->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                            <button type="button"  class="btn btn-danger" data-delete="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}" data-description="{{ $sintoma->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -94,6 +95,13 @@
                 <form id="formRegistrar" action="{{ url('/symptom/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="name">Nombre <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="rgtName" name="name" required="required" class="form-control inside">
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
@@ -132,6 +140,11 @@
                         <input type="hidden" name="id" />
 
                         <div class="form-group">
+                                <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
                             <div class="col-md-8">
                                 <input type="text" id="description" name="description" required="required" class="form-control inside">
@@ -148,13 +161,14 @@
                                 <input type="hidden" name="oldImage">
                             </div>
                         </div>
-                    </div>
+
 
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
                         <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
     </div>
@@ -190,6 +204,5 @@
 
 @endsection
 @section('scripts')
-    <script src="{{ asset('assets/js/footable.min.js') }}"></script>
     <script src="{{ asset('symptoms/js/index.js') }}"></script>
 @endsection

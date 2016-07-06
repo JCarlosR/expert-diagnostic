@@ -39,11 +39,15 @@ class SymptomController extends Controller
         if ( $validator->fails() )
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
+        if ($request->get('name') == null OR $request->get('name') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
+
         if ($request->get('description') == null OR $request->get('description') == "")
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
 
 
         $symptom = Sintoma::create([
+            'name' => $request->get('name'),
             'descripcion' => $request->get('description')
         ]);
 
@@ -73,10 +77,14 @@ class SymptomController extends Controller
         if ( $validator->fails() )
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
+        if ($request->get('name') == null OR $request->get('name') == "")
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del sintoma']);
+        
         if ($request->get('description') == null OR $request->get('description') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del sintoma']);
 
         $symptom = Sintoma::find( $request->get('id') );
+        $symptom->name = $request->get('name');
         $symptom->descripcion = $request->get('description');
 
         if( $request->file('image') )
@@ -97,14 +105,16 @@ class SymptomController extends Controller
 
     public function deleteSymptom(Request $request)
     {
-        $this->validate($request, [
-            'id' => 'exists:symptom'
-        ]);
+        $symptom = Sintoma::find($request->get('id'));
+
+        if($symptom == null)
+            return response()->json(['error' => true, 'message' => 'No existe el paciente especificado.']);
 
         $symptom = Sintoma::find($request->get('id'));
         $symptom->delete();
 
-        return response()->json($symptom);
+        return response()->json(['error' => false, 'message' => 'Paciente eliminado correctamente.']);
+
     }
 
 }

@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('diagnostico') }}">
                         <i class="ti-map"></i>
                         <p>Diagnóstico</p>
                     </a>

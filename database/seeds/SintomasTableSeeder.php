@@ -13,7 +13,8 @@ class SintomasTableSeeder extends Seeder
     public function run()
     {
         Sintoma::create([
-            'descripcion' => 'Dolor de cabeza',
+            'name' => 'Dolor de Cabeza',
+            'descripcion' => 'Se refiere a un dolor de cabeza comun.',
             'imagen' =>'algo.jpg'
         ]);
     }

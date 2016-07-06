@@ -36,4 +36,7 @@ Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
     Route::get('enfermedad/eliminar/{id}', 'DiseaseController@delete');
 
 // Diagnostic routes
+    Route::get('diagnostico','DiagnosisController@index');
+    Route::get('diagnostico/all','DiagnosisController@getAll');
+
 });

@@ -16,6 +16,6 @@ class Sintoma extends Model
 
     public $timestamps = false;
 
-    protected $fillable = [ 'descripcion', 'imagen'];
+    protected $fillable = [ 'name', 'descripcion', 'imagen'];
 
 }

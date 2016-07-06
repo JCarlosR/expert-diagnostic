@@ -2,8 +2,6 @@ $(document).on('ready', principal);
 
 function principal()
 {
-    $('.mytable').footable();
-
     $modalNuevo = $('#modalNuevo');
     $modalEditar = $('#modalEditar');
     $modalEliminar = $('#modalEliminar');
@@ -13,14 +11,14 @@ function principal()
 
     $('#formEditar').on('submit', updateSymptom);
     $('#formRegistrar').on('submit', registerSymptom);
-    $('#formEliminar').on('submit', deletePatient);
+    $('#formEliminar').on('submit', deleteSymptom);
 
     $('#btnNew').on('click', mostrarNuevo);
 }
 
-function deletePatient() {
+function deleteSymptom() {
     event.preventDefault();
-    var url =  '../public/pacientes/eliminar';
+    var url =  '../public/symptom/eliminar';
     $.ajax({
         url: url,
         data: new FormData(this),
@@ -96,6 +94,9 @@ function mostrarEditar() {
     var id = $(this).data('id');
     $modalEditar.find('[name="id"]').val(id);
 
+    var name = $(this).data('name');
+    $modalEditar.find('[name="name"]').val(name);
+
     var description = $(this).data('description');
     $modalEditar.find('[name="description"]').val(description);
 
@@ -110,8 +111,8 @@ function mostrarEliminar() {
     var id = $(this).data('delete');
     $modalEliminar.find('[name="id"]').val(id);
 
-    var description = $(this).data('description');
-    $modalEliminar.find('[name="descEliminar"]').val(description);
+    var name = $(this).data('name');
+    $modalEliminar.find('[name="descEliminar"]').val(name);
 
     $modalEliminar.modal('show');
 }
