@@ -8,19 +8,20 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-// Patient routes
+
 Route::group(['middleware' => 'auth'], function () {
 
+// Patient routes
     Route::get('/pacientes', 'PatientController@index');
     Route::post('/pacientes/registrar', 'PatientController@store');
     Route::post('/pacientes/modificar', 'PatientController@edit');
     Route::post('/pacientes/eliminar', 'PatientController@delete');
 
-// symptom routes
-Route::get('symptom', 'SymptomController@index');
-Route::post('/symptom/registrar', 'SymptomController@postSymptom');
-Route::post('/symptom/modificar', 'SymptomController@putSymptom');
-Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
+// Symptom routes
+    Route::get('symptom', 'SymptomController@index');
+    Route::post('/symptom/registrar', 'SymptomController@postSymptom');
+    Route::post('/symptom/modificar', 'SymptomController@putSymptom');
+    Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
 
 // Medication routes
     Route::get('/medicamentos', 'MedicationController@index');
