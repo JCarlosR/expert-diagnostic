@@ -16,13 +16,8 @@ class DiseaseController extends Controller
         $diseases = Disease::orderby('name','asc')->paginate(3);
         return view('diseases.index')->with(compact('diseases'));
     }
-
-    public function create()
-    {
-        return view('diseases.create');
-    }
-
-    public function store( Request $request)
+    
+    public function store( Request $request )
     {
         $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 

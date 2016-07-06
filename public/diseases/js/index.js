@@ -1,5 +1,6 @@
 $(document).on('ready', principal);
 
+var $modalRegistrar;
 var $modalEditar;
 var $modalWatch;
 var $modalEliminar;
@@ -8,14 +9,22 @@ function principal()
 {
     $('.mytable').footable();
 
+    $modalRegistrar = $('#modalRegistrar');
     $modalEditar = $('#modalEditar');
     $modalEliminar = $('#modalEliminar');
     $modalWatch = $('#modalWatch');
 
+    $('[data-registrar]').on('click', mostrarRegistrar);
     $('[data-edit]').on('click', mostrarEditar);
     $('[data-delete]').on('click', mostrarEliminar);
     $('[data-watch]').on('click', mostrarVideo);
-    $('#form').on('submit', registerDisease);
+    $('#formRegistrar').on('submit', disease);
+    $('#formModificar').on('submit', disease);
+}
+
+function mostrarRegistrar()
+{
+    $modalRegistrar.modal('show');
 }
 
 function mostrarEditar() {
@@ -39,13 +48,12 @@ function mostrarEditar() {
     $modalEditar.modal('show');
 }
 
-function registerDisease()
+function disease()
 {
     event.preventDefault();
-    var url =  '../public/enfermedad/modificar';
 
     $.ajax({
-            url: url,
+            url: $(this).attr("action"),
             data: new FormData(this),
             dataType: "JSON",
             processData: false,
@@ -89,7 +97,7 @@ function mostrarEliminar() {
                     showmessage(response.message,0);
                     setTimeout(function(){
                         location.reload();
-                    }, 3000);
+                    }, 2000);
                 }
             });
 
@@ -124,6 +132,6 @@ function showmessage( message, error )
 
     },{
         type: type,
-        timer: 300
+        timer: 400
     });
 }
