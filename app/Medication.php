@@ -9,4 +9,9 @@ class Medication extends Model
     protected $fillable = [
         'active_component', 'trade_name', 'description', 'image',
     ];
+
+    public function diseases()
+    {
+        return $this->belongsToMany('App\Disease');
+    }
 }
