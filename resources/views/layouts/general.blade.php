@@ -70,27 +70,27 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('enfermedades') }}">
+                    <a href="{{ url('/enfermedades') }}">
                         <i class="ti-headphone-alt"></i>
                         <p>Enfermedades</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('/') }}">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Tratamientos</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('diagnostico') }}">
-                        <i class="ti-map"></i>
-                        <p>Diagnóstico</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{ url('/medicamentos') }}">
                         <i class="ti-blackboard"></i>
                         <p>Medicamentos</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/conocimiento') }}">
+                        <i class="ti-pencil-alt2"></i>
+                        <p>Base de conocimiento</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/diagnostico') }}">
+                        <i class="ti-map"></i>
+                        <p>Diagnóstico</p>
                     </a>
                 </li>
             </ul>

@@ -29,7 +29,7 @@ class SymptomController extends Controller
     {
         $sintomas = Sintoma::orderBy('id', 'asc')->paginate(5);
 
-        return view('layouts.symptom')->with(compact(['sintomas']));
+        return view('symptom.symptom')->with(compact(['sintomas']));
     }
 
     public function postSymptom(Request $request)
