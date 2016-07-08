@@ -39,4 +39,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('diagnostico','DiagnosisController@index');
     Route::get('diagnostico/all','DiagnosisController@getAll');
     Route::get('diagnostico/enfermedades/{sintomas}','DiagnosisController@diseases');
+
+    
+// Knowledge routes
+    Route::get('conocimiento','KnowledgeController@index');
+    Route::get('asignar/sintomas/{id}','KnowledgeController@getAssign');
+    Route::post('asignar/sintomas/{id}','KnowledgeController@postAssign');
+
 });
