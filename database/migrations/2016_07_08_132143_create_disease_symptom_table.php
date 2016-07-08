@@ -12,7 +12,7 @@ class CreateDiseaseSymptomTable extends Migration
      */
     public function up()
     {
-        Schema::create('disease_symptom', function (Blueprint $table) {
+        Schema::create('disease_symptoms', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('disease_id')->unsigned();

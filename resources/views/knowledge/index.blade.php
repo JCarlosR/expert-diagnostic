@@ -1,6 +1,6 @@
 @extends('layouts.general')
 
-@section('title','Enfermedades')
+@section('title','Asignar síntomas')
 
 @section('styles')
     <style>
@@ -28,8 +28,12 @@
             height: 40px;
             width: 40px;
         }
+        .sintoma{
+            margin: 1.4em 0;
+            height: 180px;
+        }
     </style>
-
+    <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/footable.bootstrap.min.css')}}">
 @endsection
 
@@ -71,7 +75,7 @@
                                         </td>
                                         <td>{{$disease->description}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-success" data-assign="{{ $disease->id }}" data-name="{{ $disease ->name }}">
+                                            <button type="button" class="btn btn-success" data-url="{{url('asignar/sintomas/')}}" data-assign="{{ $disease->id }}" data-name="{{ $disease ->name }}">
                                                 <i class="fa fa-pencil"></i>Asignar síntomas
                                             </button>
 
@@ -96,50 +100,41 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="formModificar" action="{{ url('enfermedad/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
-                        <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                        <input type="hidden" name="id" />
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label for="name">Nombre*</label>
-                                <input type="text" id="name" name="name" class="form-control inside in-input" required>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Listado de Síntomas</h4>
+                                </div>
+                                <div class="content">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                        <input type="text" id="search" value="" class="form-control" placeholder="Search...">
+                                    </div>
+                                    <div id="noAsignados" class="panel-body">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="botones col-md-2">
+                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignar();">Mover
+                                <span class="btn-label"><i class="ti-angle-right"></i></span></button>
+                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolver();">
+                                <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover</button>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Sintomas Agregados</h4>
+                                </div>
+                                <div class="content">
+                                    <div id="asignados" class="panel-body">
 
-                        <div class="form-group">
-                            <div class="col-md-8">
-                                <label for="image">Nueva Imagen</label>
-                                <input type="file" id="image" name="image" class="form-control inside in-input" accept="image/*">
-                            </div>
-
-                            <div class="col-md-3 col-md-offset-1">
-                                <label for="oldImage">Imagen anterior</label>
-                                <div id="oldImage"> </div>
-                                <input type="hidden" name="oldImage">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label for="">Url de vídeo*</label>
-                                <input type="text" id="video" name="video"  class="form-control inside in-input" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label for="description">Descripción</label>
-                                <textarea name="description" id="description" class="form-control no-resize inside in-input"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group text-center">
-                            <div class="col-md-12">
-                                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                                <button class="btn btn-primary"><span class="glyphicon glyphicon-ok-circle"></span> Modificar </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,6 +162,7 @@
 
 @section('scripts')
     <script src="{{ asset('assets/js/footable.min.js') }} "></script>
+    <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/search.js') }} "></script>
     <script src="{{ asset('knowledge/js/index.js') }}"></script>
 @endsection

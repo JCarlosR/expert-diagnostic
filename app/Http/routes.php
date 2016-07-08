@@ -41,5 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     
 // Knowledge routes
     Route::get('conocimiento','KnowledgeController@index');
+    Route::get('asignar/sintomas/{id}','KnowledgeController@getAssign');
+    Route::post('asignar/sintomas/{id}','KnowledgeController@postAssign');
     
 });

@@ -1,104 +1,54 @@
 $(document).on('ready', principal);
 
-var $modalRegistrar;
-var $modalEditar;
+var $modalAsignar;
 var $modalWatch;
-var $modalEliminar;
 
 function principal() {
     $('.mytable').footable();
 
-    $modalRegistrar = $('#modalRegistrar');
-    $modalEditar = $('#modalEditar');
-    $modalEliminar = $('#modalEliminar');
+    $modalAsignar = $('#modalAsignar');
     $modalWatch = $('#modalWatch');
 
-    $('[data-registrar]').on('click', mostrarRegistrar);
-    $('[data-edit]').on('click', mostrarEditar);
-    $('[data-delete]').on('click', mostrarEliminar);
+    $('[data-assign]').on('click', mostrarAsignar);
     $('[data-watch]').on('click', mostrarVideo);
-    $('#formRegistrar').on('submit', disease);
-    $('#formModificar').on('submit', disease);
 }
 
-function mostrarRegistrar() {
-    $modalRegistrar.modal('show');
-}
+var asignados;
+var no_asignados;
 
-function mostrarEditar() {
-    var id = $(this).data('edit');
-    $modalEditar.find('[name="id"]').val(id);
-
-    var name = $(this).data('name');
-    $modalEditar.find('[name="name"]').val(name);
-
-    var description = $(this).data('description');
-    $modalEditar.find('[name="description"]').val(description);
-
-    var video = $(this).data('video');
-    $modalEditar.find('[name="video"]').val(video);
-
-    var image = $(this).data('image');
-    $modalEditar.find('[name="oldImage"]').val(image);
-    var image_url = '../public/diseases/images/'+image;
-    $("#oldImage").html('<img src="'+image_url+'" class="img-responsive image"> ');
-
-    $modalEditar.modal('show');
-}
-
-function disease() {
-    event.preventDefault();
-
-    $.ajax({
-            url: $(this).attr("action"),
-            data: new FormData(this),
-            dataType: "JSON",
-            processData: false,
-            contentType: false,
-            method: 'POST'
-        })
-        .done(function( response ) {
-            if(response.error)
-                showmessage(response.message,1);
-            else{
-                showmessage(response.message,0);
-                setTimeout(function(){
-                    location.reload();
-                }, 2000);
-            }
-        });
-}
-
-function mostrarEliminar() {
-    var id = $(this).data('delete');
-    $modalEliminar.find('[name="id"]').val(id);
-
-    var name = $(this).data('name');
-    $modalEliminar.find('[name="nombreEliminar"]').val(name);
-
-    $modalEliminar.modal('show');
-
-    $('#accept').on('click', function(event)
-    {
-        event.preventDefault();
-        var url =  '../public/enfermedad/eliminar/'+id;
-
-        $.ajax({
-                url: url,
-                method: 'GET'
-            })
-            .done(function( response ) {
-                if(response.error)
-                    showmessage(response.message,1);
-                else{
-                    showmessage(response.message,0);
-                    setTimeout(function(){
-                        location.reload();
-                    }, 2000);
-                }
-            });
-
+function mostrarAsignar() {
+    $asignados = $('#asignados');
+    $noAsignados = $('#noAsignados');
+    var enfermedad = $(this).data('assign');
+    var url = $(this).data('url');
+    var route = url+'/'+enfermedad;
+    console.log(route);
+    $.getJSON(route, function (data) {
+        asignados = data.asignados;
+        no_asignados = data.no_asignados;
+        console.log(asignados);
+        console.log(no_asignados);
+        loadSintomasAsignados(asignados);
+        loadSintomasNoAsignados(no_asignados);
     });
+    $modalAsignar.modal('show');
+
+}
+
+function loadSintomasAsignados(data){
+    $asignados.empty();
+    for (var i=0; i<data.length; ++i) {
+        var html = '<div class="col-md-6" data-detalle="'+data[i].id+'" class="sintoma col-md-6 text-center"><img  class="img-thumbnail img-rounded" src="./symptoms/images/'+data[i].imagen+'" style="height: 100px" onclick="showDescription(\''+data[i].descripcion+'\')"/><label class="checkbox"><input type="checkbox" data-toggle="checkbox" name="origen" value="'+data[i].id+'"/>'+data[i].name+'</label></div>';
+        $asignados.append(html);
+    }
+}
+
+function loadSintomasNoAsignados(data){
+    $noAsignados.empty();
+    for (var i=0; i<data.length; ++i) {
+        var html = '<div data-detalle="'+data[i].id+'" class="sintoma col-md-6 text-center"><img  class="img-thumbnail img-rounded" src="./symptoms/images/'+data[i].imagen+'" style="height: 100px" onclick="showDescription(\''+data[i].descripcion+'\')"/><label class="checkbox"><input type="checkbox" data-toggle="checkbox" name="origen" value="'+data[i].id+'"/>'+data[i].name+'</label></div>';
+        $noAsignados.append(html);
+    }
 }
 
 function mostrarVideo() {
@@ -129,4 +79,8 @@ function showmessage( message, error ) {
         type: type,
         timer: 400
     });
+}
+
+function showDescription(data){
+    swal(data);
 }
