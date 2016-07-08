@@ -18,4 +18,9 @@ class Sintoma extends Model
 
     protected $fillable = [ 'name', 'descripcion', 'imagen'];
 
+    public function diseases()
+    {
+        return $this->belongsToMany('App\Disease');
+    }
+
 }
