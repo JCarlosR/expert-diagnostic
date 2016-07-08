@@ -1,4 +1,6 @@
-@extends('layouts.general'))
+@extends('layouts.general')
+
+@section('title','Diagnostico')
 
 @section('styles')
     <style>
@@ -70,9 +72,6 @@
             </div>
         </div>
     </div>
-
-    </div>
-
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>

@@ -40,10 +40,10 @@ class SymptomController extends Controller
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
         if ($request->get('name') == null OR $request->get('name') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
 
         if ($request->get('description') == null OR $request->get('description') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del paciente']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
 
 
         $symptom = Sintoma::create([
@@ -66,7 +66,7 @@ class SymptomController extends Controller
 
         $symptom->save();
 
-        return response()->json(['error' => false, 'message' => 'Paciente registrado correctamente']);
+        return response()->json(['error' => false, 'message' => 'Síntoma registrado correctamente']);
 
     }
 
@@ -78,10 +78,10 @@ class SymptomController extends Controller
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
         if ($request->get('name') == null OR $request->get('name') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del sintoma']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
         
         if ($request->get('description') == null OR $request->get('description') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del sintoma']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del síntoma']);
 
         $symptom = Sintoma::find( $request->get('id') );
         $symptom->name = $request->get('name');
@@ -100,7 +100,7 @@ class SymptomController extends Controller
 
         $symptom->save();
 
-        return response()->json(['error' => false, 'message' => 'Paciente modificado correctamente']);
+        return response()->json(['error' => false, 'message' => 'Síntoma modificado correctamente']);
     }
 
     public function deleteSymptom(Request $request)
@@ -108,12 +108,12 @@ class SymptomController extends Controller
         $symptom = Sintoma::find($request->get('id'));
 
         if($symptom == null)
-            return response()->json(['error' => true, 'message' => 'No existe el paciente especificado.']);
+            return response()->json(['error' => true, 'message' => 'No existe el síntoma especificado.']);
 
         $symptom = Sintoma::find($request->get('id'));
         $symptom->delete();
 
-        return response()->json(['error' => false, 'message' => 'Paciente eliminado correctamente.']);
+        return response()->json(['error' => false, 'message' => 'Síntoma eliminado correctamente.']);
 
     }
 
