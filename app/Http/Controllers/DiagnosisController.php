@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Disease;
 use App\Http\Requests;
 use App\Sintoma;
 use Illuminate\Http\Request;
@@ -31,6 +32,21 @@ class DiagnosisController extends Controller
     }
 
     public function getAll(){
+        $sintomas = Sintoma::All();
+        return $sintomas;
+    }
+
+    public function diseases( $sintomas )
+    {
+        $string = '';
+        $sintomas = str_replace(',', '', $sintomas);
+
+        $string =Disease::where('');
+
+        for( $i=0;$i< strlen($sintomas);$i++  )
+
+
+
         $sintomas = Sintoma::All();
         return $sintomas;
     }

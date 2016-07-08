@@ -1,5 +1,7 @@
 $(document).on('ready', principal);
 
+var disease_simptom = [];
+
 function principal(){
     $sintomas = $('#noAsignados');
     $buscador = $('#search');
@@ -11,7 +13,6 @@ function principal(){
         console.log(data);
         loadSintomasSource(full_data);
     });
-
 }
 
 var full_data;
@@ -46,6 +47,7 @@ function buscarSintoma(){
 function asignar() {
     $("input[name=origen]:checked").each(function(){
         values.push($(this));
+        disease_simptom.push($(this).val());
     });
     $(values).each( function(i,element) {
         var _this = $(this);
@@ -55,11 +57,20 @@ function asignar() {
     });
     values.length=0;
 
+    $.ajax({
+        url: 'diagnostico/enfermedades/'+disease_simptom,
+        method: 'GET'
+    }).done(function (data) {
+
+        alert('I am here again');
+    });
 }
+
 function devolver() {
     $("input[name=destino]:checked").each(function(){
         values.push($(this));
     });
+
     $(values).each( function(i,element) {
         var _this = $(this);
         _this.attr('name','origen');

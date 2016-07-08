@@ -11,6 +11,6 @@ class DiseaseMedicationSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }
