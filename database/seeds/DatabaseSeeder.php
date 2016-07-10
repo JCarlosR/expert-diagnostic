@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
 
         //Juarez
-        $this->call(SintomasTableSeeder::class);
+        $this->call(SymptomsTableSeeder::class);
 
         $this->call(DiseasesTableSeeder::class);
 
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MedicationsTableSeeder::class);
 
-        $this->call(DiseaseSymptomTableSeeder::class);
+        $this->call(DiseaseSymptomsTableSeeder::class);
 
     }
 }
