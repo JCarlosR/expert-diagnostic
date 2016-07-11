@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSintomasTable extends Migration
+class CreateSymptomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSintomasTable extends Migration
      */
     public function up()
     {
-        Schema::create('symptom', function (Blueprint $table) {
+        Schema::create('symptoms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('descripcion');
@@ -28,6 +28,6 @@ class CreateSintomasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('symptom');
+        Schema::drop('symptoms');
     }
 }

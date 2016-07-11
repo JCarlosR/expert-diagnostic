@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class DiseaseSymptom extends Model
 {
+    protected $table = 'disease_symptom';
     protected $fillable = ['disease_id','symptom_id'];
 
-    public function disease()
+    public function diseases()
     {
         return $this->belongsToMany('App\Disease', 'id');
     }
 
-    public function symptomp()
+    public function symptoms()
     {
-        return $this->belongsToMany('App\Sintoma', 'id');
+        return $this->belongsToMany('App\Symptom', 'id');
     }
 }

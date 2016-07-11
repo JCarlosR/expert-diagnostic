@@ -125,32 +125,34 @@ function show_diseases()
             {
                 var html_ =
                     '<div class="col-md-6">'+
-                    '<div class="card text-center" style="background-color: #4e4e4e; border-color: #151515; color:white;">'+
-                    '<div class="card-block">'+
-                    '<h3 class="card-title">'+ name[i] +'</h3>'+
-                    '<button type="button" class="btn btn-success" data-detail="'+ id[i] +'" data-description="'+ description[i] +'" data-image="'+ image[i] +'">'+
-                    '<i class="fa fa-eye"></i> Ver enfermedad'+
-                    '</button>'+
-                    '<button type="button" class="btn btn-success" data-id="'+ id[i] +'" data-video="'+ video[i] +'">'+
-                    '<i class="fa fa-eye"></i> Ver tratamiento'+
-                    '</button>'+
-                    '<br><br>'+
-                    '</div>'+
-                    '</div>'+
+                        '<div class="card text-center" style="background-color: #4e4e4e; border-color: #151515; color:white;">'+
+                            '<div class="card-block" id="datas">'+
+                                '<h3 class="card-title">'+ name[i] +'</h3>'+
+                                '<button type="button" class="btn btn-success" onclick="mostrarDetalles();" data-description="'+ description[i] +'" data-image="'+ image[i] +'">'+
+                                    '<i class="fa fa-eye"></i> Ver enfermedad'+
+                                '</button>'+
+                                '<button type="button" class="btn btn-success" data-id="'+ id[i] +'" data-video="'+ video[i] +'">'+
+                                    '<i class="fa fa-eye"></i> Ver tratamiento'+
+                                '</button>'+
+                                '<br><br>'+
+                            '</div>'+
+                        '</div>'+
                     '</div>';
                 $('#enfermedades').append(html_);
             }
         }
+
+        //onclick="mostrarDetalles();"
     });
 }
 
 function mostrarDetalles()
 {
-    alert('go');
     event.preventDefault();
-    var description = $(this).data('description');
-    var image = $(this).data('image');
-    alert(description);
+
+
+    //  var id = $(this).data('edit');
+  // $modalEditar.find('[name="id"]').val(id);
 
 }
 
