@@ -57,21 +57,53 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Listado de Tratamientos</h4>
+                            <h4 class="title">Enfermedad(es)</h4>
                         </div>
-                        <div class="content">
-                            <div id="tratamientos" class="panel-body">
-                            </div>
+                        <div id="enfermedades" class="panel-body">
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="modalDetalles" class="modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Eliminar enfermedad</h4>
+                </div>
+
+                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalTratamiento" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" name=""><span name="title"></span> </h4>
+                </div>
+                <div class="modal-body">
+                    <iframe width="854" id="iframe" height="480" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" id="exit" ><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>

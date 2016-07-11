@@ -5,12 +5,17 @@ var disease_simptom = [];
 function principal(){
     $sintomas = $('#noAsignados');
     $buscador = $('#search');
-
     $buscador.on('input',buscarSintoma);
+
+    //SoleS
+    $modalDetalles    = $('#modalDetalles');
+    $modalTratamiento = $('#modalTratamiento');
+
+    $('[data-detail]').on('click', mostrarDetalles);
+    $('[data-id]').on('click', mostrarTratamiento);
 
     $.getJSON('diagnostico/all', function (data) {
         full_data = data;
-        console.log(data);
         loadSintomasSource(full_data);
     });
 }
@@ -19,6 +24,10 @@ var full_data;
 var values = [];
 var origen = [];
 var destino= [];
+
+//SoleS
+var $modalDetalles;
+var $modalTratamiento;
 
 function loadSintomasSource(data){
     for (var i=0; i<data.length; ++i) {
@@ -47,7 +56,6 @@ function buscarSintoma(){
 function asignar() {
     $("input[name=origen]:checked").each(function(){
         values.push($(this));
-        disease_simptom.push($(this).val());
     });
     $(values).each( function(i,element) {
         var _this = $(this);
@@ -57,13 +65,9 @@ function asignar() {
     });
     values.length=0;
 
-    $.ajax({
-        url: 'diagnostico/enfermedades/'+disease_simptom,
-        method: 'GET'
-    }).done(function (data) {
+    //SoleS Logic
+    show_diseases();
 
-        alert('I am here again');
-    });
 }
 
 function devolver() {
@@ -78,8 +82,79 @@ function devolver() {
 
     });
     values.length=0;
+    //SoleS Logic
+    show_diseases();
 }
 
 function showDescription(data){
     swal(data);
+}
+
+function show_diseases()
+{
+    var asignados = document.getElementById("asignados").children;
+    var len = asignados.length;
+    var symptoms = [];
+
+    for(  var i =0;i<len; i++ )
+        symptoms.push( asignados[i].getAttribute('data-detalle') );
+
+    $.ajax({
+        url: '../public/diagnostico/enfermedades',
+        data: {symptoms: JSON.stringify(symptoms)},
+        method: 'GET'
+    }).done(function (data) {
+        if(  data.error ){
+            $('#enfermedades').html('');
+            alert(data.message);
+        }
+        else
+        {
+            $('#enfermedades').html('');
+
+            //<img  class="img-thumbnail img-rounded" src="./symptoms/images/'+data[i].imagen+'" style="height: 100px"/>
+            var id = []; var name = []; var image = []; var video = []; var description = [];
+
+            $.each(data.id,function(key,value) { id.push(value); });
+            $.each(data.name,function(key,value) { name.push(value); });
+            $.each(data.image,function(key,value) { image.push(value); });
+            $.each(data.video,function(key,value) { video.push(value); });
+            $.each(data.description,function(key,value) { description.push(value); });
+
+            for( var i=0; i<id.length;i++ )
+            {
+                var html_ =
+                    '<div class="col-md-6">'+
+                    '<div class="card text-center" style="background-color: #4e4e4e; border-color: #151515; color:white;">'+
+                    '<div class="card-block">'+
+                    '<h3 class="card-title">'+ name[i] +'</h3>'+
+                    '<button type="button" class="btn btn-success" data-detail="'+ id[i] +'" data-description="'+ description[i] +'" data-image="'+ image[i] +'">'+
+                    '<i class="fa fa-eye"></i> Ver enfermedad'+
+                    '</button>'+
+                    '<button type="button" class="btn btn-success" data-id="'+ id[i] +'" data-video="'+ video[i] +'">'+
+                    '<i class="fa fa-eye"></i> Ver tratamiento'+
+                    '</button>'+
+                    '<br><br>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>';
+                $('#enfermedades').append(html_);
+            }
+        }
+    });
+}
+
+function mostrarDetalles()
+{
+    alert('go');
+    event.preventDefault();
+    var description = $(this).data('description');
+    var image = $(this).data('image');
+    alert(description);
+
+}
+
+function mostrarTratamiento()
+{
+    alert('go');
 }
