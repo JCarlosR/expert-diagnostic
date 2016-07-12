@@ -78,8 +78,12 @@
                                             <button type="button" class="btn btn-success" data-url="{{url('asignar/sintomas/')}}" data-assign="{{ $disease->id }}" data-name="{{ $disease ->name }}">
                                                 <i class="fa fa-pencil"></i>Asignar síntomas
                                             </button>
+                                            <button type="button" class="btn btn-primary" data-url="{{url('asignar/medicamentos/')}}" data-assignmed="{{ $disease->id }}" data-name="{{ $disease ->name }}">
+                                                <i class="fa fa-pencil"></i>Asignar medicamentos
+                                            </button>
 
                                         </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -92,15 +96,67 @@
         </div>
     </div>
 
-    <div id="modalAsignar" class="modal fade in">
+    <div id="modalAsignarMed" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Asignar síntomas</h4>
+                    <h4 id="titulo" class="modal-title">Asignar medicamentos para la enfermedad <label id="diseaseMed"></label></h4>
                 </div>
 
                 <div class="modal-body">
                     <div class="row">
+                        <input type="hidden" data-diseasemed="" id="enfermedadMed">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Listado de Medicamentos</h4>
+                                </div>
+                                <div class="content">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                        <input type="text" id="search" value="" class="form-control" placeholder="Search...">
+                                    </div>
+                                    <div id="noAsignadosMed" class="panel-body">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botones col-md-2">
+                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignarMed();">Mover
+                                <span class="btn-label"><i class="ti-angle-right"></i></span></button>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolverMed();">
+                                <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover</button>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Medicamentos Agregados</h4>
+                                </div>
+                                <div class="content">
+                                    <div id="asignadosMed" class="panel-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAsignar" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="titulo" class="modal-title">Asignar síntomas para la enfermedad <label id="disease"></label></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" data-disease="" id="enfermedad">
                         <div class="col-md-5">
                             <div class="card">
                                 <div class="header">
@@ -119,6 +175,8 @@
                         <div class="botones col-md-2">
                             <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignar();">Mover
                                 <span class="btn-label"><i class="ti-angle-right"></i></span></button>
+                            <br>
+                            <br>
                             <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolver();">
                                 <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover</button>
                         </div>

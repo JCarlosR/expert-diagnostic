@@ -38,10 +38,17 @@ Route::group(['middleware' => 'auth'], function () {
 // Diagnostic routes
     Route::get('diagnostico','DiagnosisController@index');
     Route::get('diagnostico/all','DiagnosisController@getAll');
+    Route::get('diagnostico/enfermedades','DiagnosisController@diseases');
+    Route::get('enfermedades/medicamentos/{disease_id}','DiagnosisController@medication');
+
     
 // Knowledge routes
     Route::get('conocimiento','KnowledgeController@index');
     Route::get('asignar/sintomas/{id}','KnowledgeController@getAssign');
-    Route::post('asignar/sintomas/{id}','KnowledgeController@postAssign');
-    
+    Route::get('asignar/sintoma/{disease}/{symptom}','KnowledgeController@getAssignSymptom');
+    Route::get('desasignar/sintoma/{disease}/{symptom}','KnowledgeController@getNotAssignSymptom');
+
+    Route::get('asignar/medicamentos/{id}','KnowledgeController@getAssignMed');
+    Route::get('asignar/medicamento/{disease}/{medication}','KnowledgeController@getAssignMedication');
+    Route::get('desasignar/medicamento/{disease}/{medication}','KnowledgeController@getNotAssignMedication');
 });

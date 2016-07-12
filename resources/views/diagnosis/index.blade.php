@@ -15,6 +15,11 @@
         .botones{
             margin-top:200px;
         }
+        .image
+        {
+            width: 250px;
+            height: 200px;
+        }
     </style>
     <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.min.css')}}">
 @endsection
@@ -59,21 +64,82 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Listado de Tratamientos</h4>
+                            <h4 class="title">Enfermedad(es)</h4>
                         </div>
-                        <div class="content">
-                            <div id="tratamientos" class="panel-body">
-                            </div>
+                        <div id="enfermedades" class="panel-body">
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="modalDetalles" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" ><span id="name_disease"></span></h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <textarea name="description_disease" id="description_disease" class="form-control" rows="4"  readonly></textarea><br><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-4" id="image_disease">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalTratamiento" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><span id="name_disease_treatment"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <iframe width="700" id="iframe" height="250" src="" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <h4>Prescripción médica</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8" id="medication">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>

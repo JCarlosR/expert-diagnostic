@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Sintoma;
+use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +27,7 @@ class SymptomController extends Controller
      */
     public function index()
     {
-        $sintomas = Sintoma::orderBy('id', 'asc')->paginate(5);
+        $sintomas = Symptom::orderBy('id', 'asc')->paginate(5);
 
         return view('symptom.symptom')->with(compact(['sintomas']));
     }
@@ -46,7 +46,7 @@ class SymptomController extends Controller
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
 
 
-        $symptom = Sintoma::create([
+        $symptom = Symptom::create([
             'name' => $request->get('name'),
             'descripcion' => $request->get('description')
         ]);
@@ -83,7 +83,7 @@ class SymptomController extends Controller
         if ($request->get('description') == null OR $request->get('description') == "")
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del síntoma']);
 
-        $symptom = Sintoma::find( $request->get('id') );
+        $symptom = Symptom::find( $request->get('id') );
         $symptom->name = $request->get('name');
         $symptom->descripcion = $request->get('description');
 
@@ -105,12 +105,12 @@ class SymptomController extends Controller
 
     public function deleteSymptom(Request $request)
     {
-        $symptom = Sintoma::find($request->get('id'));
+        $symptom = Symptom::find($request->get('id'));
 
         if($symptom == null)
             return response()->json(['error' => true, 'message' => 'No existe el síntoma especificado.']);
 
-        $symptom = Sintoma::find($request->get('id'));
+        $symptom = Symptom::find($request->get('id'));
         $symptom->delete();
 
         return response()->json(['error' => false, 'message' => 'Síntoma eliminado correctamente.']);

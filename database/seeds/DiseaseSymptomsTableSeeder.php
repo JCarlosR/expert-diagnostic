@@ -3,7 +3,7 @@
 use App\DiseaseSymptom;
 use Illuminate\Database\Seeder;
 
-class DiseaseSymptomTableSeeder extends Seeder
+class DiseaseSymptomsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

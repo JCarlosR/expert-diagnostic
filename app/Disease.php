@@ -10,7 +10,7 @@ class Disease extends Model
 
     public function symptoms()
     {
-        return $this->belongsToMany('App\Sintoma');
+        return $this->belongsToMany('App\Symptom');
     }
 
     public function medications()
