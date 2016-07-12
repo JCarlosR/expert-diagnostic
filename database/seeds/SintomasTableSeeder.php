@@ -36,7 +36,7 @@ class SintomasTableSeeder extends Seeder
         Sintoma::create(['name' =>'HEMORROIDES ','descripcion'=>'HEMORROIDES ','imagen'=>'algo.jpg']);
         Sintoma::create(['name' =>'ICTERICIA ','descripcion'=>'ICTERICIA ','imagen'=>'algo.jpg']);
         Sintoma::create(['name' =>'INAPETENCIA ','descripcion'=>'INAPETENCIA ','imagen'=>'algo.jpg']);
-        Sintoma::create(['name' =>'INFECCIONES INTESTINALESACIONES','descripcion'=>'INFECCIONES INTESTINALESACIONES','imagen'=>'algo.jpg']);
+        Sintoma::create(['name' =>'INFECCIONES INTESTINALES','descripcion'=>'INFECCIONES INTESTINALES','imagen'=>'algo.jpg']);
         Sintoma::create(['name' =>'LLENURA','descripcion'=>'LLENURA','imagen'=>'algo.jpg']);
         Sintoma::create(['name' =>'MALESTAR GENERAL','descripcion'=>'MALESTAR GENERAL','imagen'=>'algo.jpg']);
         Sintoma::create(['name' =>'MAREOS','descripcion'=>'MAREOS','imagen'=>'algo.jpg']);

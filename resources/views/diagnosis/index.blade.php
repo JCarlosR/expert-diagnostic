@@ -35,6 +35,8 @@
                             </div>
                             <div id="noAsignados" class="panel-body">
                             </div>
+                            <ul class="pagination">
+                            </ul>
                         </div>
                     </div>
                 </div>
