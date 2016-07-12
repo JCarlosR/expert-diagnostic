@@ -155,7 +155,7 @@ function asignarMed() {
 }
 
 function devolverMed() {
-    var enfermedad = $('#enfermedad').data('diseasemed');
+    var enfermedad = $('#enfermedadMed').data('diseasemed');
     $("input[name=destino]:checked").each(function(){
         values.push($(this));
     });
