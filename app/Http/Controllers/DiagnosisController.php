@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Disease;
+use App\DiseaseMedication;
 use App\DiseaseSymptom;
 use App\Http\Requests;
+use App\Medication;
 use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -127,5 +129,26 @@ class DiagnosisController extends Controller
             if( $array[$i] == $element )
                 return true;
         return false;
+    }
+
+    public function medication( $disease_id )
+    {
+        $disease_medications = DiseaseMedication::where('disease_id',$disease_id)->get();
+        $medic_result = [];
+
+        foreach ($disease_medications as $disease_medication) {
+            $medication_test = Medication::find($disease_medication->medication_id);
+            $medic_result [] = $medication_test->trade_name.' - '.$medication_test->active_component;
+        }
+
+        if( count($medic_result)==0 )
+            $data['error'] = true;
+        else
+        {
+            $data['error'] = false;
+            $data['medication'] = $medic_result;
+        }
+
+        return $data;
     }
 }

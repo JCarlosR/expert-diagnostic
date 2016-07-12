@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('diagnostico','DiagnosisController@index');
     Route::get('diagnostico/all','DiagnosisController@getAll');
     Route::get('diagnostico/enfermedades','DiagnosisController@diseases');
+    Route::get('enfermedades/medicamentos/{disease_id}','DiagnosisController@medication');
 
     
 // Knowledge routes

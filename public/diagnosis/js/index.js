@@ -170,7 +170,20 @@ function mostrarTratamiento(name,id,video)
     $('#name_disease_treatment').html(name);
     $('#iframe').attr('src',video);
 
-    //alert(id+' - '+video);
+    $.ajax({
+        url: '../public/enfermedades/medicamentos/'+id,
+        method: 'GET'
+    }).done(function (data) {
+        if (data.error)
+            $('#medication').html('Ho existen datos');
+        else
+        {
+            $('#medication').html('');
+            $.each(data.medication, function (key, value) {
+                $('#medication').append('<p><i class="fa fa-list-ul"></i> '+value+'</p>');
+            });
+        }
+    });
 
     $modalTratamiento.modal('show');
 }

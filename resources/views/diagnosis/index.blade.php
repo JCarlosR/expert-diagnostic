@@ -120,14 +120,11 @@
                         </div>
                     </div>
                     <div class="row text-center">
-                        <h5>Prescripción médica</h5>
+                        <h4>Prescripción médica</h4>
                     </div>
-                    <div class="row" id="medicamentos">
-                        <div class="col-md-offset-1 col-md-10">
-                            <p>Medicamento 1</p>
-                            <p>Medicamento 2</p>
-                            <p>Medicamento 3</p>
-                            <p>Medicamento 4</p>
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-8" id="medication">
+
                         </div>
                     </div>
                 </div>
