@@ -15,6 +15,11 @@
         .botones{
             margin-top:200px;
         }
+        .image
+        {
+            width: 250px;
+            height: 200px;
+        }
     </style>
     <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.min.css')}}">
 @endsection
@@ -74,13 +79,30 @@
     </div>
 
     <div id="modalDetalles" class="modal fade in">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar enfermedad</h4>
+                    <h4 class="modal-title" ><span id="name_disease"></span></h4>
                 </div>
 
-                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <textarea name="description_disease" id="description_disease" class="form-control" rows="4"  readonly></textarea><br><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-4" id="image_disease">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -89,14 +111,29 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" name=""><span name="title"></span> </h4>
+                    <h4 class="modal-title"><span id="name_disease_treatment"></span></h4>
                 </div>
                 <div class="modal-body">
-                    <iframe width="854" id="iframe" height="480" src="" frameborder="0" allowfullscreen></iframe>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                            <iframe width="700" id="iframe" height="250" src="" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <h5>Prescripción médica</h5>
+                    </div>
+                    <div class="row" id="medicamentos">
+                        <div class="col-md-offset-1 col-md-10">
+                            <p>Medicamento 1</p>
+                            <p>Medicamento 2</p>
+                            <p>Medicamento 3</p>
+                            <p>Medicamento 4</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="form-group text-center">
-                        <button class="btn btn-primary" id="exit" ><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    <div class="text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
                     </div>
                 </div>
 

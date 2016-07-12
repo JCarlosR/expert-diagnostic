@@ -11,9 +11,6 @@ function principal(){
     $modalDetalles    = $('#modalDetalles');
     $modalTratamiento = $('#modalTratamiento');
 
-    $('[data-detail]').on('click', mostrarDetalles);
-    $('[data-id]').on('click', mostrarTratamiento);
-
     $.getJSON('diagnostico/all', function (data) {
         full_data = data;
         loadSintomasSource(full_data);
@@ -90,73 +87,110 @@ function showDescription(data){
     swal(data);
 }
 
-function show_diseases()
-{
+function show_diseases() {
     var asignados = document.getElementById("asignados").children;
     var len = asignados.length;
     var symptoms = [];
 
-    for(  var i =0;i<len; i++ )
-        symptoms.push( asignados[i].getAttribute('data-detalle') );
+    for (var i = 0; i < len; i++)
+        symptoms.push(asignados[i].getAttribute('data-detalle'));
 
     $.ajax({
         url: '../public/diagnostico/enfermedades',
         data: {symptoms: JSON.stringify(symptoms)},
         method: 'GET'
     }).done(function (data) {
-        if(  data.error ){
+        if (data.error) {
             $('#enfermedades').html('');
-            alert(data.message);
+            showmessage(data.message,1);
         }
-        else
-        {
+        else {
             $('#enfermedades').html('');
 
             //<img  class="img-thumbnail img-rounded" src="./symptoms/images/'+data[i].imagen+'" style="height: 100px"/>
-            var id = []; var name = []; var image = []; var video = []; var description = [];
+            var id = [];
+            var name = [];
+            var image = [];
+            var video = [];
+            var description = [];
 
-            $.each(data.id,function(key,value) { id.push(value); });
-            $.each(data.name,function(key,value) { name.push(value); });
-            $.each(data.image,function(key,value) { image.push(value); });
-            $.each(data.video,function(key,value) { video.push(value); });
-            $.each(data.description,function(key,value) { description.push(value); });
+            $.each(data.id, function (key, value) {
+                id.push(value);
+            });
+            $.each(data.name, function (key, value) {
+                name.push(value);
+            });
+            $.each(data.image, function (key, value) {
+                image.push(value);
+            });
+            $.each(data.video, function (key, value) {
+                video.push(value);
+            });
+            $.each(data.description, function (key, value) {
+                description.push(value);
+            });
 
-            for( var i=0; i<id.length;i++ )
-            {
+            for (var i = 0; i < id.length; i++) {
                 var html_ =
-                    '<div class="col-md-6">'+
-                        '<div class="card text-center" style="background-color: #4e4e4e; border-color: #151515; color:white;">'+
-                            '<div class="card-block" id="datas">'+
-                                '<h3 class="card-title">'+ name[i] +'</h3>'+
-                                '<button type="button" class="btn btn-success" onclick="mostrarDetalles();" data-description="'+ description[i] +'" data-image="'+ image[i] +'">'+
-                                    '<i class="fa fa-eye"></i> Ver enfermedad'+
-                                '</button>'+
-                                '<button type="button" class="btn btn-success" data-id="'+ id[i] +'" data-video="'+ video[i] +'">'+
-                                    '<i class="fa fa-eye"></i> Ver tratamiento'+
-                                '</button>'+
-                                '<br><br>'+
-                            '</div>'+
-                        '</div>'+
+                    '<div class="col-md-6">' +
+                    '<div class="card text-center" style="background-color: #4e4e4e; border-color: #151515; color:white;">' +
+                    '<div class="card-block">' +
+                    '<h3 class="card-title">' + name[i] + '</h3>' +
+                    '<button type="button" class="btn btn-success" onclick="mostrarDetalles(\''+name[i]+'\',\''+description[i]+'\',\''+image[i]+'\');">' +
+                    '<i class="fa fa-eye"></i> Ver enfermedad' +
+                    '</button>' +
+                    '<button type="button" class="btn btn-success" onclick="mostrarTratamiento(\''+name[i]+'\',\''+ id[i]+'\',\''+ video[i]+'\' );">' +
+                    '<i class="fa fa-eye"></i> Ver tratamiento' +
+                    '</button>' +
+                    '<br><br>' +
+                    '</div>' +
+                    '</div>' +
                     '</div>';
                 $('#enfermedades').append(html_);
             }
         }
-
-        //onclick="mostrarDetalles();"
     });
 }
 
-function mostrarDetalles()
+function mostrarDetalles(name,description,image)
 {
     event.preventDefault();
 
+    $('#name_disease').html(name);
+    $('#description_disease').val(description);
+    var html = '<img  class="img-rounded image" src="./diseases/images/'+image+'">';
+    $('#image_disease').html(html);
 
-    //  var id = $(this).data('edit');
-  // $modalEditar.find('[name="id"]').val(id);
-
+    $modalDetalles.modal('show');
 }
 
-function mostrarTratamiento()
+function mostrarTratamiento(name,id,video)
 {
-    alert('go');
+    event.preventDefault();
+    $('#name_disease_treatment').html(name);
+    $('#iframe').attr('src',video);
+
+    //alert(id+' - '+video);
+
+    $modalTratamiento.modal('show');
+}
+
+function showmessage( message, error )
+{
+    var icon = 'ti-thumb-up';
+    var type = 'success';
+    if( error==1 )
+    {
+        icon = 'ti-thumb-down';
+        type = 'danger';
+    }
+
+    $.notify({
+        icon: icon,
+        message: '<b>'+message+'</b>'
+
+    },{
+        type: type,
+        timer: 400
+    });
 }

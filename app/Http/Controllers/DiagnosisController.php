@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Disease;
 use App\DiseaseSymptom;
 use App\Http\Requests;
-use App\Sintoma;
+use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -33,7 +33,7 @@ class DiagnosisController extends Controller
     }
 
     public function getAll(){
-        $sintomas = Sintoma::All();
+        $sintomas = Symptom::All();
         return $sintomas;
     }
 
