@@ -1,23 +1,55 @@
 $(document).on('ready', principal);
 
 var $modalAsignar;
+var $modalAsignarMed;
 var $modalWatch;
 
 function principal() {
     $('.mytable').footable();
 
     $modalAsignar = $('#modalAsignar');
+    $modalAsignarMed = $('#modalAsignarMed');
     $modalWatch = $('#modalWatch');
 
     $('[data-assign]').on('click', mostrarAsignar);
+    $('[data-assignMed]').on('click', mostrarAsignarMed);
     $('[data-watch]').on('click', mostrarVideo);
 }
 
 var asignados;
 var no_asignados;
+var asignadosMed;
+var no_asignadosMed;
 var values = [];
 var origen = [];
 var destino= [];
+var valuesMed = [];
+var origenMed = [];
+var destinoMed= [];
+
+function mostrarAsignarMed() {
+    $asignadosMed = $('#asignadosMed');
+    $noAsignadosMed = $('#noAsignadosMed');
+    var enfermedad = $(this).data('assignmed');
+    document.getElementById('diseaseMed').innerHTML = $(this).data('name');
+    var enfer = document.getElementById("enfermedadMed");
+
+    enfer.setAttribute( 'data-diseasemed', enfermedad );
+    console.log(enfermedad);
+    var url = $(this).data('url');
+    var route = url+'/'+enfermedad;
+    console.log(route);
+    $.getJSON(route, function (data) {
+        asignadosMed = data.asignados;
+        no_asignadosMed = data.no_asignados;
+        console.log(asignadosMed);
+        console.log(no_asignadosMed);
+        loadMedicamentosAsignados(asignadosMed);
+        loadMedicamentosNoAsignados(no_asignadosMed);
+    });
+    $modalAsignarMed.modal('show');
+
+}
 
 function mostrarAsignar() {
     $asignados = $('#asignados');
@@ -43,6 +75,25 @@ function mostrarAsignar() {
 
 }
 
+function loadMedicamentosAsignados(data){
+    $asignadosMed.empty();
+    for (var i=0; i<data.length; ++i) {
+        console.log(data[i].medication_id);
+
+        var html = '<div data-detalle="'+data[i].medication_id+'" class="sintoma col-md-6 text-center"><img  class="img-thumbnail img-rounded" src="./medication/images/'+data[i].imagen+'" style="height: 100px" onclick="showDescription(\''+data[i].descripcion+'\')"/><label class="checkbox"><input type="checkbox" data-toggle="checkbox" name="destino" value="'+data[i].medication_id+'"/>'+data[i].trade_name+'</label></div>';
+        $asignadosMed.append(html);
+    }
+}
+
+function loadMedicamentosNoAsignados(data){
+    console.log(data);
+    $noAsignadosMed.empty();
+    for (var i=0; i<data.length; ++i) {
+        var html = '<div data-detalle="'+data[i].id+'" class="sintoma col-md-6 text-center"><img  class="img-thumbnail img-rounded" src="./medication/images/'+data[i].image+'" style="height: 100px" onclick="showDescription(\''+data[i].description+'\')"/><label class="checkbox"><input type="checkbox" data-toggle="checkbox" name="origen" value="'+data[i].id+'"/>'+data[i].trade_name+'</label></div>';
+        $noAsignadosMed.append(html);
+    }
+}
+
 function loadSintomasAsignados(data){
     $asignados.empty();
     for (var i=0; i<data.length; ++i) {
@@ -60,6 +111,82 @@ function loadSintomasNoAsignados(data){
         var html = '<div data-detalle="'+data[i].id+'" class="sintoma col-md-6 text-center"><img  class="img-thumbnail img-rounded" src="./symptoms/images/'+data[i].imagen+'" style="height: 100px" onclick="showDescription(\''+data[i].descripcion+'\')"/><label class="checkbox"><input type="checkbox" data-toggle="checkbox" name="origen" value="'+data[i].id+'"/>'+data[i].name+'</label></div>';
         $noAsignados.append(html);
     }
+}
+
+function asignarMed() {
+    // Id enfermedad
+    var enfermedad = $('#enfermedadMed').data('diseasemed');
+    $("input[name=origen]:checked").each(function(){
+        values.push($(this));
+    });
+    $(values).each( function(i,element) {
+        var _this = $(this);
+
+        // Id del sintoma
+        console.log('Id de la enfermedad')
+        console.log(enfermedad);
+        console.log('Id del sintoma')
+        console.log(_this.val());
+        // Llamado ajax para guardar el nuevo sintoma
+        var url =  '../public/asignar/medicamento/'+enfermedad+'/'+_this.val();
+        $.ajax({
+            url: url,
+            method: 'GET'
+        })
+            .done(function( response ) {
+
+                /*                if(response.error)
+                 showmessage(response.message,1);
+                 else{
+                 showmessage(response.message,0);
+                 setTimeout(function(){
+                 location.reload();
+                 }, 3000);
+                 }*/
+            });
+        _this.attr('name','destino');
+        _this.parent().parent().appendTo('#asignadosMed');
+        location.reload();
+
+    });
+
+    values.length=0;
+
+}
+
+function devolverMed() {
+    var enfermedad = $('#enfermedad').data('diseasemed');
+    $("input[name=destino]:checked").each(function(){
+        values.push($(this));
+    });
+    $(values).each( function(i,element) {
+        var _this = $(this);
+        console.log('Id de la enfermedad')
+        console.log(enfermedad);
+        console.log('Id del sintoma')
+        console.log(_this.val());
+        var url =  '../public/desasignar/medicamento/'+enfermedad+'/'+_this.val();
+        $.ajax({
+            url: url,
+            method: 'GET'
+        })
+            .done(function( response ) {
+
+                /*                if(response.error)
+                 showmessage(response.message,1);
+                 else{
+                 showmessage(response.message,0);
+                 setTimeout(function(){
+                 location.reload();
+                 }, 3000);
+                 }*/
+            });
+        _this.attr('name','origen');
+        _this.parent().parent().appendTo('#noAsignadosMed');
+        location.reload();
+
+    });
+    values.length=0;
 }
 
 function asignar() {
