@@ -28,7 +28,6 @@ function principal(){
         {
             full_data[i].noasignado = true;
         }
-        // console.log(data);
         loadSintomasSource(full_data);
         mostrarPagina(1);
         setNextAndBackPageEvents()
@@ -40,6 +39,10 @@ var values = [];
 var origen = [];
 var destino = [];
 var html = [];
+
+// Arrays of possible diseases
+var id = [];
+var name_array = [];
 
 function setNextAndBackPageEvents() {
     $('#next').on('click', function nextPage() {
@@ -71,12 +74,12 @@ function loadSintomasSource(data){
     }
 
     var pgntr = '<li id="backentorn"><a id="back">«</a></li>';
-    console.log(pag);
+    // console.log(pag);
     for (var k = 0; k <= pag; k++) {
         pgntr += '<li id="' + (k + 1) + '"><a href="#" onclick="mostrarPagina(\'' + (k + 1) + '\')">' + (k + 1) + '</a></li>';
     }
     pgntr += '<li id="nextentorn"><a id="next" rel="next">»</a></li>';
-    console.log(pgntr);
+    // console.log(pgntr);
     $paginacion.append(pgntr);
 }
 
@@ -191,8 +194,8 @@ function show_diseases() {
             $diseases.html('');
 
             //<img  class="img-thumbnail img-rounded" src="./symptoms/images/'+data[i].imagen+'" style="height: 100px"/>
-            var id = [];
-            var name = [];
+            id = [];
+            name_array = [];
             var image = [];
             var video = [];
             var description = [];
@@ -201,7 +204,7 @@ function show_diseases() {
                 id.push(value);
             });
             $.each(data.name, function (key, value) {
-                name.push(value);
+                name_array.push(value);
             });
             $.each(data.image, function (key, value) {
                 image.push(value);
@@ -218,11 +221,11 @@ function show_diseases() {
                     '<div class="col-md-6">' +
                     '<div class="card text-center" style="background-color: #4e4e4e; border-color: #151515; color:white;">' +
                     '<div class="card-block">' +
-                    '<h3 class="card-title">' + name[i] + '</h3>' +
-                    '<button type="button" class="btn btn-success" onclick="mostrarDetalles(\''+name[i]+'\',\''+description[i]+'\',\''+image[i]+'\');">' +
+                    '<h3 class="card-title">' + name_array[i] + '</h3>' +
+                    '<button type="button" class="btn btn-success" onclick="mostrarDetalles(\''+name_array[i]+'\',\''+description[i]+'\',\''+image[i]+'\');">' +
                     '<i class="fa fa-eye"></i> Ver enfermedad' +
                     '</button>' +
-                    '<button type="button" class="btn btn-success" onclick="mostrarTratamiento(\''+name[i]+'\',\''+ id[i]+'\',\''+ video[i]+'\' );">' +
+                    '<button type="button" class="btn btn-success" onclick="mostrarTratamiento(\''+name_array[i]+'\',\''+ id[i]+'\',\''+ video[i]+'\' );">' +
                     '<i class="fa fa-eye"></i> Ver tratamiento' +
                     '</button>' +
                     '<br><br>' +
@@ -291,8 +294,102 @@ function showmessage( message, error )
     });
 }
 
-//
+// Associative array length
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
 
 function diagnose() {
-    alert('SOON');
+    // Evaluate each possible disease
+    // and get their symptoms list
+    var symptoms = [];
+    for (var i=0; i<id.length; ++i) {
+        var disease_id = id[i];
+        $.getJSON('./enfermedades/'+disease_id+'/sintomas', function (data) {
+            symptoms[data.disease_id] = data.symptom_ids;
+
+            // When all the symptoms were loaded
+            if (Object.size(symptoms) == id.length) {
+                startDiagnoseQuestions(symptoms);
+            }
+        });
+    }
+}
+
+function startDiagnoseQuestions(symptoms_group) {
+    diagnoseDisease(0, symptoms_group);
+
+    // Loaded symptoms
+    // console.log(symptoms);
+}
+
+function diagnoseDisease(diagnose_position, symptoms_group) {
+    // They id array contains the ids for possible diseases
+    if (diagnose_position == id.length) return;
+
+    // alert('preguntas para D position ' + diagnose_position);
+
+    var disease_id = id[diagnose_position];
+    var name = name_array[diagnose_position];
+    var symptoms = symptoms_group[disease_id];
+
+    swal.setDefaults({
+        confirmButtonText: 'Sí, lo padezco',
+        cancelButtonText: 'No',
+        showCancelButton: true,
+        animation: false
+    });
+
+    var steps = [];
+    for (var i=0; i<symptoms.length; ++i) {
+        if (notSelectedSymptom(symptoms[i])) {
+            steps.push({
+                title: 'Usted presenta este síntoma?',
+                text: 'Síntoma: ' + symptomName(symptoms[i])
+            });
+        }
+    }
+
+    swal.queue(steps).then(function () {
+        swal({
+            title: 'Usted presenta: '+name,
+            confirmButtonText: 'Entiendo !',
+            showCancelButton: false
+        }).finally(function() {
+            swal.resetDefaults();
+            diagnoseDisease(diagnose_position+1, symptoms_group);
+        });;
+    }, function () {
+        swal({
+            title: 'Se ha descartado la enfermedad: '+name,
+            confirmButtonText: 'Entiendo !',
+            showCancelButton: false
+        }).finally(function() {
+            swal.resetDefaults();
+            diagnoseDisease(diagnose_position+1, symptoms_group);
+        });;
+    })
+
+}
+
+function symptomName(symptom_id) {
+    for (var i=0; i<full_data.length; ++i) {
+        if (full_data[i].id == symptom_id)
+            return full_data[i].name;
+    }
+
+    return 'Symptom ' + symptom_id;
+}
+
+function notSelectedSymptom(symptom_id) {
+    for (var i=0; i<full_data.length; ++i) {
+        if (full_data[i].id == symptom_id)
+            return full_data[i].noasignado;
+    }
+
+    return true;
 }

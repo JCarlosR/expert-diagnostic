@@ -39,6 +39,14 @@ class DiagnosisController extends Controller
         return $sintomas;
     }
 
+    public function symptomsByDisease($id) {
+        $disease = Disease::find($id);
+        $symptom_ids = $disease->symptoms()->getRelatedIds();
+        $data['disease_id'] = $id;
+        $data['symptom_ids'] = $symptom_ids;
+        return $data;
+    }
+
     public function diseases(Request $request)
     {
         $patient_symptoms = json_decode( $request->get('symptoms') );
