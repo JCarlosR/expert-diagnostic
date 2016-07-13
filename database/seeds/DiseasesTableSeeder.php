@@ -67,7 +67,7 @@ class DiseasesTableSeeder extends Seeder
         ]);
 
         Disease::create([
-            'name'=>'Sangre en las evacuaciones',
+            'name'=>'Hemorroides',
             'image'=>'8.jpg',
             'video'=>'https://www.youtube.com/embed/7AczCi4UQA8',
             'description'=>'Son una señal de un problema en el tubo digestivo.'.
