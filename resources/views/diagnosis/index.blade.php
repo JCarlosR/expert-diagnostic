@@ -1,6 +1,6 @@
 @extends('layouts.general')
 
-@section('title','Diagnostico')
+@section('title','Diagnóstico')
 
 @section('styles')
     <style>
@@ -12,7 +12,7 @@
             width: 100px;
             height: 100px;
         }
-        .botones{
+        .botones {
             margin-top:200px;
         }
         .image
@@ -21,7 +21,7 @@
             height: 200px;
         }
     </style>
-    <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css') }}">
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
                 <div class="col-md-5">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Listado de Síntomas</h4>
+                            <h4 class="title">Listado de síntomas</h4>
                         </div>
                         <div class="content">
                             <div class="input-group">
@@ -46,15 +46,22 @@
                     </div>
                 </div>
                 <div class="botones col-md-2">
-                    <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignar();">Mover
-                        <span class="btn-label"><i class="ti-angle-right"></i></span></button>
+                    <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignar();">
+                        Mover <span class="btn-label"><i class="ti-angle-right"></i></span>
+                    </button>
+                    <br><br>
                     <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolver();">
-                        <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover</button>
+                        <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover
+                    </button>
+                    <br><br>
+                    <button type="button" class="btn btn-success" onclick="diagnose();">
+                        <span class="btn-label"><i class="ti-pulse"></i></span>  Diagnosticar
+                    </button>
                 </div>
                 <div class="col-md-5">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Sintomas Agregados</h4>
+                            <h4 class="title">Síntomas seleccionados</h4>
                         </div>
                         <div class="content">
                             <div id="asignados" class="panel-body">
@@ -69,7 +76,7 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Enfermedad(es)</h4>
+                            <h4 class="title">Posibles enfermedades</h4>
                         </div>
                         <div id="enfermedades" class="panel-body">
 
@@ -139,8 +146,8 @@
             </div>
         </div>
     </div>
-
 @endsection
+
 @section('scripts')
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('diagnosis/js/index.js') }}"></script>

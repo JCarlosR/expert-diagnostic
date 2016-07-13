@@ -56,17 +56,17 @@ class DiagnosisController extends Controller
             return $data;
         }
 
-        //DISEASES ACCORDING TO THE FIRST SYMPTOM
+        // Diseases associated with the first symptom
         $array_diseases = [];
         foreach ($disease_symptoms as $disease_symptom)
             $array_diseases [] = $disease_symptom->disease_id;
 
-        //DISEASES WITH ALL THEIR SYMPTOMS, CONSIDERING THE BEFORE STEP
+        // Filtered diseases with all their symptoms
         $array_disease_symptoms = [];
         foreach ($array_diseases as $array_disease)
             $array_disease_symptoms[$array_disease] = $this->get_symptoms($array_disease);
 
-        //DISEASES WITH PATIENTS´SYMPTOMS
+        // Diseases associated with the selected symptoms
         $answers = [];
         $iterator = 0;
         foreach ($array_disease_symptoms as $array_disease_symptom) {
@@ -75,13 +75,11 @@ class DiagnosisController extends Controller
             $iterator++;
         }
 
-        if( count($answers)==0 )
-        {
+        if (count($answers) == 0) {
             $data['error'] = true;
-            $data['message'] = 'No existe enferdedad con dichos síntomas *';
+            $data['message'] = 'No existe enfemedad con dichos síntomas *';
             return $data;
-        }else
-        {
+        } else {
             $ids    = [];
             $names  = [];
             $images = [];
@@ -141,10 +139,9 @@ class DiagnosisController extends Controller
             $medic_result [] = $medication_test->trade_name.' - '.$medication_test->active_component;
         }
 
-        if( count($medic_result)==0 )
+        if (count($medic_result) == 0)
             $data['error'] = true;
-        else
-        {
+        else {
             $data['error'] = false;
             $data['medication'] = $medic_result;
         }
