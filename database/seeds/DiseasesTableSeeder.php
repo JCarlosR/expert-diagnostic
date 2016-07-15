@@ -81,19 +81,19 @@ class DiseasesTableSeeder extends Seeder
             'description'=>'es un trastorno que lleva a dolor abdominal y cambios en el intestino.'
         ]);
 
-        Disease::create([
+        /*Disease::create([
             'name'=>'Dolor abdominal',
             'image'=>'10.jpg',
             'video'=>'https://www.youtube.com/embed/OErbAK_girE',
             'description'=>'Es el dolor que se siente en el área entre el pecho y la ingle, a menudo denominada región estomacal o vientre.'
-        ]);
+        ]);*/
 
-        Disease::create([
+        /*Disease::create([
             'name'=>'Perdida de peso no intencional',
             'image'=>'11.jpg',
             'video'=>'https://www.youtube.com/embed/u5XWTI-Dh2E',
             'description'=>' Es la pérdida de peso involuntaria es la pérdida de 5 kg o el 5% de su peso corporal normal durante 6 a 12 meses o menos sin conocer la razón.'
-        ]);
+        ]);*/
 
         Disease::create([
             'name'=>'Gastritis',

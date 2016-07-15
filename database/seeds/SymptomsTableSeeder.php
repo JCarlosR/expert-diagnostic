@@ -57,5 +57,6 @@ class SymptomsTableSeeder extends Seeder
         Symptom::create(['name' =>'TOS ','descripcion'=>'TOS ','imagen'=>'algo.jpg']);
         Symptom::create(['name' =>'VASCULITIS ','descripcion'=>'VASCULITIS ','imagen'=>'algo.jpg']);
         Symptom::create(['name' =>'VÓMITOS ','descripcion'=>'VÓMITOS ','imagen'=>'algo.jpg']);
+        Symptom::create(['name' =>'ARDOR ESTOMACAL','descripcion'=>'ARDOR ESTOMACAL','imagen'=>'algo.jpg']);
     }
 }

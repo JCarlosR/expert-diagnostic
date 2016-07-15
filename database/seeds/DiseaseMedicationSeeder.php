@@ -56,7 +56,7 @@ class DiseaseMedicationsSeeder extends Seeder
         DiseaseMedication::create([ 'disease_id' => 9, 'medication_id' => 21 ]);
         DiseaseMedication::create([ 'disease_id' => 9, 'medication_id' => 22 ]);
 
-        DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 1 ]);
+/*        DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 1 ]);
         DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 4 ]);
         DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 24 ]);
         DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 25 ]);
@@ -65,12 +65,12 @@ class DiseaseMedicationsSeeder extends Seeder
 
         DiseaseMedication::create([ 'disease_id' => 11, 'medication_id' => 14 ]);
         DiseaseMedication::create([ 'disease_id' => 11, 'medication_id' => 5 ]);
-        DiseaseMedication::create([ 'disease_id' => 11, 'medication_id' => 13 ]);
+        DiseaseMedication::create([ 'disease_id' => 11, 'medication_id' => 13 ]);*/
 
-        DiseaseMedication::create([ 'disease_id' => 12, 'medication_id' => 1 ]);
-        DiseaseMedication::create([ 'disease_id' => 12, 'medication_id' => 22 ]);
-        DiseaseMedication::create([ 'disease_id' => 12, 'medication_id' => 26 ]);
-        DiseaseMedication::create([ 'disease_id' => 12, 'medication_id' => 11 ]);
+        DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 1 ]);
+        DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 22 ]);
+        DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 26 ]);
+        DiseaseMedication::create([ 'disease_id' => 10, 'medication_id' => 11 ]);
 
     }
 }
