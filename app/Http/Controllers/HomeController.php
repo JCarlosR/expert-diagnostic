@@ -30,6 +30,6 @@ class HomeController extends Controller
 
     public function helpExpert()
     {
-        return File::get(public_path() . '/helpExpert/index.htm');
+        return File::get(public_path() . '/index.htm');
     }
 }
