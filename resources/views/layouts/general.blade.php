@@ -66,7 +66,7 @@
                 <li @yield('symptom')>
                     <a href="{{ url('/symptom') }}">
                         <i class="ti-view-list-alt"></i>
-                        <p>Síntomas</p>
+                        <p>Factores</p>
                     </a>
                 </li>
                 <li>
@@ -78,13 +78,13 @@
                 <li>
                     <a href="{{ url('/medicamentos') }}">
                         <i class="ti-blackboard"></i>
-                        <p>Medicamentos</p>
+                        <p>Recomendaciones</p>
                     </a>
                 </li>
                 <li>
                     <a href="{{ url('/conocimiento') }}">
                         <i class="ti-pencil-alt2"></i>
-                        <p>Base de conocimiento</p>
+                        <p>Reglas conocimiento</p>
                     </a>
                 </li>
                 <li>
@@ -109,6 +109,7 @@
                     </button>
                     <a class="navbar-brand" href="#">@yield('title')</a>
                 </div>
+
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -117,20 +118,14 @@
                                 <p>Diagnóstico</p>
                             </a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-bell"></i>
-                                <p class="notification">4</p>
-                                <p>Notificaciones</p>
-                                <b class="caret"></b>
+
+                        <li>
+                            <a href="{{ url('ayuda') }}"  target="_blank">
+                                <i class="ti-panel"></i>
+                                <p>Ayuda en linea</p>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Notificación 1</a></li>
-                                <li><a href="#">Notificación 2</a></li>
-                                <li><a href="#">Notificación 3</a></li>
-                                <li><a href="#">Notificación 4</a></li>
-                            </ul>
                         </li>
+
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-settings"></i>

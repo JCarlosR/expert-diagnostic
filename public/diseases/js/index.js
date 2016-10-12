@@ -97,7 +97,7 @@ function mostrarEliminar() {
                     showmessage(response.message,0);
                     setTimeout(function(){
                         location.reload();
-                    }, 2000);
+                    }, 1000);
                 }
             });
 

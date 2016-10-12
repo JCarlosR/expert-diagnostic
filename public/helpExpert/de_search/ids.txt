@@ -1,0 +1,156 @@
+1
+ Sistema E... ¡Se requiere una licencia Advanced!
+ index.htm
+2
+ 1. Intr... ¡Se requiere una licencia Advanced!
+ introduccion.htm
+3
+ 1.1. Introdu... ¡Se requiere una licencia Advanced!
+ introduccion_rapida.htm
+4
+ Acerca de Exp... ¡Se requiere una licencia Advanced!
+ acerca_de_expert_diagnostic.htm
+5
+ Requisitos ... ¡Se requiere una licencia Advanced!
+ requisitos_del_sistema.htm
+6
+ Créd... ¡Se requiere una licencia Advanced!
+ creditos.htm
+7
+ 1.2. Siste... ¡Se requiere una licencia Advanced!
+ 1_2__sistema_experto.htm
+8
+ 1.3.... ¡Se requiere una licencia Advanced!
+ 1_3__etv.htm
+9
+ 2. Inici... ¡Se requiere una licencia Advanced!
+ iniciar_sesion.htm
+10
+ 2.1. Roles... ¡Se requiere una licencia Advanced!
+ 2_1__roles_y_permisos.htm
+11
+ 3. Págin... ¡Se requiere una licencia Advanced!
+ 3__pagina_inicial.htm
+12
+ 4. Administ... ¡Se requiere una licencia Advanced!
+ 4__administrar_paciente.htm
+13
+ Listar P... ¡Se requiere una licencia Advanced!
+ listar_pacientes.htm
+14
+ Nuevo P... ¡Se requiere una licencia Advanced!
+ nuevo_paciente.htm
+15
+ Editar ... ¡Se requiere una licencia Advanced!
+ editar_paciente.htm
+16
+ Eliminar... ¡Se requiere una licencia Advanced!
+ eliminar_paciente.htm
+17
+ 5. Administ... ¡Se requiere una licencia Advanced!
+ 5__administrar_factores.htm
+18
+ Administrar ... ¡Se requiere una licencia Advanced!
+ administrar_antecedentes.htm
+19
+ Nuevo an... ¡Se requiere una licencia Advanced!
+ nuevo_antecedente.htm
+20
+ Editar an... ¡Se requiere una licencia Advanced!
+ editar_antecedente.htm
+21
+ Eliminar a... ¡Se requiere una licencia Advanced!
+ eliminar_antecedente.htm
+22
+ Administra... ¡Se requiere una licencia Advanced!
+ administrar_sintomas.htm
+23
+ Nuevo ... ¡Se requiere una licencia Advanced!
+ nuevo_sintoma.htm
+24
+ Editar ... ¡Se requiere una licencia Advanced!
+ editar_sintoma.htm
+25
+ Eliminar... ¡Se requiere una licencia Advanced!
+ eliminar_sintoma.htm
+26
+ Administrar o... ¡Se requiere una licencia Advanced!
+ administrar_otros_factores.htm
+27
+ Nuevo ... ¡Se requiere una licencia Advanced!
+ nuevo_factor.htm
+28
+ Editar... ¡Se requiere una licencia Advanced!
+ editar_factor.htm
+29
+ Elimina... ¡Se requiere una licencia Advanced!
+ eliminar_factor.htm
+30
+ 6. Administra... ¡Se requiere una licencia Advanced!
+ 6__administrar_enfermedades.htm
+31
+ Listado de ... ¡Se requiere una licencia Advanced!
+ listado_de_enfermedades.htm
+32
+ Nueva en... ¡Se requiere una licencia Advanced!
+ nueva_enfermedad.htm
+33
+ Modificar ... ¡Se requiere una licencia Advanced!
+ modificar_enfermedad.htm
+34
+ Eliminar ... ¡Se requiere una licencia Advanced!
+ eliminar_enfermedad.htm
+35
+ 7. Administrar ... ¡Se requiere una licencia Advanced!
+ 7__administrar_recomendaciones.htm
+36
+ Listado de re... ¡Se requiere una licencia Advanced!
+ listado_de_recomendaciones.htm
+37
+ Nueva rec... ¡Se requiere una licencia Advanced!
+ nueva_recomendacion.htm
+38
+ Modificar r... ¡Se requiere una licencia Advanced!
+ modificar_recomendacion.htm
+39
+ Eliminar re... ¡Se requiere una licencia Advanced!
+ eliminar_recomendacion.htm
+40
+ 8. Administrar reg... ¡Se requiere una licencia Advanced!
+ 8__administrar_reglas_de_conocimiento.htm
+41
+ Listado de regla... ¡Se requiere una licencia Advanced!
+ listado_de_reglas_de_conocimiento.htm
+42
+ Nueva regla d... ¡Se requiere una licencia Advanced!
+ nueva_regla_de_conocimiento.htm
+43
+ Eliminar regla ... ¡Se requiere una licencia Advanced!
+ eliminar_regla_de_conocimiento.htm
+44
+ 9. Administra... ¡Se requiere una licencia Advanced!
+ 9__administrar_diagnostico.htm
+45
+ Diagn... ¡Se requiere una licencia Advanced!
+ diagnostico.htm
+46
+ Diagnóstico... ¡Se requiere una licencia Advanced!
+ diagnostico_repreguntas.htm
+47
+ Diagnóstico r... ¡Se requiere una licencia Advanced!
+ diagnostico_recomendaciones.htm
+48
+ 10. Administ... ¡Se requiere una licencia Advanced!
+ 10__administrar_usuarios.htm
+49
+ Listado d... ¡Se requiere una licencia Advanced!
+ listado_de_usuarios.htm
+50
+ Nuevo ... ¡Se requiere una licencia Advanced!
+ nuevo_usuario.htm
+51
+ Modifica... ¡Se requiere una licencia Advanced!
+ modificar_usuario.htm
+52
+ Eliminar... ¡Se requiere una licencia Advanced!
+ eliminar_usuario.htm

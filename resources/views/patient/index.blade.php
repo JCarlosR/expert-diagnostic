@@ -55,7 +55,6 @@
                             <table class="table table-striped mytable">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Direccion</th>
@@ -70,7 +69,6 @@
                                 <tbody>
                                     @foreach($patients as $patient)
                                     <tr>
-                                        <td>{{ $patient->id }}</td>
                                         <td>{{ $patient->name }}</td>
                                         <td>{{ $patient->surname }}</td>
                                         <td>{{ $patient->address }}</td>
