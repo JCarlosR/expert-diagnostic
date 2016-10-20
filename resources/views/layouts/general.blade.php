@@ -30,7 +30,44 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('assets/css/themify-icons.css') }}" rel="stylesheet">
 
+
+
     @yield('styles')
+
+    <style>
+        .navbar-default{
+            background-color: #65a8eb !important;
+        }
+        .sidebar .sidebar-wrapper{
+            background-color:#65a8eb !important;
+        }
+
+        .sidebar .logo .simple-text, .sidebar .mini-logo .simple-text, .sidebar[data-background-color="white"] .logo .simple-text, .sidebar[data-background-color="white"] .mini-logo .simple-text, .off-canvas-sidebar .logo .simple-text, .off-canvas-sidebar .mini-logo .simple-text, .off-canvas-sidebar[data-background-color="white"] .logo .simple-text, .off-canvas-sidebar[data-background-color="white"] .mini-logo .simple-text {
+            color: #fff !important;
+        }
+
+        .sidebar[data-active-color="danger"] .nav li.active > a, .off-canvas-sidebar[data-active-color="danger"] .nav li.active > a {
+            color: #000 !important;
+        }
+        .sidebar .nav li:not(.active) > a, .sidebar[data-background-color="white"] .nav li:not(.active) > a, .off-canvas-sidebar .nav li:not(.active) > a, .off-canvas-sidebar[data-background-color="white"] .nav li:not(.active) > a {
+            color: #fff !important;
+        }
+
+        .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+            color: #fff !important;
+        }
+        .navbar-default .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar-default .navbar-nav > li > a:not(.btn) {
+            color: #fff !important;
+        }
+        .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:not(.btn):hover, .navbar-default .navbar-nav > .active > a:not(.btn):focus, .navbar-default .navbar-nav > li > a:not(.btn):hover, .navbar-default .navbar-nav > li > a:not(.btn):focus {
+            color: #000 !important;
+        }
+
+    </style>
 
 </head>
 <body>
