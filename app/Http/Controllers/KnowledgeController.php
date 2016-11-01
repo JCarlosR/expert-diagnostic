@@ -17,9 +17,15 @@ class KnowledgeController extends Controller
 {
     public function index()
     {
-        $diseases = Disease::orderBy('id', 'asc')->paginate(10);
+        $diseases = Disease::orderBy('id', 'asc')->paginate(4);
         //dd($patients);
-        return view('knowledge.index')->with(compact('diseases'));;
+        return view('knowledge.index')->with(compact('diseases'));
+    }
+
+    public function newRule()
+    {
+
+        return view('knowledge.newRule');
     }
 
     public function getAssign($id)

@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asignar/medicamento/{disease}/{medication}','KnowledgeController@getAssignMedication');
     Route::get('desasignar/medicamento/{disease}/{medication}','KnowledgeController@getNotAssignMedication');
 
+    Route::get('nueva-regla','KnowledgeController@newRule');
+
     // Ayuda en línea
     Route::get('ayuda','HomeController@helpExpert');
 

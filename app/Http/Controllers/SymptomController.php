@@ -27,7 +27,7 @@ class SymptomController extends Controller
      */
     public function index()
     {
-        $sintomas = Symptom::orderBy('id', 'asc')->paginate(5);
+        $sintomas = Symptom::orderBy('id', 'asc')->paginate(3);
 
         return view('symptom.symptom')->with(compact(['sintomas']));
     }

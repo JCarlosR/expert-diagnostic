@@ -40,14 +40,11 @@
 @section('content')
     <div class="content">
         <div class="container-fluid">
-            <div class="col-md-9 form-inline margen">
-                <div class="col-md-8 input-group ">
-                    <span class="input-group-addon">Enfermedad</span><input type="text" id="search" class="form-control" placeholder="Búsqueda personalizada ...">
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col-md-12 separator">
+                    <a type="button" href="{{ url('nueva-regla') }}" class="btn btn-info btn-fill btn-wd">Nueva regla</a>
+                    <br>
+                    <br>
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Listado de enfermedades</h4>
@@ -55,31 +52,18 @@
                         <div class="content table-responsive table-full-width">
                             <table class="table table-striped mytable">
                                 <thead>
-                                <tr>
-                                    <th>Enfermedad</th>
-                                    <th data-type="html"> Imagen </th>
-                                    <th data-type="html"> Vídeo </th>
-                                    <th data-hide="all" data-breakpoints="all" data-title="Descripción"></th>
-                                    <th data-type="html"> Acciones </th>
-                                </tr>
+                                    <tr>
+                                        <th>Regla</th>
+                                        <th> Acciones </th>
+                                    </tr>
                                 </thead>
                                 <tbody id="tabla">
                                 @foreach($diseases as $disease)
                                     <tr>
                                         <td>{{ $disease->name }}</td>
-                                        <td ><img src="{{ asset('diseases/images') }}/{{ $disease->image }} " class="img-responsive image"></td>
                                         <td>
-                                            <button type="button" class="btn btn-success" data-watch="{{ $disease->id }}" data-name="{{ $disease ->name }}" data-video="{{ $disease->video }}">
-                                                <i class="fa fa-eye"></i>Visualizar
-                                            </button>
-                                        </td>
-                                        <td>{{$disease->description}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-success" data-url="{{url('asignar/sintomas/')}}" data-assign="{{ $disease->id }}" data-name="{{ $disease ->name }}">
-                                                <i class="fa fa-pencil"></i>Asignar síntomas
-                                            </button>
-                                            <button type="button" class="btn btn-primary" data-url="{{url('asignar/medicamentos/')}}" data-assignmed="{{ $disease->id }}" data-name="{{ $disease ->name }}">
-                                                <i class="fa fa-pencil"></i>Asignar medicamentos
+                                            <button type="button" class="btn btn-danger" data-url="{{url('asignar/sintomas/')}}" data-assign="{{ $disease->id }}" data-name="{{ $disease ->name }}">
+                                                <i class="fa fa-trash"></i>Eliminar regla
                                             </button>
 
                                         </td>
