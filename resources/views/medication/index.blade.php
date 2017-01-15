@@ -30,7 +30,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo medicamiento</button>
+                    <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo medicamento</button>
                     <br>
                     <br>
                     <div class="card">
