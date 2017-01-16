@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Factor;
+use App\Factors;
 use App\Http\Requests;
-use App\Other;
+use App\Others;
 use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
-class SymptomController extends Controller
+class FactorController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,14 +30,9 @@ class SymptomController extends Controller
      */
     public function index()
     {
-        $otros = Other::orderBy('id', 'asc')->paginate(3);
-        $factores = Factor::orderBy('id', 'asc')->paginate(3);
-        $sintomas = Symptom::orderBy('id', 'asc')->paginate(3);
-
-        return view('symptom.symptom')->with(compact('sintomas', 'factores', 'otros'));
     }
 
-    public function postSymptom(Request $request)
+    public function postFactor(Request $request)
     {
         $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
@@ -44,21 +40,21 @@ class SymptomController extends Controller
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
         if ($request->get('name') == null OR $request->get('name') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del antecedente']);
 
         if ($request->get('description') == null OR $request->get('description') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del antecedente']);
 
 
-        $symptom = Symptom::create([
+        $symptom = Factor::create([
             'name' => $request->get('name'),
             'descripcion' => $request->get('description')
         ]);
 
         if( $request->file('image') )
         {
-            $path = public_path().'/symptoms/images';
-            if($request->get('oldImage') !='0.png' )
+            $path = public_path().'/factor/images';
+            if($request->get('oldImage') !='algo.png' )
                 File::delete($path.'/'.$request->get('oldImage'));
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = $symptom->id . '.' . $extension;
@@ -66,11 +62,11 @@ class SymptomController extends Controller
             $symptom->imagen = $fileName;
         }
         else
-            $symptom->imagen = '0.jpg';
+            $symptom->imagen = 'algo.jpg';
 
         $symptom->save();
 
-        return response()->json(['error' => false, 'message' => 'Síntoma registrado correctamente']);
+        return response()->json(['error' => false, 'message' => 'Antecedente registrado correctamente']);
 
     }
 

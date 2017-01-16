@@ -278,7 +278,7 @@
                             <div class="tab-pane active" id="portlet_tab1">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo Antecedente</button>
+                                        <button type="button" id="btnNewA" class="btn btn-info btn-fill btn-wd">Nuevo Antecedente</button>
                                         <br>
                                         <br>
                                         <div class="card">
@@ -311,22 +311,22 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($sintomas as $sintoma)
+                                                    @foreach($factores as $antecedente)
                                                         <tr>
-                                                            <td>{{ $sintoma->id }}</td>
-                                                            <td>{{ $sintoma->name }}</td>
-                                                            <td>{{ $sintoma->descripcion }}</td>
-                                                            <td><img src="{{ asset('symptoms/images') }}/{{ $sintoma->imagen }} " class="image"></td>
+                                                            <td>{{ $antecedente->id }}</td>
+                                                            <td>{{ $antecedente->name }}</td>
+                                                            <td>{{ $antecedente->descripcion }}</td>
+                                                            <td><img src="{{ asset('symptoms/images') }}/{{ $antecedente->imagen }} " class="image"></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-primary" data-id="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}"
-                                                                        data-description="{{ $sintoma->descripcion }}" data-image="{{ $sintoma->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}" data-description="{{ $sintoma->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                                                <button type="button" class="btn btn-primary" data-id="{{ $antecedente->id }}" data-name="{{ $antecedente->name }}"
+                                                                        data-description="{{ $antecedente->descripcion }}" data-image="{{ $antecedente->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
+                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $antecedente->id }}" data-name="{{ $antecedente->name }}" data-description="{{ $antecedente->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
                                                 </table>
-                                                {!! $sintomas->render() !!}
+                                                {!! $factores->render() !!}
                                             </div>
                                         </div>
                                     </div>
@@ -335,7 +335,7 @@
                             <div class="tab-pane" id="portlet_tab2">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo Sintoma</button>
+                                        <button type="button" id="btnNewS" class="btn btn-info btn-fill btn-wd">Nuevo Sintoma</button>
                                         <br>
                                         <br>
                                         <div class="card">
@@ -353,8 +353,6 @@
                                                     </div>
                                                 </div>
                                             @endif
-
-
 
                                             <div class="content table-responsive table-full-width">
                                                 <table class="table table-striped mytable">
@@ -375,9 +373,9 @@
                                                             <td>{{ $sintoma->descripcion }}</td>
                                                             <td><img src="{{ asset('symptoms/images') }}/{{ $sintoma->imagen }} " class="image"></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-primary" data-id="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}"
+                                                                <button type="button" class="btn btn-primary" data-sintoma data-id="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}"
                                                                         data-description="{{ $sintoma->descripcion }}" data-image="{{ $sintoma->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}" data-description="{{ $sintoma->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                                                <button type="button"  class="btn btn-danger" data-deletesintoma="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}" data-description="{{ $sintoma->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -392,7 +390,7 @@
                             <div class="tab-pane" id="portlet_tab3">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo factor</button>
+                                        <button type="button" id="btnNewF" class="btn btn-info btn-fill btn-wd">Nuevo factor</button>
                                         <br>
                                         <br>
                                         <div class="card">
@@ -425,22 +423,22 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($sintomas as $sintoma)
+                                                    @foreach($otros as $factor)
                                                         <tr>
-                                                            <td>{{ $sintoma->id }}</td>
-                                                            <td>{{ $sintoma->name }}</td>
-                                                            <td>{{ $sintoma->descripcion }}</td>
-                                                            <td><img src="{{ asset('symptoms/images') }}/{{ $sintoma->imagen }} " class="image"></td>
+                                                            <td>{{ $factor->id }}</td>
+                                                            <td>{{ $factor->name }}</td>
+                                                            <td>{{ $factor->descripcion }}</td>
+                                                            <td><img src="{{ asset('symptoms/images') }}/{{ $factor->imagen }} " class="image"></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-primary" data-id="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}"
-                                                                        data-description="{{ $sintoma->descripcion }}" data-image="{{ $sintoma->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $sintoma->id }}" data-name="{{ $sintoma->name }}" data-description="{{ $sintoma->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                                                <button type="button" class="btn btn-primary" data-id="{{ $factor->id }}" data-name="{{ $factor->name }}"
+                                                                        data-description="{{ $factor->descripcion }}" data-image="{{ $factor->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
+                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $factor->id }}" data-name="{{ $factor->name }}" data-description="{{ $factor->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
                                                 </table>
-                                                {!! $sintomas->render() !!}
+                                                {!! $otros->render() !!}
                                             </div>
                                         </div>
                                     </div>
@@ -454,7 +452,241 @@
         </div>
     </div>
 
-    <div id="modalNuevo" class="modal fade in">
+    <div id="modalNuevoS" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo Síntoma</h4>
+                </div>
+
+
+                <form id="formRegistrarS" action="{{ url('/symptom/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="name">Nombre <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="rgtName" name="name" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="description" name="description" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                            <div class="col-md-5">
+                                <input type="file" name="image" class="form-control inside" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar Síntoma</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEditarS" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar sintomas</h4>
+                </div>
+
+
+                <form id="formEditarS" action="{{ url('/symptom/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="id" />
+
+                        <div class="form-group">
+                                <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="description" name="description" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                            <div class="col-md-5">
+                                <input type="file" name="image" class="form-control inside" accept="image/*">
+                            </div>
+                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                            <div class="col-md-2" id="newImage">
+                                <input type="hidden" name="oldImage">
+                            </div>
+                        </div>
+
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar síntoma</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEliminarS" class="modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Eliminar Sintoma</h4>
+                </div>
+                <form id="formEliminarS" action="{{ url('symptom/eliminar') }}" method="POST">
+                    <div class="modal-body">
+
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="id" />
+                        <div class="form-group">
+                            <label for="descEliminar">¿Desea eliminar el siguiente sintoma?</label>
+                            <input type="text" readonly class="form-control" name="descEliminar"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-left">
+                            <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalNuevoA" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nuevo Antecedente</h4>
+                </div>
+
+
+                <form id="formRegistrarF" action="{{ url('/factor/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="name">Nombre <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="rgtName" name="name" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="description" name="description" required="required" class="form-control inside">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                            <div class="col-md-5">
+                                <input type="file" name="image" class="form-control inside" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar Antecedente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEditarA" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar sintomas</h4>
+                </div>
+
+
+                <form id="formEditar" action="{{ url('/symptom/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="id" />
+
+                        <div class="form-group">
+                            <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" id="description" name="description" required="required" class="form-control inside">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                        <div class="col-md-5">
+                            <input type="file" name="image" class="form-control inside" accept="image/*">
+                        </div>
+                        <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                        <div class="col-md-2" id="newImage">
+                            <input type="hidden" name="oldImage">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalEliminarA" class="modal fade in">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Eliminar Sintoma</h4>
+                </div>
+                <form id="formEliminar" action="{{ url('symptom/eliminar') }}" method="POST">
+                    <div class="modal-body">
+
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="id" />
+                        <div class="form-group">
+                            <label for="descEliminar">¿Desea eliminar el siguiente sintoma?</label>
+                            <input type="text" readonly class="form-control" name="descEliminar"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-left">
+                            <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalNuevoF" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -496,7 +728,7 @@
         </div>
     </div>
 
-    <div id="modalEditar" class="modal fade in">
+    <div id="modalEditarF" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -510,27 +742,27 @@
                         <input type="hidden" name="id" />
 
                         <div class="form-group">
-                                <input type="text" id="edtName" name="name" required="required" class="form-control inside">
-                            </div>
+                            <input type="text" id="edtName" name="name" required="required" class="form-control inside">
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" id="description" name="description" required="required" class="form-control inside">
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" id="description" name="description" required="required" class="form-control inside">
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
-                            <div class="col-md-5">
-                                <input type="file" name="image" class="form-control inside" accept="image/*">
-                            </div>
-                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
-                            <div class="col-md-2" id="newImage">
-                                <input type="hidden" name="oldImage">
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                        <div class="col-md-5">
+                            <input type="file" name="image" class="form-control inside" accept="image/*">
                         </div>
+                        <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                        <div class="col-md-2" id="newImage">
+                            <input type="hidden" name="oldImage">
+                        </div>
+                    </div>
 
 
                     <div class="form-group text-center">
@@ -539,11 +771,10 @@
                     </div>
                 </form>
             </div>
-            </div>
         </div>
     </div>
 
-    <div id="modalEliminar" class="modal fade in">
+    <div id="modalEliminarF" class="modal fade in">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

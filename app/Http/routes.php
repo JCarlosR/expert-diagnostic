@@ -18,6 +18,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/symptom/modificar', 'SymptomController@putSymptom');
     Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
 
+// Factor routes
+    Route::post('/factor/registrar', 'FactorController@postFactor');
+
 // Medication routes
     Route::get('/medicamentos', 'MedicationController@index');
     Route::post('/medicamentos/registrar', 'MedicationController@store');

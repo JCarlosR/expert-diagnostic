@@ -2,19 +2,40 @@ $(document).on('ready', principal);
 
 function principal()
 {
-    $modalNuevo = $('#modalNuevo');
-    $modalEditar = $('#modalEditar');
-    $modalEliminar = $('#modalEliminar');
+    $modalNuevoS = $('#modalNuevoS');
+    $modalEditarS = $('#modalEditarS');
+    $modalEliminarS = $('#modalEliminarS');
 
-    $('[data-id]').on('click', mostrarEditar);
-    $('[data-delete]').on('click', mostrarEliminar);
+    $modalNuevoA = $('#modalNuevoA');
 
-    $('#formEditar').on('submit', updateSymptom);
-    $('#formRegistrar').on('submit', registerSymptom);
-    $('#formEliminar').on('submit', deleteSymptom);
+    $('#btnNewS').on('click', mostrarNuevoS);
+    $('[data-sintoma]').on('click', mostrarEditarS);
+    $('[data-deletesintoma]').on('click', mostrarEliminarS);
 
-    $('#btnNew').on('click', mostrarNuevo);
+    $('#btnNewA').on('click', mostrarNuevoA);
+/*    $('[data-antecedente]').on('click', mostrarEditarA);
+    $('[data-deleteantecedente]').on('click', mostrarEliminarA);
+
+    $('[data-factor]').on('click', mostrarEditarF);
+    $('[data-deletefactor]').on('click', mostrarEliminarF);*/
+
+    $('#formRegistrarS').on('submit', registerSymptom);
+    $('#formEditarS').on('submit', updateSymptom);
+    $('#formEliminarS').on('submit', deleteSymptom);
+
+    $('#formRegistrarA').on('submit', registerFactor);
+
+/*    $('#btnNewA').on('click', mostrarNuevoA);
+    $('#btnNewF').on('click', mostrarNuevoF);*/
 }
+
+var $modalNuevoS;
+var $modalEditarS;
+var $modalEliminarS;
+
+var $modalNuevoA;
+var $modalEditarA;
+var $modalEliminarA;
 
 function deleteSymptom() {
     event.preventDefault();
@@ -88,41 +109,69 @@ function registerSymptom() {
         });
 }
 
-function mostrarEditar() {
+function registerFactor() {
+    event.preventDefault();
+    var url =  '../public/factor/registrar';
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
 
-    $modalEditar = $('#modalEditar');
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 2000);
+            }
+        });
+}
+
+
+function mostrarNuevoS() {
+    $modalNuevoS.modal('show');
+}
+
+function mostrarEditarS() {
+
     var id = $(this).data('id');
-    $modalEditar.find('[name="id"]').val(id);
+    $modalEditarS.find('[name="id"]').val(id);
 
     var name = $(this).data('name');
-    $modalEditar.find('[name="name"]').val(name);
+    $modalEditarS.find('[name="name"]').val(name);
 
     var description = $(this).data('description');
-    $modalEditar.find('[name="description"]').val(description);
+    $modalEditarS.find('[name="description"]').val(description);
 
     var image = $(this).data('image');
-    $modalEditar.find('[name="newImage"]').val(image);
+    $modalEditarS.find('[name="newImage"]').val(image);
     var image_url = '../public/symptoms/images/'+image;
     $("#newImage").html('<img src="'+image_url+'" class="img-responsive image"> ');
-    $modalEditar.modal('show');
+    $modalEditarS.modal('show');
 }
 
-function mostrarEliminar() {
+function mostrarEliminarS() {
     var id = $(this).data('delete');
-    $modalEliminar.find('[name="id"]').val(id);
+    $modalEliminarS.find('[name="id"]').val(id);
 
     var name = $(this).data('name');
-    $modalEliminar.find('[name="descEliminar"]').val(name);
+    $modalEliminarS.find('[name="descEliminar"]').val(name);
 
-    $modalEliminar.modal('show');
+    $modalEliminarS.modal('show');
 }
 
-function mostrarNuevo() {
-    $modalNuevo.modal('show');
+
+function mostrarNuevoA() {
+    $modalNuevoA.modal('show');
 }
 
-function showmessage( message, error )
-{
+function showmessage( message, error ){
     var icon = 'ti-thumb-up';
     var type = 'success';
     if( error==1 )
