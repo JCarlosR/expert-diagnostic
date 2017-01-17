@@ -45,9 +45,10 @@ class OtherController extends Controller
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del factor']);
 
 
-        $factor = Other::create([
+        $factor = Factor::create([
             'name' => $request->get('name'),
-            'descripcion' => $request->get('description')
+            'descripcion' => $request->get('description'),
+            'type' => 'O'
         ]);
 
         if( $request->file('image') )
@@ -82,7 +83,7 @@ class OtherController extends Controller
         if ($request->get('description') == null OR $request->get('description') == "")
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del factor']);
 
-        $factor = Other::find( $request->get('id') );
+        $factor = Factor::find( $request->get('id') );
         $factor->name = $request->get('name');
         $factor->descripcion = $request->get('description');
 
@@ -104,12 +105,12 @@ class OtherController extends Controller
 
     public function deleteFactor(Request $request)
     {
-        $factor = Other::find($request->get('id'));
+        $factor = Factor::find($request->get('id'));
 
         if($factor == null)
             return response()->json(['error' => true, 'message' => 'No existe el factor especificado.']);
 
-        $factor = Other::find($request->get('id'));
+        $factor = Factor::find($request->get('id'));
         $factor->delete();
 
         return response()->json(['error' => false, 'message' => 'Factor eliminado correctamente.']);

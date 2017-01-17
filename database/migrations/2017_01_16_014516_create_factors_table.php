@@ -16,6 +16,7 @@ class CreateFactorsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('descripcion');
+            $table->string('type');
             $table->string('imagen');
             $table->timestamps();
         });
