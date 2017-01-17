@@ -13,7 +13,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/pacientes/eliminar', 'PatientController@delete');
 
 // Symptom routes
-    Route::get('symptom', 'SymptomController@index');
+    Route::get('factores', 'SymptomController@index');
     Route::post('/symptom/registrar', 'SymptomController@postSymptom');
     Route::post('/symptom/modificar', 'SymptomController@putSymptom');
     Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/factor/eliminar', 'OtherController@deleteFactor');
 
 // Medication routes
-    Route::get('/medicamentos', 'MedicationController@index');
+    Route::get('/recomendaciones', 'MedicationController@index');
     Route::post('/medicamentos/registrar', 'MedicationController@store');
     Route::post('/medicamentos/modificar', 'MedicationController@edit');
     Route::post('/medicamentos/eliminar', 'MedicationController@delete');

@@ -14,10 +14,8 @@ class CreateMedicationsTable extends Migration
     {
         Schema::create('medications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('active_component');
-            $table->string('trade_name');
-            $table->string('description');
-            $table->string('image');
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }

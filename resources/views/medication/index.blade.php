@@ -1,7 +1,7 @@
 
 @extends('layouts.general')
 
-@section('title', 'Medicamentos')
+@section('title', 'Recomendaciones')
 
 @section('styles')
     <style>
@@ -30,12 +30,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nuevo medicamento</button>
+                    <button type="button" id="btnNew" class="btn btn-info btn-fill btn-wd">Nueva recomendación</button>
                     <br>
                     <br>
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Listado de medicamentos</h4>
+                            <h4 class="title">Listado de recomendaciones</h4>
                         </div>
 
                         @if( $errors->count() > 0 )
@@ -56,10 +56,8 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nombre comercial</th>
-                                        <th>Principio activo</th>
+                                        <th>Nombre</th>
                                         <th>Descripción</th>
-                                        <th data-type="html">Imagen</th>
                                         <th data-type="html">Opciones</th>
                                     </tr>
                                 </thead>
@@ -67,17 +65,14 @@
                                     @foreach($medications as $medication)
                                     <tr>
                                         <td>{{ $medication->id }}</td>
-                                        <td>{{ $medication->trade_name }}</td>
-                                        <td>{{ $medication->active_component }}</td>
+                                        <td>{{ $medication->name }}</td>
                                         <td>{{ $medication->description }}</td>
-                                        <td><img src="{{ asset('medication/images') }}/{{ $medication->image }} " class="image"></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-id="{{ $medication->id }}"
-                                                    data-trade_name="{{ $medication->trade_name }}"
-                                                    data-active_component="{{ $medication->active_component }}"
-                                                    data-description="{{ $medication->description }}"
-                                                    data-image="{{ $medication->image }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                            <button type="button"  class="btn btn-danger" data-delete="{{ $medication->id }}" data-name="{{ $medication->trade_name }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                                    data-name="{{ $medication->name }}"
+                                                    data-description="{{ $medication->description }}">
+                                                <i class="fa fa-pencil" data-backdrop="false"></i></button>
+                                            <button type="button"  class="btn btn-danger" data-delete="{{ $medication->id }}" data-name="{{ $medication->name }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -95,7 +90,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Nuevo medicamento</h4>
+                    <h4 class="modal-title">Nueva recomendación</h4>
                 </div>
 
                 <form action="{{ url('/medicamentos/registrar') }}" id="formRegistrar" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
@@ -103,16 +98,9 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="name">Nombre comercial <span class="required">*</span></label>
+                            <label class="control-label col-md-3" for="name">Nombre <span class="required">*</span></label>
                             <div class="col-md-8">
                                 <input type="text" id="name" name="name" required="required" class="form-control inside">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="component">Principio activo <span class="required">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" id="component" name="component" class="form-control inside">
                             </div>
                         </div>
 
@@ -122,19 +110,11 @@
                                 <textarea id="description" rows="4" name="description" class="form-control inside"></textarea>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
-                            <div class="col-md-5">
-                                <input type="file" name="image" class="form-control inside" accept="image/*">
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar medicamento</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar recomendación</button>
                     </div>
                 </form>
             </div>
@@ -155,7 +135,7 @@
                     </div>
                 @endif
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar medicamento</h4>
+                    <h4 class="modal-title">Editar recomendación</h4>
                 </div>
                 <form id="formEditar" action="{{ url('/medicamentos/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
@@ -163,16 +143,9 @@
                         <input type="hidden" name="id" />
 
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="name">Nombre comercial <span class="required">*</span></label>
+                            <label class="control-label col-md-3" for="name">Nombre <span class="required">*</span></label>
                             <div class="col-md-8">
                                 <input type="text" id="name" name="name" required="required" class="form-control inside">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3" for="component">Principio activo <span class="required">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" id="component" name="component" class="form-control inside">
                             </div>
                         </div>
 
@@ -182,22 +155,10 @@
                                 <textarea id="description" rows="4" name="description" class="form-control inside"></textarea>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
-                            <div class="col-md-5">
-                                <input type="file" name="image" class="form-control inside" accept="image/*">
-                            </div>
-
-                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
-                            <div class="col-md-2" id="newImage">
-                                <input type="hidden" name="oldImage">
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group text-center">
                         <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar medicamento</button>
+                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar recomendación</button>
                     </div>
                 </form>
             </div>
@@ -208,7 +169,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar medicamento</h4>
+                    <h4 class="modal-title">Eliminar recomendación</h4>
                 </div>
                 <form id="formEliminar" action="{{ url('medicamentos/eliminar') }}" method="POST">
                     <div class="modal-body">
@@ -216,7 +177,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
                         <div class="form-group">
-                            <label for="nombreEliminar">¿Desea eliminar el siguiente medicamento?</label>
+                            <label for="nombreEliminar">¿Desea eliminar la siguiente recomendación?</label>
                             <input type="text" readonly class="form-control" name="nombreEliminar"/>
                         </div>
                     </div>

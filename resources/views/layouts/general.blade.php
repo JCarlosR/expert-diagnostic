@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li @yield('symptom')>
-                    <a href="{{ url('/symptom') }}">
+                    <a href="{{ url('/factores') }}">
                         <i class="ti-view-list-alt"></i>
                         <p>Factores</p>
                     </a>
@@ -113,7 +113,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/medicamentos') }}">
+                    <a href="{{ url('/recomendaciones') }}">
                         <i class="ti-blackboard"></i>
                         <p>Recomendaciones</p>
                     </a>

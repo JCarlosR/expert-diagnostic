@@ -1,5 +1,9 @@
 $(document).on('ready', principal);
 
+var $modalNuevo;
+var $modalEditar;
+var $modalEliminar;
+
 function principal()
 {
     $('.mytable').footable();
@@ -36,7 +40,7 @@ function deleteMedication() {
                 showmessage(response.message,0);
                 setTimeout(function(){
                     location.reload();
-                }, 3000);
+                }, 500);
             }
         });
 }
@@ -60,7 +64,7 @@ function updateMedication() {
                 showmessage(response.message,0);
                 setTimeout(function(){
                     location.reload();
-                }, 3000);
+                }, 500);
             }
         });
 }
@@ -84,7 +88,7 @@ function registerMedication() {
                 showmessage(response.message,0);
                 setTimeout(function(){
                     location.reload();
-                }, 3000);
+                }, 500);
             }
         });
 }
@@ -95,19 +99,11 @@ function mostrarEditar() {
     var id = $(this).data('id');
     $modalEditar.find('[name="id"]').val(id);
 
-    var name = $(this).data('trade_name');
+    var name = $(this).data('name');
     $modalEditar.find('[name="name"]').val(name);
-
-    var component = $(this).data('active_component');
-    $modalEditar.find('[name="component"]').val(component);
 
     var description = $(this).data('description');
     $modalEditar.find('[name="description"]').val(description);
-
-    var image = $(this).data('image');
-    $modalEditar.find('[name="newImage"]').val(image);
-    var image_url = '../public/medication/images/'+image;
-    $("#newImage").html('<img src="'+image_url+'" class="img-responsive image"> ');
 
     $modalEditar.modal('show');
 }
