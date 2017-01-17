@@ -18,8 +18,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/symptom/modificar', 'SymptomController@putSymptom');
     Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
 
-// Factor routes
-    Route::post('/factor/registrar', 'FactorController@postFactor');
+// Antecedente routes
+    Route::post('/antecedente/registrar', 'FactorController@postAntecedent');
+    Route::post('/antecedente/modificar', 'FactorController@putAntecedent');
+    Route::post('/antecedente/eliminar', 'FactorController@deleteAntecedent');
+
+// Antecedente routes
+    Route::post('/factor/registrar', 'OtherController@postFactor');
+    Route::post('/factor/modificar', 'OtherController@putFactor');
+    Route::post('/factor/eliminar', 'OtherController@deleteFactor');
 
 // Medication routes
     Route::get('/medicamentos', 'MedicationController@index');

@@ -316,11 +316,11 @@
                                                             <td>{{ $antecedente->id }}</td>
                                                             <td>{{ $antecedente->name }}</td>
                                                             <td>{{ $antecedente->descripcion }}</td>
-                                                            <td><img src="{{ asset('symptoms/images') }}/{{ $antecedente->imagen }} " class="image"></td>
+                                                            <td><img src="{{ asset('antecedente/images') }}/{{ $antecedente->imagen }} " class="image"></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-primary" data-id="{{ $antecedente->id }}" data-name="{{ $antecedente->name }}"
+                                                                <button type="button" class="btn btn-primary" data-antecedente data-id="{{ $antecedente->id }}" data-name="{{ $antecedente->name }}"
                                                                         data-description="{{ $antecedente->descripcion }}" data-image="{{ $antecedente->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $antecedente->id }}" data-name="{{ $antecedente->name }}" data-description="{{ $antecedente->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                                                <button type="button"  class="btn btn-danger" data-deleteantecedente="{{ $antecedente->id }}" data-name="{{ $antecedente->name }}" data-description="{{ $antecedente->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -428,11 +428,11 @@
                                                             <td>{{ $factor->id }}</td>
                                                             <td>{{ $factor->name }}</td>
                                                             <td>{{ $factor->descripcion }}</td>
-                                                            <td><img src="{{ asset('symptoms/images') }}/{{ $factor->imagen }} " class="image"></td>
+                                                            <td><img src="{{ asset('factor/images') }}/{{ $factor->imagen }} " class="image"></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-primary" data-id="{{ $factor->id }}" data-name="{{ $factor->name }}"
+                                                                <button type="button" class="btn btn-primary" data-factor data-id="{{ $factor->id }}" data-name="{{ $factor->name }}"
                                                                         data-description="{{ $factor->descripcion }}" data-image="{{ $factor->imagen }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
-                                                                <button type="button"  class="btn btn-danger" data-delete="{{ $factor->id }}" data-name="{{ $factor->name }}" data-description="{{ $factor->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                                                <button type="button"  class="btn btn-danger" data-deletefactor="{{ $factor->id }}" data-name="{{ $factor->name }}" data-description="{{ $factor->descripcion }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -493,7 +493,6 @@
             </div>
         </div>
     </div>
-
     <div id="modalEditarS" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -508,12 +507,14 @@
                         <input type="hidden" name="id" />
 
                         <div class="form-group">
+                            <label class="control-label col-md-3" for="edtName">Descripcion <span class="required">*</span></label>
+                            <div class="col-md-8">
                                 <input type="text" id="edtName" name="name" required="required" class="form-control inside">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                            <label class="control-label col-md-3" for="description">Nombre <span class="required">*</span></label>
                             <div class="col-md-8">
                                 <input type="text" id="description" name="description" required="required" class="form-control inside">
                             </div>
@@ -531,15 +532,15 @@
                         </div>
 
 
-                    <div class="form-group text-center">
-                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar síntoma</button>
+                        <div class="form-group text-center">
+                            <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                            <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar síntoma</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <div id="modalEliminarS" class="modal fade in">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -577,7 +578,7 @@
                 </div>
 
 
-                <form id="formRegistrarF" action="{{ url('/factor/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formRegistrarA" action="{{ url('/antecedente/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -610,66 +611,67 @@
             </div>
         </div>
     </div>
-
     <div id="modalEditarA" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar sintomas</h4>
+                    <h4 class="modal-title">Editar Antecedente</h4>
                 </div>
 
 
-                <form id="formEditar" action="{{ url('/symptom/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formEditarA" action="{{ url('/antecedente/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
 
                         <div class="form-group">
-                            <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                            <label class="control-label col-md-3" for="edtName">Nombre <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
-                        <div class="col-md-8">
-                            <input type="text" id="description" name="description" required="required" class="form-control inside">
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="description" name="description" required="required" class="form-control inside">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
-                        <div class="col-md-5">
-                            <input type="file" name="image" class="form-control inside" accept="image/*">
+                        <div class="form-group">
+                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                            <div class="col-md-5">
+                                <input type="file" name="image" class="form-control inside" accept="image/*">
+                            </div>
+                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                            <div class="col-md-2" id="newImageA">
+                                <input type="hidden" name="oldImage">
+                            </div>
                         </div>
-                        <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
-                        <div class="col-md-2" id="newImage">
-                            <input type="hidden" name="oldImage">
+
+
+                        <div class="form-group text-center">
+                            <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                            <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar antecedente</button>
                         </div>
-                    </div>
-
-
-                    <div class="form-group text-center">
-                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <div id="modalEliminarA" class="modal fade in">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar Sintoma</h4>
+                    <h4 class="modal-title">Eliminar antecedente</h4>
                 </div>
-                <form id="formEliminar" action="{{ url('symptom/eliminar') }}" method="POST">
+                <form id="formEliminarA" action="{{ url('antecedente/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
                         <div class="form-group">
-                            <label for="descEliminar">¿Desea eliminar el siguiente sintoma?</label>
+                            <label for="descEliminar">¿Desea eliminar el siguiente antecedente?</label>
                             <input type="text" readonly class="form-control" name="descEliminar"/>
                         </div>
                     </div>
@@ -690,11 +692,11 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Nuevo Síntoma</h4>
+                    <h4 class="modal-title">Nuevo Otro Factor</h4>
                 </div>
 
 
-                <form id="formRegistrar" action="{{ url('/symptom/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formRegistrarF" action="{{ url('/factor/registrar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -727,66 +729,67 @@
             </div>
         </div>
     </div>
-
     <div id="modalEditarF" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Editar sintomas</h4>
+                    <h4 class="modal-title">Editar factor</h4>
                 </div>
 
-
-                <form id="formEditar" action="{{ url('/symptom/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
+                <form id="formEditarF" action="{{ url('/factor/modificar') }}" class="form-horizontal form-label-left"  method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
                         <input type="hidden" name="id" />
 
                         <div class="form-group">
-                            <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                            <label class="control-label col-md-3" for="edtName">Nombre <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="edtName" name="name" required="required" class="form-control inside">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
-                        <div class="col-md-8">
-                            <input type="text" id="description" name="description" required="required" class="form-control inside">
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="description">Descripcion <span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" id="description" name="description" required="required" class="form-control inside">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
-                        <div class="col-md-5">
-                            <input type="file" name="image" class="form-control inside" accept="image/*">
+                        <div class="form-group">
+                            <label class="control-label col-md-3"  for="image">Nueva Imagen</label>
+                            <div class="col-md-5">
+                                <input type="file" name="image" class="form-control inside" accept="image/*">
+                            </div>
+                            <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
+                            <div class="col-md-2" id="newImageF">
+                                <input type="hidden" name="oldImage">
+                            </div>
                         </div>
-                        <label class="control-label col-md-2" for="last-name">Imagen anterior</label>
-                        <div class="col-md-2" id="newImage">
-                            <input type="hidden" name="oldImage">
+
+
+                        <div class="form-group text-center">
+                            <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                            <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar factor</button>
                         </div>
-                    </div>
-
-
-                    <div class="form-group text-center">
-                        <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
-                        <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <div id="modalEliminarF" class="modal fade in">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar Sintoma</h4>
+                    <h4 class="modal-title">Eliminar factor</h4>
                 </div>
-                <form id="formEliminar" action="{{ url('symptom/eliminar') }}" method="POST">
+                <form id="formEliminarF" action="{{ url('factor/eliminar') }}" method="POST">
                     <div class="modal-body">
 
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <input type="hidden" name="id" />
                         <div class="form-group">
-                            <label for="descEliminar">¿Desea eliminar el siguiente sintoma?</label>
+                            <label for="descEliminar">¿Desea eliminar el siguiente factor?</label>
                             <input type="text" readonly class="form-control" name="descEliminar"/>
                         </div>
                     </div>

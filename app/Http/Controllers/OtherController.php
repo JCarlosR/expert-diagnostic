@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Factor;
 use App\Http\Requests;
+use App\Other;
 use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
-class FactorController extends Controller
+class OtherController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -30,7 +31,7 @@ class FactorController extends Controller
     {
     }
 
-    public function postAntecedent(Request $request)
+    public function postFactor(Request $request)
     {
         $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
@@ -38,37 +39,37 @@ class FactorController extends Controller
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
         if ($request->get('name') == null OR $request->get('name') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del antecedente']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del factor']);
 
         if ($request->get('description') == null OR $request->get('description') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del antecedente']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del factor']);
 
 
-        $antecedent = Factor::create([
+        $factor = Other::create([
             'name' => $request->get('name'),
             'descripcion' => $request->get('description')
         ]);
 
         if( $request->file('image') )
         {
-            $path = public_path().'/antecedente/images';
+            $path = public_path().'/factor/images';
             if($request->get('oldImage') !='algo.png' )
                 File::delete($path.'/'.$request->get('oldImage'));
             $extension = $request->file('image')->getClientOriginalExtension();
-            $fileName = $antecedent->id . '.' . $extension;
+            $fileName = $factor->id . '.' . $extension;
             $request->file('image')->move($path, $fileName);
-            $antecedent->imagen = $fileName;
+            $factor->imagen = $fileName;
         }
         else
-            $antecedent->imagen = 'algo.jpg';
+            $factor->imagen = 'algo.jpg';
 
-        $antecedent->save();
+        $factor->save();
 
-        return response()->json(['error' => false, 'message' => 'Antecedente registrado correctamente']);
+        return response()->json(['error' => false, 'message' => 'Factor registrado correctamente']);
 
     }
 
-    public function putAntecedent(Request $request)
+    public function putFactor(Request $request)
     {
         $validator = Validator::make($request->all(), [ 'image'=>'image' ]);
 
@@ -76,42 +77,42 @@ class FactorController extends Controller
             return response()->json(['error' => true, 'message' => 'Solo se permiten imágenes']);
 
         if ($request->get('name') == null OR $request->get('name') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del antecedent']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del factor']);
         
         if ($request->get('description') == null OR $request->get('description') == "")
-            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del antecedente']);
+            return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del factor']);
 
-        $antecedent = Factor::find( $request->get('id') );
-        $antecedent->name = $request->get('name');
-        $antecedent->descripcion = $request->get('description');
+        $factor = Other::find( $request->get('id') );
+        $factor->name = $request->get('name');
+        $factor->descripcion = $request->get('description');
 
         if( $request->file('image') )
         {
-            $path = public_path().'/antecedente/images';
+            $path = public_path().'/factor/images';
             if($request->get('oldImage') !='0.png' )
                 File::delete($path.'/'.$request->get('oldImage'));
             $extension = $request->file('image')->getClientOriginalExtension();
-            $fileName = $antecedent->id . '.' . $extension;
+            $fileName = $factor->id . '.' . $extension;
             $request->file('image')->move($path, $fileName);
-            $antecedent->imagen = $fileName;
+            $factor->imagen = $fileName;
         }
 
-        $antecedent->save();
+        $factor->save();
 
-        return response()->json(['error' => false, 'message' => 'Antecedente modificado correctamente']);
+        return response()->json(['error' => false, 'message' => 'Factor modificado correctamente']);
     }
 
-    public function deleteAntecedent(Request $request)
+    public function deleteFactor(Request $request)
     {
-        $antecedent = Factor::find($request->get('id'));
+        $factor = Other::find($request->get('id'));
 
-        if($antecedent == null)
-            return response()->json(['error' => true, 'message' => 'No existe el antecedente especificado.']);
+        if($factor == null)
+            return response()->json(['error' => true, 'message' => 'No existe el factor especificado.']);
 
-        $antecedent = Factor::find($request->get('id'));
-        $antecedent->delete();
+        $factor = Other::find($request->get('id'));
+        $factor->delete();
 
-        return response()->json(['error' => false, 'message' => 'Antecedente eliminado correctamente.']);
+        return response()->json(['error' => false, 'message' => 'Factor eliminado correctamente.']);
 
     }
 
