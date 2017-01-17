@@ -29,9 +29,9 @@ class SymptomController extends Controller
      */
     public function index()
     {
-        $otros = Other::orderBy('id', 'asc')->paginate(3);
-        $factores = Factor::orderBy('id', 'asc')->paginate(3);
-        $sintomas = Symptom::orderBy('id', 'asc')->paginate(3);
+        $otros = Factor::where('type', 'O')->orderBy('id', 'asc')->paginate(3);
+        $factores = Factor::where('type', 'A')->orderBy('id', 'asc')->paginate(3);
+        $sintomas = Factor::where('type', 'S')->orderBy('id', 'asc')->paginate(3);
 
         return view('symptom.symptom')->with(compact('sintomas', 'factores', 'otros'));
     }
@@ -50,9 +50,10 @@ class SymptomController extends Controller
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar el nombre del síntoma']);
 
 
-        $symptom = Symptom::create([
+        $symptom = Factor::create([
             'name' => $request->get('name'),
-            'descripcion' => $request->get('description')
+            'descripcion' => $request->get('description'),
+            'type' => 'S'
         ]);
 
         if( $request->file('image') )
@@ -87,7 +88,7 @@ class SymptomController extends Controller
         if ($request->get('description') == null OR $request->get('description') == "")
             return response()->json(['error' => true, 'message' => 'Es necesario ingresar la descripcion del síntoma']);
 
-        $symptom = Symptom::find( $request->get('id') );
+        $symptom = Factor::find( $request->get('id') );
         $symptom->name = $request->get('name');
         $symptom->descripcion = $request->get('description');
 
@@ -109,12 +110,12 @@ class SymptomController extends Controller
 
     public function deleteSymptom(Request $request)
     {
-        $symptom = Symptom::find($request->get('id'));
+        $symptom = Factor::find($request->get('id'));
 
         if($symptom == null)
             return response()->json(['error' => true, 'message' => 'No existe el síntoma especificado.']);
 
-        $symptom = Symptom::find($request->get('id'));
+        $symptom = Factor::find($request->get('id'));
         $symptom->delete();
 
         return response()->json(['error' => false, 'message' => 'Síntoma eliminado correctamente.']);

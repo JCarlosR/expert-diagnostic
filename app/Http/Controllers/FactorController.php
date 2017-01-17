@@ -46,7 +46,8 @@ class FactorController extends Controller
 
         $antecedent = Factor::create([
             'name' => $request->get('name'),
-            'descripcion' => $request->get('description')
+            'descripcion' => $request->get('description'),
+            'type' => 'A'
         ]);
 
         if( $request->file('image') )
