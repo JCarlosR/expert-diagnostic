@@ -27,6 +27,10 @@
 @section('content')
     <div class="content">
         <div class="container-fluid">
+            <div class="row text-center">
+                <h4>Diagnosticando al paciente: {{ $patientName }}</h4>
+            </div>
+
             <div class="row">
                 <div class="col-md-5">
                     <div class="card">

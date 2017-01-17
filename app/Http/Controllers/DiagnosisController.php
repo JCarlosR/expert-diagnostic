@@ -7,6 +7,7 @@ use App\DiseaseMedication;
 use App\DiseaseSymptom;
 use App\Http\Requests;
 use App\Medication;
+use App\Patient;
 use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -29,9 +30,12 @@ class DiagnosisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( $patientId )
     {
-        return view('diagnosis.index');
+        $patient = Patient::find($patientId);
+        $patientName = $patient->surname.', '.$patient->name;
+
+        return view('diagnosis.index')->with(compact('patientName'));
     }
 
     public function getAll(){

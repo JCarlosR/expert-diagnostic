@@ -124,12 +124,12 @@
                         <p>Reglas conocimiento</p>
                     </a>
                 </li>
-                <li>
+                <!--li>
                     <a href="{{ url('/diagnostico') }}">
                         <i class="ti-map"></i>
                         <p>Diagnóstico</p>
                     </a>
-                </li>
+                </--li -->
             </ul>
         </div>
     </div>

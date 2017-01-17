@@ -88,6 +88,7 @@
                                                     data-birthdate="{{ $patient->birthdate }}"
                                                     data-comment="{{ $patient->comment }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
                                             <button type="button"  class="btn btn-danger" data-delete="{{ $patient->id }}" data-name="{{ $patient->name }}" data-surname="{{ $patient->surname }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
+                                            <a href="{{url('diagnostico-'.$patient->id)}}" class="btn btn-info"><i class="fa fa-eye" data-backdrop="false"></i> Diagnosticar</a>
                                         </td>
                                     </tr>
                                     @endforeach

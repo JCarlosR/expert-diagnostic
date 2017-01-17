@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('enfermedad/eliminar/{id}', 'DiseaseController@delete');
 
 // Diagnostic routes
-    Route::get('diagnostico','DiagnosisController@index');
+    Route::get('diagnostico-{patientId}','DiagnosisController@index');
     Route::get('diagnostico/all','DiagnosisController@getAll');
     Route::get('diagnostico/enfermedades','DiagnosisController@diseases');
     Route::get('enfermedades/medicamentos/{disease_id}','DiagnosisController@medication');
