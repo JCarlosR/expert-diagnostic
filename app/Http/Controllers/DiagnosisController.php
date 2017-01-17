@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Disease;
 use App\DiseaseMedication;
 use App\DiseaseSymptom;
+use App\Factor;
 use App\Http\Requests;
 use App\Medication;
 use App\Patient;
@@ -34,8 +35,11 @@ class DiagnosisController extends Controller
     {
         $patient = Patient::find($patientId);
         $patientName = $patient->surname.', '.$patient->name;
+        $antecedents = Factor::where('type', 'A')->lists('name')->toJson();
+        $symptoms = Factor::where('type', 'S')->lists('name')->toJson();
+        $others = Factor::where('type', 'O')->lists('name')->toJson();
 
-        return view('diagnosis.index')->with(compact('patientName'));
+        return view('diagnosis.index')->with(compact('patientName', 'antecedents', 'symptoms', 'others'));
     }
 
     public function getAll(){

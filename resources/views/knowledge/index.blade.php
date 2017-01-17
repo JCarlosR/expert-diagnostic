@@ -42,7 +42,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 separator">
-                    <a type="button" href="{{ url('nueva-regla') }}" class="btn btn-info btn-fill btn-wd">Nueva regla</a>
                     <br>
                     <br>
                     <div class="card">
@@ -53,7 +52,7 @@
                             <table class="table table-striped mytable">
                                 <thead>
                                     <tr>
-                                        <th>Regla</th>
+                                        <th> Enfermedad</th>
                                         <th> Acciones </th>
                                     </tr>
                                 </thead>
@@ -62,12 +61,10 @@
                                     <tr>
                                         <td>{{ $disease->name }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-danger" data-url="{{url('asignar/sintomas/')}}" data-assign="{{ $disease->id }}" data-name="{{ $disease ->name }}">
-                                                <i class="fa fa-trash"></i>Eliminar regla
-                                            </button>
-
+                                            <a type="button" class="btn btn-danger" href="{{url('asignar/reglas/'.$disease->id)}}">
+                                                <i class="fa fa-eye"></i>Agregar regla
+                                            </a>
                                         </td>
-
                                     </tr>
                                 @endforeach
                                 </tbody>

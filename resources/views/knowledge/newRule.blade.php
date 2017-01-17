@@ -4,6 +4,14 @@
 
 @section('styles')
     <style>
+        .table
+        {
+            margin-left: 30px;
+        }
+        .marco
+        {
+            background-color: #95e9fe !important;
+        }
         .separator
         {
             margin-top: 15px;
@@ -33,60 +41,59 @@
             height: 180px;
         }
 
-        /* Hiding the checkbox, but allowing it to be focused */
-        .badgebox
-        {
-            opacity: 0;
+        .typeahead,
+        .tt-query,
+        .tt-hint {
+            line-height: 30px;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            outline: none;
         }
-
-        .badgebox + .badge
-        {
-            /* Move the check mark away when unchecked */
-            text-indent: -999999px;
-            /* Makes the badge's width stay the same checked and unchecked */
-            width: 27px;
+        .typeahead:focus {
+            border: 1px solid #0097cf;
         }
-
-        .badgebox:focus + .badge
-        {
-            /* Set something to make the badge looks focused */
-            /* This really depends on the application, in my case it was: */
-
-            /* Adding a light border */
-            box-shadow: inset 0px 0px 5px;
-            /* Taking the difference out of the padding */
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
         }
-
-        .badgebox:checked + .badge
-        {
-            /* Move the check mark back when checked */
-            text-indent: 0;
-        }.form-group input[type="checkbox"] {
-             display: none;
-         }
-
-        .form-group input[type="checkbox"] + .btn-group > label span {
-            width: 20px;
+        .tt-hint {
+            color: #bdbdbd;
         }
-
-        .form-group input[type="checkbox"] + .btn-group > label span:first-child {
-            display: none;
+        .tt-menu {
+            margin: 12px 0;
+            padding: 8px 0;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            color: #000;
         }
-        .form-group input[type="checkbox"] + .btn-group > label span:last-child {
-            display: inline-block;
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
         }
-
-        .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
-            display: inline-block;
+        .tt-suggestion:hover {
+            cursor: pointer;
+            color: #fff;
+            background-color: #0097cf;
         }
-        .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
-            display: none;
+        .tt-suggestion.tt-cursor {
+            color: #fff;
+            background-color: #0097cf;
         }
-
+        .tt-suggestion p {
+            margin: 0;
+        }
 
     </style>
     <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/footable.bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/typeahead.css')}}">
 @endsection
 
 @section('content')
@@ -94,215 +101,146 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 separator">
-
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Listado de enfermedades</h4>
+                            <h4 class="title">Asignar reglas para {{ $disease->name }}</h4>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <label class="control-label col-md-3" for="sintoma">
+                                    Síntomas:
+                                </label><br><br>
+                                <div class="input-group col-md-9" style="margin-left: 10px">
+                                    <div class="col-md-10"><input id="sintoma" name="sintoma" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label col-md-3" for="antecedente">
+                                    Antecedentes:
+                                </label><br><br>
+                                <div class="input-group col-md-9">
+                                    <div class="col-md-10"><input id="antecedente" name="antecedente" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label col-md-12" for="otro">
+                                    Otros factores:
+                                </label><br><br>
+                                <div class="input-group col-md-9">
+                                    <div class="col-md-10"><input id="otro" name="otro" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default2" id="fancy-checkbox-default2" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default3" id="fancy-checkbox-default3" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default4" id="fancy-checkbox-default4" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-defaul4t" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default4" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default2" id="fancy-checkbox-default2" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default3" id="fancy-checkbox-default3" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default4" id="fancy-checkbox-default4" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-defaul4t" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default4" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default2" id="fancy-checkbox-default2" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default3" id="fancy-checkbox-default3" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default4" id="fancy-checkbox-default4" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-defaul4t" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default4" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default2" id="fancy-checkbox-default2" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default2" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default3" id="fancy-checkbox-default3" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default3" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="[ form-group ]">
-                                    <input type="checkbox" name="fancy-checkbox-default4" id="fancy-checkbox-default4" autocomplete="off" />
-                                    <div class="[ btn-group ]">
-                                        <label for="fancy-checkbox-defaul4t" class="[ btn btn-default ]">
-                                            <span class="[ glyphicon glyphicon-ok ]"></span>
-                                            <span> </span>
-                                        </label>
-                                        <label for="fancy-checkbox-default4" class="[ btn btn-default active ]">
-                                            Default Checkbox
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col-md-8">
+                                <label class="control-label col-md-3" for="factores">
+                                    Factores:
+                                </label><br><br>
+                                <div class="input-group col-md-10">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Factor</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-factor">
+                                            <tr>
+                                                <td data-factor></td>
+                                                <td>
+                                                    <button data-delete type="button" class="btn btn-danger">Quitar</button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-items">
+                                        {{-- Load with javascript --}}
 
-
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label col-md-3" for="peso">
+                                    Peso:
+                                </label><br><br>
+                                <div class="input-group col-md-9">
+                                    <input id="peso" name="peso" class="marco form-control" type="text">
+                                </div>
+                                <button class="btn btn-success">Agregar recomendaciones</button>
+                            </div>
                         </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <button class="btn btn-primary">Nueva regla</button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button class="btn btn-success">Guardar regla</button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <button class="btn btn-danger">Volver</button>
+                            </div>
+                        </div>
+                        {{--<div class="row">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-3" for="factores">
+                                    Recomendaciones:
+                                </label><br><br>
+                                <div class="input-group col-md-12">
+                                    <div class="col-md-12"><input id="antecedente" name="antecedente" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-12 col-md-offset-5"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="input-group col-md-10">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Recomendación</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-factor">
+                                            <tr>
+                                                <td data-recomendacion></td>
+                                                <td>
+                                                    <button data-eliminar type="button" class="btn btn-danger">Quitar</button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-items">
+                                        --}}{{-- Load with javascript --}}{{--
+                                        <tr>
+                                            <td data-factor>asascasc</td>
+                                            <td>
+                                                <button data-delete type="button" class="btn btn-danger">Quitar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-factor>asascasc</td>
+                                            <td>
+                                                <button data-delete type="button" class="btn btn-danger">Quitar</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td data-factor>asascasc</td>
+                                            <td>
+                                                <button data-delete type="button" class="btn btn-danger">Quitar</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -440,5 +378,61 @@
         $(document).ready(function() {
             $(".icons").remove();
         });
+    </script>
+    <script src="{{ asset('assets/js/typeahead.bundle.js') }}"></script>
+    <script>
+        var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substringRegex;
+                // an array that will be populated with substring matches
+                matches = [];
+                // regex used to determine if a string contains the substring `q`
+                substrRegex = new RegExp(q, 'i');
+                // iterate through the pool of strings and for any string that
+                // contains the substring `q`, add it to the `matches` array
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                        matches.push(str);
+                    }
+                });
+                cb(matches);
+            };
+        };
+        var symptoms = {!! $symptoms !!};
+        $('#sintoma').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'symptoms',
+                    source: substringMatcher(symptoms)
+                }
+        );
+        var antecedents = {!! $antecedents !!};
+        $('#antecedente').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'antecedents',
+                    source: substringMatcher(antecedents)
+                }
+        );
+        var others = {!! $others !!};
+        $('#otro').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'others',
+                    source: substringMatcher(others)
+                }
+        );
     </script>
 @endsection

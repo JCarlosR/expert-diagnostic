@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Disease;
 use App\DiseaseMedication;
 use App\DiseaseSymptom;
+use App\Factor;
 use App\Http\Requests;
 use App\Medication;
 use App\Patient;
@@ -52,6 +53,15 @@ class KnowledgeController extends Controller
         $data['no_asignados'] = $array2;
         //dd($data);
         return $data;
+    }
+
+    public function getAssignRule($diseaseId){
+        $disease = Disease::find($diseaseId);
+        $antecedents = Factor::where('type', 'A')->lists('name')->toJson();
+        $symptoms = Factor::where('type', 'S')->lists('name')->toJson();
+        $others = Factor::where('type', 'O')->lists('name')->toJson();
+
+        return view('knowledge.newRule')->with(compact('disease', 'antecedents', 'symptoms', 'others'));
     }
 
     public function getAssignMed($id)

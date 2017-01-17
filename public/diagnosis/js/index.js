@@ -238,8 +238,7 @@ function show_diseases() {
     });
 }
 
-function mostrarDetalles(name,description,image)
-{
+function mostrarDetalles(name,description,image){
     event.preventDefault();
 
     $('#name_disease').html(name);
@@ -250,8 +249,7 @@ function mostrarDetalles(name,description,image)
     $modalDetalles.modal('show');
 }
 
-function mostrarTratamiento(name,id,video)
-{
+function mostrarTratamiento(name,id,video){
     event.preventDefault();
     $('#name_disease_treatment').html(name);
     $('#iframe').attr('src',video);
@@ -274,8 +272,7 @@ function mostrarTratamiento(name,id,video)
     $modalTratamiento.modal('show');
 }
 
-function showmessage( message, error )
-{
+function showmessage( message, error ){
     var icon = 'ti-thumb-up';
     var type = 'success';
     if( error==1 )

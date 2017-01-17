@@ -4,86 +4,184 @@
 
 @section('styles')
     <style>
-        .sintoma{
-            margin: 1.4em 0;
-            height: 165px;
+        .table
+        {
+            margin-left: 30px;
         }
-        .img-thumbnail {
-            width: 100px;
-            height: 100px;
+        .marco
+        {
+            background-color: #95e9fe !important;
         }
-        .botones {
-            margin-top:200px;
+        .separator
+        {
+            margin-top: 15px;
+        }
+        .margen
+        {
+            margin-top:30px;
+        }
+        .no-resize
+        {
+            resize: none;
+        }
+        .in-input
+        {
+            border: 1px solid rgba(102, 97, 91, 0.35) !important;
+        }
+        .inside:focus{
+            border: 1px solid #0097cf !important;
         }
         .image
         {
-            width: 250px;
-            height: 200px;
+            height: 40px;
+            width: 40px;
         }
+        .sintoma{
+            margin: 1.4em 0;
+            height: 180px;
+        }
+
+        .typeahead,
+        .tt-query,
+        .tt-hint {
+            line-height: 30px;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            outline: none;
+        }
+        .typeahead:focus {
+            border: 1px solid #0097cf;
+        }
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+        .tt-hint {
+            color: #bdbdbd;
+        }
+        .tt-menu {
+            margin: 12px 0;
+            padding: 8px 0;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            color: #000;
+        }
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+        .tt-suggestion:hover {
+            cursor: pointer;
+            color: #fff;
+            background-color: #0097cf;
+        }
+        .tt-suggestion.tt-cursor {
+            color: #fff;
+            background-color: #0097cf;
+        }
+        .tt-suggestion p {
+            margin: 0;
+        }
+
     </style>
     <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/css/typeahead.css')}}">
 @endsection
 
 @section('content')
     <div class="content">
         <div class="container-fluid">
-            <div class="row text-center">
-                <h4>Diagnosticando al paciente: {{ $patientName }}</h4>
-            </div>
-
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-12 separator">
+                    <br>
+                    <br>
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Listado de síntomas</h4>
+                            <h4 class="title">Diagnosticando al paciente: {{ $patientName }}</h4>
                         </div>
-                        <div class="content">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <input type="text" id="search" value="" class="form-control" placeholder="Search...">
-                            </div>
-                            <div id="noAsignados" class="panel-body">
-                            </div>
-                            <ul class="pagination">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="botones col-md-2">
-                    <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignar();">
-                        Mover <span class="btn-label"><i class="ti-angle-right"></i></span>
-                    </button>
-                    <br><br>
-                    <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolver();">
-                        <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover
-                    </button>
-                    <br><br>
-                    <button type="button" class="btn btn-success" onclick="diagnose();">
-                        <span class="btn-label"><i class="ti-pulse"></i></span>  Diagnosticar
-                    </button>
-                </div>
-                <div class="col-md-5">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Síntomas seleccionados</h4>
-                        </div>
-                        <div class="content">
-                            <div id="asignados" class="panel-body">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <label class="control-label col-md-3" for="sintoma">
+                                    Síntomas:
+                                </label><br><br>
+                                <div class="input-group col-md-9" style="margin-left: 10px">
+                                    <div class="col-md-10"><input id="sintoma" name="sintoma" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
 
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <div class="col-md-4">
+                                <label class="control-label col-md-3" for="antecedente">
+                                    Antecedentes:
+                                </label><br><br>
+                                <div class="input-group col-md-9">
+                                    <div class="col-md-10"><input id="antecedente" name="antecedente" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
 
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Posibles enfermedades</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label col-md-12" for="otro">
+                                    Otros factores:
+                                </label><br><br>
+                                <div class="input-group col-md-9">
+                                    <div class="col-md-10"><input id="otro" name="otro" class="marco typeahead form-control" type="text"></div>
+                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="enfermedades" class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <label class="control-label col-md-3" for="factores">
+                                    Factores:
+                                </label><br><br>
+                                <div class="input-group col-md-12">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Factor</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-factor">
+                                            <tr>
+                                                <td data-factor></td>
+                                                <td>
+                                                    <button data-delete type="button" class="btn btn-danger">Quitar</button>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-items">
+                                        {{-- Load with javascript --}}
 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <button class="btn btn-primary">Nuevo diagnostico</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button class="btn btn-success">Diagnosticar</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button class="btn btn-success">Guardar diagnostico</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button class="btn btn-danger">Volver</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,7 +253,61 @@
 @section('scripts')
     <!-- Promise.finally support -->
     <script src="https://cdn.jsdelivr.net/promise.prototype.finally/1.0.1/finally.js"></script>
-
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('diagnosis/js/index.js') }}"></script>
+    <script src="{{ asset('assets/js/typeahead.bundle.js') }}"></script>
+    <script>
+        var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substringRegex;
+                // an array that will be populated with substring matches
+                matches = [];
+                // regex used to determine if a string contains the substring `q`
+                substrRegex = new RegExp(q, 'i');
+                // iterate through the pool of strings and for any string that
+                // contains the substring `q`, add it to the `matches` array
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                        matches.push(str);
+                    }
+                });
+                cb(matches);
+            };
+        };
+        var symptoms = {!! $symptoms !!};
+        $('#sintoma').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'symptoms',
+                    source: substringMatcher(symptoms)
+                }
+        );
+        var antecedents = {!! $antecedents !!};
+        $('#antecedente').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'antecedents',
+                    source: substringMatcher(antecedents)
+                }
+        );
+        var others = {!! $others !!};
+        $('#otro').typeahead(
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                },
+                {
+                    name: 'others',
+                    source: substringMatcher(others)
+                }
+        );
+    </script>
 @endsection

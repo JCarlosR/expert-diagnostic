@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asignar/sintomas/{id}','KnowledgeController@getAssign');
     Route::get('asignar/sintoma/{disease}/{symptom}','KnowledgeController@getAssignSymptom');
     Route::get('desasignar/sintoma/{disease}/{symptom}','KnowledgeController@getNotAssignSymptom');
+    
+    Route::get('asignar/reglas/{disease}','KnowledgeController@getAssignRule');
 
     Route::get('asignar/medicamentos/{id}','KnowledgeController@getAssignMed');
     Route::get('asignar/medicamento/{disease}/{medication}','KnowledgeController@getAssignMedication');
