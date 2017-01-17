@@ -1,8 +1,6 @@
 <?php
 
 use App\Factor;
-use App\Other;
-use App\Symptom;
 use Illuminate\Database\Seeder;
 
 class FactorsTableSeeder extends Seeder
@@ -15,63 +13,73 @@ class FactorsTableSeeder extends Seeder
     public function run()
     {
         // OTROS FACTORES
-        Other::create([
+        Factor::create([
             'name'=>'Prueba del torniquete',
             'descripcion'=>'',
+            'type'=>'O',
             'imagen'=>''
         ]);
-        Other::create([
+        Factor::create([
             'name'=>'Edad',
             'descripcion'=>'',
+            'type'=>'O',
             'imagen'=>''
         ]);
-        Other::create([
+        Factor::create([
             'name'=>'Género',
             'descripcion'=>'',
+            'type'=>'O',
             'imagen'=>''
         ]);
 
         // SÍNTOMAS
-        Symptom::create([
+        Factor::create([
             'name'=>'Fiebre mayor a 39°C',
             'descripcion'=>'Fiebre',
+            'type'=>'S',
             'imagen'=>''
         ]);
-        Symptom::create([
+        Factor::create([
             'name'=>'Fiebre mayor a 38°C',
             'descripcion'=>'Fiebre',
             'imagen'=>''
         ]);
-        Symptom::create([
+        Factor::create([
             'name'=>'Fiebre mayor a 37°C',
             'descripcion'=>'Fiebre',
+            'type'=>'S',
             'imagen'=>''
         ]);
 
-        Symptom::create([
+        Factor::create([
             'name'=>'Artromialgia',
             'descripcion'=>'',
+            'type'=>'S',
             'imagen'=>''
         ]);
-        Symptom::create([
+        Factor::create([
             'name'=>'Rash',
             'descripcion'=>'',
+            'type'=>'S',
             'imagen'=>''
         ]);
-        Symptom::create([
+        Factor::create([
             'name'=>'Hemorragia',
             'descripcion'=>'',
+            'type'=>'S',
             'imagen'=>''
         ]);
-        Symptom::create([
+        Factor::create([
             'name'=>'Dolor de espalda difuso',
             'descripcion'=>'',
+            'type'=>'S',
             'imagen'=>''
         ]);
 
-        Symptom::create([
+        Factor::create([
             'name'=>'Erupción maculopapular',
             'descripcion'=>'',
+            'type'=>'S',
             'imagen'=>''
         ]);
 
@@ -79,16 +87,19 @@ class FactorsTableSeeder extends Seeder
         Factor::create([
             'name'=>'Contacto con contagiados',
             'descripcion'=>'',
+            'type' => 'A',
             'imagen'=>''
         ]);
         Factor::create([
             'name'=>'Viajes/Vivir a zonas endémicas',
             'descripcion'=>'',
+            'type' => 'A',
             'imagen'=>''
         ]);
         Factor::create([
             'name'=>'Relaciones sexuales con contagiados',
             'descripcion'=>'',
+            'type' => 'A',
             'imagen'=>''
         ]);
     }
