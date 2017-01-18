@@ -20,4 +20,9 @@ class Rule extends Model
         return $disease->name;
     }
 
+    public function diseases()
+    {
+        return $this->belongsTo('App\Disease', 'disease_id');
+    }
+
 }

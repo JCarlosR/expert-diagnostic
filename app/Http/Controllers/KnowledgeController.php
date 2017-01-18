@@ -73,6 +73,16 @@ class KnowledgeController extends Controller
         $peso = json_decode($request->get('peso'));
         $enfermedad = json_decode($request->get('enfermedad'));
         //dd($peso);
+        if (sizeof($factores)==0)
+        {
+            return response()->json(['error' => true, 'message' => 'Se debe especificar factores a guardar.']);
+        }
+
+        if (sizeof($recomendaciones)==0)
+        {
+            return response()->json(['error' => true, 'message' => 'Se debe especificar recomendaciones a guardar.']);
+        }
+
         if($enfermedad=="")
         {
             return response()->json(['error' => true, 'message' => 'Se debe especificar la enfermedad.']);
@@ -113,6 +123,26 @@ class KnowledgeController extends Controller
         }
 
         return response()->json(['error' => false, 'message' => 'Se ha registrado correctamente la regla de conocimiento']);
+    }
+
+    public function getRules($disease){
+        $rules = Rule::where('disease_id', $disease)->where('enable', 1)->with('diseases')->get();
+        //dd($rules);
+        return $rules;
+    }
+
+    public function postDeleteRule(Request $request){
+        //dd($request->get('nombreEliminar'));
+        $rule = Rule::find($request->get('id'));
+
+        if($rule == null)
+            return response()->json(['error' => true, 'message' => 'No existe la regla de conocimiento especificada.']);
+
+        $rule->enable = 0;
+        $rule->save();
+
+        return response()->json(['error' => false, 'message' => 'Regla de conocimiento eliminada correctamente']);
+
     }
 
     public function getAssignMed($id)

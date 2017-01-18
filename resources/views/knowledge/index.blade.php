@@ -64,6 +64,9 @@
                                             <a type="button" class="btn btn-danger" href="{{url('asignar/reglas/'.$disease->id)}}">
                                                 <i class="fa fa-eye"></i>Agregar regla
                                             </a>
+                                            <a class="btn btn-primary" data-rules data-disease="{{ $disease->id }}">
+                                                <i class="fa fa-eye"></i>Ver reglas
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -71,9 +74,47 @@
                             </table>
                             {!! $diseases->render() !!}
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="title">
+                                    Reglas de conocimiento:
+                                </h4><br><br>
+                                <div class="input-group col-md-10">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Regla</th>
+                                            <th>Porcentaje</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-rule">
+                                            <tr>
+                                                <td data-rule></td>
+                                                <td data-percentage></td>
+                                                <td>
+                                                    <a data-factors class="btn btn-success">Ver factores</a>
+                                                </td>
+                                                <td>
+                                                    <a data-recommendation class="btn btn-primary">Recomendaciones</a>
+                                                </td>
+                                                <td>
+                                                    <a data-eliminar class="btn btn-danger">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-rules">
+                                        {{-- Load with javascript --}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -128,53 +169,34 @@
         </div>
     </div>
 
-    <div id="modalAsignar" class="modal fade in">
+    <div id="modalEliminar" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="titulo" class="modal-title">Asignar síntomas para la enfermedad <label id="disease"></label></h4>
+                    <h4 class="modal-title">Eliminar regla</h4>
                 </div>
 
-                <div class="modal-body">
-                    <div class="row">
-                        <input type="hidden" data-disease="" id="enfermedad">
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Listado de Síntomas</h4>
-                                </div>
-                                <div class="content">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                        <input type="text" id="search" value="" class="form-control" placeholder="Search...">
-                                    </div>
-                                    <div id="noAsignados" class="panel-body">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="botones col-md-2">
-                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignar();">Mover
-                                <span class="btn-label"><i class="ti-angle-right"></i></span></button>
-                            <br>
-                            <br>
-                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolver();">
-                                <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover</button>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Sintomas Agregados</h4>
-                                </div>
-                                <div class="content">
-                                    <div id="asignados" class="panel-body">
+                <form id="formEliminar" action="{{ url('eliminar/regla') }}" method="POST">
+                    <div class="modal-body">
 
-                                    </div>
-                                </div>
-                            </div>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="id" />
+                        <input type="hidden" name="enfermedad" />
+                        <div class="form-group">
+                            <label for="nombreEliminar">¿Desea eliminar la siguiente regla de conocimiento?</label>
+                            <input type="text" readonly class="form-control" name="nombreEliminar"/>
                         </div>
                     </div>
-                </div>
+                    <div class="modal-footer">
+                        <div class="btn-group pull-left">
+                            <button class="btn btn-danger pull-left" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button id="accept" class="btn btn-primary"><span class="ti-check" aria-hidden="true"></span> Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
