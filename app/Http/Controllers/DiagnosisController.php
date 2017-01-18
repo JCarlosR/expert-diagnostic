@@ -164,4 +164,24 @@ class DiagnosisController extends Controller
 
         return $data;
     }
+
+    //  EXPERT SYSTEM MODIFIED
+
+    public function factorNombresId($factorName)
+    {
+        $factor = Factor::where('name',$factorName)->get(['id','name'])->first();
+
+        if(  $factor== null )
+            return ['success'=>'false','message'=>'No existe una factor con ese nombre, no puede ser agregado.'];
+        return ['success'=>'true','data'=>$factor];
+    }
+
+    public function forwardChaining( Request $request )
+    {
+        $datos = json_decode($request->factors);
+        foreach ( $datos as $dato ) {
+
+        }
+    }
+
 }

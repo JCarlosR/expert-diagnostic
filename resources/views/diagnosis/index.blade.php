@@ -115,7 +115,7 @@
                                 </label><br><br>
                                 <div class="input-group col-md-9" style="margin-left: 10px">
                                     <div class="col-md-10"><input id="sintoma" name="sintoma" class="marco typeahead form-control" type="text"></div>
-                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                    <div class="col-md-2"><button class="btn btn-success" id="sintomaAdd"><i class="fa fa-check"></i></button></div>
                                 </div>
 
                             </div>
@@ -125,7 +125,7 @@
                                 </label><br><br>
                                 <div class="input-group col-md-9">
                                     <div class="col-md-10"><input id="antecedente" name="antecedente" class="marco typeahead form-control" type="text"></div>
-                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                    <div class="col-md-2"><button class="btn btn-success" id="antecedenteAdd"><i class="fa fa-check"></i></button></div>
                                 </div>
 
                             </div>
@@ -135,52 +135,40 @@
                                 </label><br><br>
                                 <div class="input-group col-md-9">
                                     <div class="col-md-10"><input id="otro" name="otro" class="marco typeahead form-control" type="text"></div>
-                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                    <div class="col-md-2"><button class="btn btn-success" id="otroAdd"><i class="fa fa-check"></i></button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
-                                <label class="control-label col-md-3" for="factores">
-                                    Factores:
-                                </label><br><br>
                                 <div class="input-group col-md-12">
                                     <table class="table table-hover table-condensed">
                                         <thead>
                                         <tr>
-                                            <th>Factor</th>
-                                            <th>Acción</th>
+                                            <th><b>Factor</b></th>
+                                            <th><b>Acción</b></th>
                                         </tr>
                                         </thead>
-                                        <template id="template-factor">
-                                            <tr>
-                                                <td data-factor></td>
-                                                <td>
-                                                    <button data-delete type="button" class="btn btn-danger">Quitar</button>
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <tbody id="table-items">
-                                        {{-- Load with javascript --}}
+                                        <tbody id="factorList">
 
                                         </tbody>
                                     </table>
+                                    <input type="hidden" id='_token' name="_token" value="{{ csrf_token() }}">
                                 </div>
                             </div>
                         </div>
-                        <br><br>
                         <div class="row">
                             <div class="col-md-3 text-center">
-                                <button class="btn btn-primary">Nuevo diagnostico</button>
+                                <button class="btn btn-primary" id="newDiagnostic">Nuevo diagnostico</button>
                             </div>
                             <div class="col-md-3 text-center">
-                                <button class="btn btn-success">Diagnosticar</button>
+                                <button class="btn btn-success" id="forwardChaining">Diagnosticar</button>
                             </div>
                             <div class="col-md-3 text-center">
                                 <button class="btn btn-success">Guardar diagnostico</button>
                             </div>
                             <div class="col-md-3 text-center">
-                                <button class="btn btn-danger">Volver</button>
+                                <a class="btn btn-danger" href="{{ url('pacientes') }}">Volver</a>
                             </div>
                         </div>
                     </div>
@@ -255,6 +243,7 @@
     <script src="https://cdn.jsdelivr.net/promise.prototype.finally/1.0.1/finally.js"></script>
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead.bundle.js') }}"></script>
+    <script src="{{ asset('diagnosis/js/forwardChaining.js') }}"></script>
     <script>
         var substringMatcher = function(strs) {
             return function findMatches(q, cb) {
