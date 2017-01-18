@@ -78,4 +78,18 @@ class MedicationController extends Controller
         return response()->json(['error' => false, 'message' => 'Recomendación eliminada correctamente']);
         
     }
+
+    public function recomendationNames()
+    {
+        $medications = Medication::lists('name');
+        return $medications;
+    }
+
+    public function recomendationName($name)
+    {
+        $medication = Medication::where('name',$name)->get(['id','name'])->first();
+        if(  $medication== null )
+            return ['success'=>'false','message'=>'No existe una recomendación con ese nombre, no puede ser agregada.'];
+        return ['success'=>'true','data'=>$medication];
+    }
 }

@@ -174,7 +174,7 @@
                                 <div class="input-group col-md-9">
                                     <input id="peso" name="peso" class="marco form-control" type="text">
                                 </div>
-                                <button class="btn btn-success">Agregar recomendaciones</button>
+                                <button class="btn btn-success" id="addRecomendations" >Agregar recomendaciones</button>
                             </div>
                         </div>
                         <br><br>
@@ -367,6 +367,46 @@
             </div>
         </div>
     </div>
+
+    <div id="modalRecomendation" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"> Asignar recomendaciones</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <label class="control-label col-md-3" for="sintoma">Recomendación:</label>
+                            <div class="input-group col-md-9">
+                                <div class="col-md-10"><input id="recomendations" class="marco typeahead form-control" type="text"></div>
+                                <div class="col-md-2"><button class="btn btn-success" id="addRecomendationTable"><i class="fa fa-check"></i></button></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-10 col-md-offset-1 table-responsive">
+                            <table class="table table-striped condensed">
+                                <thead>
+                                    <tr>
+                                        <th><b>Nombre</b></th>
+                                        <th><b>Acción</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recomendationData">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -374,6 +414,7 @@
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/search.js') }} "></script>
     <script src="{{ asset('knowledge/js/index.js') }}"></script>
+    <script src="{{ asset('knowledge/js/recomendation.js') }}"></script>
     <script>
         $(document).ready(function() {
             $(".icons").remove();

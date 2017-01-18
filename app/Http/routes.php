@@ -37,6 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/medicamentos/modificar', 'MedicationController@edit');
     Route::post('/medicamentos/eliminar', 'MedicationController@delete');
 
+    Route::get('/recomendaciones/nombres', 'MedicationController@recomendationNames');
+    Route::get('/recomendaciones/{name}', 'MedicationController@recomendationName');
+
 // Disease routes
     Route::get('enfermedades', 'DiseaseController@index');
     Route::post('enfermedad/registrar', 'DiseaseController@store');
