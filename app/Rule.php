@@ -10,4 +10,9 @@ class Rule extends Model
         'disease_id', 'percentage', 'enable'
     ];
 
+    public function diseases()
+    {
+        return $this->belongsTo('App\Disease', 'disease_id');
+    }
+
 }

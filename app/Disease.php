@@ -17,4 +17,5 @@ class Disease extends Model
     {
         return $this->belongsToMany('App\Medication');
     }
+
 }

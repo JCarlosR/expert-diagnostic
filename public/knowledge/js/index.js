@@ -1,13 +1,13 @@
 $(document).on('ready', principal);
 
-var $modalAsignar;
+var $modalEliminar;
 var $modalAsignarMed;
 var $modalWatch;
 
 function principal() {
     $('.mytable').footable();
 
-    $modalAsignar = $('#modalAsignar');
+    $modalEliminar = $('#modalEliminar');
     $modalAsignarMed = $('#modalAsignarMed');
     $modalWatch = $('#modalWatch');
 
@@ -19,10 +19,71 @@ function principal() {
     $('#antecedent').on('click', addAntecedent);
     $('#other').on('click', addOther);
     $(document).on('click', '[data-delete]', removeFactor);
-    $(document).on('click', '[data-delete]', removeFactor);
+    $(document).on('click', '[data-eliminar]', showModalEliminar);
     $('#btn-new').on('click', reloadPage);
     $('#btn-save').on('click', saveRule);
+    $('[data-rules]').on('click', showRules);
+    $('#formEliminar').on('submit', removeRule);
     
+}
+
+var rules = [];
+
+function showModalEliminar() {
+    console.log("ENTRE");
+    var id = $(this).data('eliminar');
+    $modalEliminar.find('[name="id"]').val(id);
+
+    var porcentaje = $(this).data('porcentaje');
+
+    var name = $(this).data('name');
+    $modalEliminar.find('[name="nombreEliminar"]').val(name + ' con un ' + porcentaje + ' %');
+
+    var disease_id = $(this).data('enfermedad');
+    $modalEliminar.find('[name="enfermedad"]').val(disease_id);
+
+    $modalEliminar.modal('show');
+}
+
+function removeRule() {
+    event.preventDefault();
+    var url =  '../public/eliminar/regla';
+    var datos = $(this).serializeArray();
+    var _token = $(this).find('[name=_token]').val();
+
+    console.log(datos);
+    $.ajax({
+        url: url,
+        data: new FormData(this),
+        processData: false,
+        contentType: false,
+        method: 'POST'
+    })
+        .done(function( response ) {
+
+            if(response.error)
+                showmessage(response.message,1);
+            else{
+                showmessage(response.message,0);
+                setTimeout(function(){
+                    location.reload();
+                }, 500);
+            }
+        });
+}
+
+function showRules() {
+    rules.length=0;
+    var enfermedad = $(this).data('disease');
+    $.getJSON('rules/enfermedad/'+enfermedad, function (data) {
+        $('#table-rules').html("");
+        for ( var i=0; i<data.length; ++i ) {
+
+            rules.push({id: data[i].id, enfermedad: data[i].diseases.name, enfermedad_id: data[i].diseases.id, porcentaje:data[i].percentage });
+            renderTemplateRules(data[i].id, data[i].diseases.name, data[i].diseases.id, data[i].percentage);
+        }
+        console.log(rules);
+    });
 }
 
 var factors = [];
@@ -160,6 +221,22 @@ function renderTemplateFactors(name, id) {
     clone.querySelector("[data-delete]").setAttribute('data-delete', id);
 
     $('#table-factors').append(clone);
+}
+
+function renderTemplateRules(rule_id, disease_name, disease_id, porcentaje) {
+
+    var clone = activateTemplate('#template-rule');
+
+    clone.querySelector("[data-rule]").innerHTML = disease_name;
+    clone.querySelector("[data-percentage]").innerHTML = porcentaje+' %';
+    clone.querySelector("[data-factors]").setAttribute('data-factors', rule_id);
+    clone.querySelector("[data-recommendation]").setAttribute('data-recommendation', rule_id);
+    clone.querySelector("[data-eliminar]").setAttribute('data-eliminar', rule_id);
+    clone.querySelector("[data-eliminar]").setAttribute('data-name', disease_name);
+    clone.querySelector("[data-eliminar]").setAttribute('data-enfermedad', disease_id);
+    clone.querySelector("[data-eliminar]").setAttribute('data-porcentaje', porcentaje);
+
+    $('#table-rules').append(clone);
 }
 
 var asignados;
