@@ -165,12 +165,13 @@ function forwardChaining()
         showmessage('Debe seleccionar por lo menos un factor.', 1);
         return;
     }
+    var timer = $(this).attr('data-timer');
     var data = JSON.stringify(factors);
 
     $.ajax({
         url: '../public/diagnostico/forwardChaining',
         method: 'POST',
-        data:{factors:data},
+        data:{factors:data,timer:timer},
         dataType:'json',
         headers : {
             'X-CSRF-TOKEN' : $('#_token').val()

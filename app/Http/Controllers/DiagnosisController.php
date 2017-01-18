@@ -12,9 +12,9 @@ use App\Patient;
 use App\Rule;
 use App\RuleFactor;
 use App\Symptom;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
 
 class DiagnosisController extends Controller
 {
@@ -35,15 +35,22 @@ class DiagnosisController extends Controller
      */
     public function index( $patientId )
     {
-        time
-        File::put('timer/diagnosis.txt','John Doe');
+
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
+        $date->setTimezone('America/Lima');
+        $date = $date->format('d-m-Y H:i:s');
+        $data = ['Inicio de diagnóstico: '.$date];
+        File::append('timer/diagnosis.txt', $data);
+
+        $time_start = microtime(true);
+
         $patient = Patient::find($patientId);
         $patientName = $patient->surname.', '.$patient->name;
         $antecedents = Factor::where('type', 'A')->lists('name')->toJson();
         $symptoms = Factor::where('type', 'S')->lists('name')->toJson();
         $others = Factor::where('type', 'O')->lists('name')->toJson();
 
-        return view('diagnosis.index')->with(compact('patientName', 'antecedents', 'symptoms', 'others'));
+        return view('diagnosis.index')->with(compact('patientName', 'antecedents', 'symptoms', 'others','time_start'));
     }
 
     public function getAll(){
@@ -183,13 +190,18 @@ class DiagnosisController extends Controller
     public function forwardChaining( Request $request )
     {
         $factors = json_decode($request->factors);
+        $timer = json_decode($request->timer);
 
-        if( count($factors)==0 )
-            return ['success'=>'false','message'=>'Seleccione por menos un factor.'];
+        if( count($factors)==0 ) {
+            return ['success' => 'false', 'message' => 'Seleccione por menos un factor.'];
+        }
 
         $ruleFactors = RuleFactor::where('factor_id',$factors[0])->get();
-        if( count($ruleFactors)==0 )
-            return ['success'=>'false','message'=>'No existen una enfermedad asociada con los factores seleccionados.'];
+        if( count($ruleFactors)==0 ) {
+            return ['success' => 'false', 'message' => 'No existen una enfermedad asociada con los factores seleccionados.'];
+            $time_end = microtime(true);
+            File::append('timer/diagnosis.txt', ($time_end -$timer));
+        }
 
         // Getting all rules
         $rules = [];
@@ -210,6 +222,9 @@ class DiagnosisController extends Controller
             $i++;
         }
 
+        $time_end = microtime(true);
+        File::append('timer/diagnosis.txt', ($time_end -$timer));
+
         if ( count($possibleRules) == 0 )
             return ['success'=>'false','message'=>'No existe una enfermedad asociada a los factores seleccionados.'];
         else {
@@ -218,7 +233,6 @@ class DiagnosisController extends Controller
                 $rule = Rule::find($possibleRule);
                 $rules->push($rule);
             }
-
             return ['success'=>'true','data'=>$rules];
         }
     }
