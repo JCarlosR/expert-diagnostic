@@ -9,6 +9,9 @@ use App\Factor;
 use App\Http\Requests;
 use App\Medication;
 use App\Patient;
+use App\Rule;
+use App\RuleFactor;
+use App\RuleRecommendation;
 use App\Symptom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -62,6 +65,54 @@ class KnowledgeController extends Controller
         $others = Factor::where('type', 'O')->lists('name')->toJson();
 
         return view('knowledge.newRule')->with(compact('disease', 'antecedents', 'symptoms', 'others'));
+    }
+
+    public function postNewRule(Request $request){
+        $factores = json_decode($request->get('factores'));
+        $recomendaciones = json_decode($request->get('recomendaciones'));
+        $peso = json_decode($request->get('peso'));
+        $enfermedad = json_decode($request->get('enfermedad'));
+        //dd($peso);
+        if($enfermedad=="")
+        {
+            return response()->json(['error' => true, 'message' => 'Se debe especificar la enfermedad.']);
+        }
+        if($peso=="")
+        {
+            return response()->json(['error' => true, 'message' => 'Se debe especificar el peso de la regla.']);
+        }
+
+        $rule = Rule::where('disease_id', $enfermedad)->where('percentage', $peso)->where('enable', 1)->first();
+
+        if ($rule)
+        {
+            return response()->json(['error' => true, 'message' => 'Ya existe una regla para la misma enfermedad con el mismo peso.']);
+        }
+
+        // Primero guardar la regla (emfermedad y porcentaje)
+        $regla = Rule::create([
+            'disease_id' => $enfermedad,
+            'percentage' => $peso,
+            'enable' => 1
+        ]);
+
+        foreach ($factores as $factor)
+        {
+            RuleFactor::create([
+                'rule_id' => $regla->id,
+                'factor_id' => $factor->id
+            ]);
+        }
+
+        for ($i=0; $i<sizeof($recomendaciones); ++$i)
+        {
+            RuleRecommendation::create([
+                'rule_id' => $regla->id,
+                'medication_id' => $recomendaciones[$i]
+            ]);
+        }
+
+        return response()->json(['error' => false, 'message' => 'Se ha registrado correctamente la regla de conocimiento']);
     }
 
     public function getAssignMed($id)

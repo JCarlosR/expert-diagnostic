@@ -21,10 +21,43 @@ function principal() {
     $(document).on('click', '[data-delete]', removeFactor);
     $(document).on('click', '[data-delete]', removeFactor);
     $('#btn-new').on('click', reloadPage);
+    $('#btn-save').on('click', saveRule);
     
 }
 
 var factors = [];
+
+function saveRule() {
+    var recomendaciones = recommendations();
+    var enfermedad = $('#enfermedad').val();
+    var peso = $('#peso').val();
+    console.log('Factores');
+    console.log(factors);
+    console.log('Recomendaciones');
+    console.log(recomendaciones);
+    var data = [];
+    data.push({name: 'factores', value: JSON.stringify(factors)});
+    data.push({name: 'recomendaciones', value: JSON.stringify(recomendaciones)});
+    data.push({name: 'enfermedad', value: JSON.stringify(enfermedad)});
+    data.push({name: 'peso', value: JSON.stringify(peso)});
+    var url = $(this).data('url');
+    if (factors.length == 0 || recomendaciones.length == 0 || peso=='')
+        showmessage('No hay factores o recomendaciones seleccionados o el porcentaje esta vacío',1);
+    $.ajax({
+        url: url,
+        data: data,
+        method: 'POST',
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    })
+        .done(function( response ) {
+            if (response.error) {
+                showmessage(response.message,1);
+            } else {
+                showmessage(response.message,0);
+                
+            }
+        });
+}
 
 function addSymptom() {
     var sintoma = $('#sintoma').val();
@@ -38,7 +71,7 @@ function addSymptom() {
                 factors.push({nombre: data.name, id: data.id});
                 renderTemplateFactors(data.name, data.id);
             }else{
-                alert('Ya a ingresado este sintoma como factor.')
+                showmessage('Ya a ingresado este sintoma como factor',1);
             }
         }
 
@@ -58,7 +91,7 @@ function addAntecedent() {
                 factors.push({nombre: data.name, id: data.id});
                 renderTemplateFactors(data.name, data.id);
             }else{
-                alert('Ya a ingresado este antecedente como factor.')
+                showmessage('Ya a ingresado este antecedente como factor',1);
             }
         }
 
@@ -78,7 +111,7 @@ function addOther() {
                 factors.push({nombre: data.name, id: data.id});
                 renderTemplateFactors(data.name, data.id);
             }else{
-                alert('Ya a ingresado este antecedente como factor.')
+                showmessage('Ya a ingresado este antecedente como factor',1);
             }
         }
 

@@ -3,6 +3,7 @@
 @section('title','Asignar síntomas')
 
 @section('styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         .table
         {
@@ -107,6 +108,7 @@
                         </div>
                         <br>
                         <br>
+                        <input type="hidden" id="enfermedad" value="{{ $disease->id }}">
                         <div class="row">
                             <div class="col-md-4">
 
@@ -172,7 +174,7 @@
                                     Peso:
                                 </label><br><br>
                                 <div class="input-group col-md-9">
-                                    <input id="peso" name="peso" class="marco form-control" type="text">
+                                    <input id="peso" name="peso" class="marco form-control" type="number" step="1" min="0" max="100">
                                 </div>
                                 <button class="btn btn-success" id="addRecomendations" >Agregar recomendaciones</button>
                             </div>
@@ -183,7 +185,7 @@
                                 <button id="btn-new" class="btn btn-primary">Nueva regla</button>
                             </div>
                             <div class="col-md-4 text-center">
-                                <button class="btn btn-success">Guardar regla</button>
+                                <button id="btn-save" data-url="{{ url('guardar/regla') }}" class="btn btn-success">Guardar regla</button>
                             </div>
                             <div class="col-md-4 text-center">
                                 <a href="{{ url('/conocimiento') }}" class="btn btn-danger">Volver</a>

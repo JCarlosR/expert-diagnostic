@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // General Factor routes
     Route::get('/factor/nombre/{sintoma}', 'SymptomController@getSymptom');
+    
 
 // Antecedente routes
     Route::post('/antecedente/registrar', 'FactorController@postAntecedent');
@@ -66,6 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('desasignar/medicamento/{disease}/{medication}','KnowledgeController@getNotAssignMedication');
 
     Route::get('nueva-regla','KnowledgeController@newRule');
+
+    Route::post('guardar/regla','KnowledgeController@postNewRule');
 
     // Ayuda en línea
     Route::get('ayuda','HomeController@helpExpert');

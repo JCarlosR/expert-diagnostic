@@ -3,8 +3,7 @@ $(document).on('ready',principal);
 var $modalRecomendation;
 var added= [];
 
-function principal()
-{
+function principal(){
     $modalRecomendation = $('#modalRecomendation');
     $('#addRecomendations').on('click',modalRecomendation);
     $('#addRecomendationTable').on('click',addRecomendationTable);
@@ -17,8 +16,7 @@ function principal()
     });
 }
 
-function loadAutoCompleteLocations(data)
-{
+function loadAutoCompleteLocations(data){
     $('#recomendations').typeahead(
         {
             hint: true,
@@ -32,13 +30,11 @@ function loadAutoCompleteLocations(data)
     );
 }
 
-function modalRecomendation()
-{
+function modalRecomendation(){
     $modalRecomendation.modal('show');
 }
 
-function addRecomendationTable()
-{
+function addRecomendationTable(){
     var recomendation = $('#recomendations').val();
     if( recomendation.length == 0)    {
         showmessage('Seleccione recomendación',1);
@@ -67,16 +63,14 @@ function addRecomendationTable()
     });
 }
 
-function hasNotBeenAdded(recomendationId)
-{
+function hasNotBeenAdded(recomendationId){
     for( var i=0;i<added.length;i++)
         if( added[i]== recomendationId )
             return false;
     return true;
 }
 
-function takeout()
-{
+function takeout(){
     var recommendationId = $(this).parent().parent().attr('data-recommendation');
     var tr = $(this).parent().parent();
         tr.remove();
@@ -92,8 +86,7 @@ function deleteElement(  array, element ){
     array.splice(pos,1);
 }
 
-function showmessage( message, error )
-{
+function showmessage( message, error ){
     var icon = 'ti-thumb-up';
     var type = 'success';
     if( error==1 )
@@ -112,9 +105,7 @@ function showmessage( message, error )
     });
 }
 
-/*
 function recommendations()
 {
     return added;
 }
-*/
