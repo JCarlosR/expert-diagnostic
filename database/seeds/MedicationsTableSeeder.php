@@ -13,48 +13,60 @@ class MedicationsTableSeeder extends Seeder
     public function run()
     {
         Medication::create([
-            'name' => 'Gravol',
-            'description' => 'Para la prevención y tratamiento activo del mareo producido por movimiento, náuseas y vómitos postoperatorios, vértigo de Ménière, jaqueca y perturbaciones producidas por electrochoque y radioterapia.',
+            'name' => 'Mosquiteras',
+            'description' => 'Colocar mosquiteras en puertas y ventanas',
         ]);
-
         Medication::create([
-            'name' => 'Primperan',
-            'description' => 'Para prevenir las náuseas y vómitos retardados que pueden aparecer después de la quimioterapia.',
+            'name' => 'Eliminación de posibles criaderos',
+            'description' => 'Eliminación de las zonas de crías cercanas al domicilio del caso confirmado',
         ]);
-
         Medication::create([
-            'name' => 'Furoxona ',
-            'description' => 'Como agente secundario en el tratamiento del cólera causado por Vibrio cholerae.Como agente secundario en el tratamiento de diarreas bacterianas causadas por microorganismos sensibles a la furazolidona: Campylobacter jejuni, Enterobacter aerogenes, Escherichia coli, Proteus, Salmonella, Shigella y Staphylococcus.',
+            'name' => 'Prueba hematocrito',
+            'description' => 'Prueba hematocrito',
         ]);
-
         Medication::create([
-            'name' => 'Donamed',
-            'description' => 'Antidiarreico que reduce los movimientos y secreciones intestinales, lo que produce una disminución de las deposiciones liquidas.',
+            'name' => 'Plaquetas',
+            'description' => 'Plaquetas',
         ]);
-
         Medication::create([
-            'name' => 'Plidan compuesto',
-            'description' => 'Analgésico en afecciones del aparato digestivo como: Síndrome Espástico doloroso, Esofágico, Gástrico, Pilórico y Colitis. Afecciones de las vías biliares: Colitis hepática, Colecistitis, Síndrome postcolecistectomía.',
+            'name' => 'Recuento leucocitario',
+            'description' => 'recuento leucocitario',
         ]);
-
         Medication::create([
-            'name' => 'Buscapina',
-            'description' => 'Buscapina se utiliza para el tratamiento de los espasmos del tracto gastrointestinal, espasmos y trastornos de la motilidad (disquinesias) de las vías biliares y espasmos del tracto genitourinario, en adultos y niños mayores de 6 años.',
+            'name' => 'Asegurar acceso venoso',
+            'description' => 'Asegurar acceso venoso',
         ]);
-
         Medication::create([
-            'name' => 'Metronidazol',
-            'description' => 'Tratamiento de infecciones bacterianas graves por anaerobios susceptibles (infecciones aeróbicas y anaeróbicas mixtas, se podrá utilizar conjuntamente con un antimicrobiano para la infección aeróbica. Es eficaz en infecciones por Bacteroides fragilis, resistente a la clindamicina, cloranfenicol y penicilina).Infecciones intra-abdominales, peritonitis, abscesos intraabdominales, abscesos hepáticos, causados por Bacteroides sp, incluyendo el grupo de B. fragilis (B. fragilis, B. distasonis, B. ovatus, B. vul­gatus), Clostridium sp, Eubacterium sp, Peptococcus niger y Peptostreptococcus sp.',
+            'name' => 'Fluidoterapia con cristaloides',
+            'description' => 'Fluidoterapia con cristaloides',
         ]);
-
         Medication::create([
-            'name' => 'Flagyl',
-            'description' => 'Está indicado en la profilaxis de infecciones colónicas perioperatorias y en el tratamiento de infecciones bacterianas anaeróbicas, amebiasis y tricomoniasis.',
+            'name' => 'Descanso',
+            'description' => 'Reposo en cama',
         ]);
-
         Medication::create([
-            'name' => 'Antalgina',
-            'description' => 'Es un analgésico y antipirético de gran efectividad. Su actividad antiflogística es semejante a la del ácido acetil salicílico. Su toxicidad es diez veces menor que la del piramidón y productos de esta serie. Antalgina es eficaz en todos lo estados patológicos que transcurren con fiebre o dolor, produciendo rápido alivio de estos síntomas, aún en los casos más rebeldes.',
+            'name' => 'Hidratación',
+            'description' => 'Ingesta de bastante líquido, jugos o rehidratantes.',
+        ]);
+        Medication::create([
+            'name' => 'Paracetamol 1g/6h',
+            'description' => 'Paracetamol 1g/6h',
+        ]);
+        Medication::create([
+            'name' => 'Antitermicos, Analgesico',
+            'description' => 'Antitermicos y/o Analgesico',
+        ]);
+        Medication::create([
+            'name' => 'No se recomienda Acido Acetilsalicilico',
+            'description' => 'INo se recomienda Acido Acetilsalicilico.',
+        ]);
+        Medication::create([
+            'name' => 'Seguimiento adecuado y persistente',
+            'description' => 'Seguimiento adecuado y persistente',
+        ]);
+        Medication::create([
+            'name' => 'Usar perservativos en los hombres con antecedentes de ZIKA',
+            'description' => 'Usar perservativos en los hombres con antecedentes de ZIKA',
         ]);
 
     }
