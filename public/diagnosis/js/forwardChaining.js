@@ -161,8 +161,10 @@ function newDiagnostic()
 
 function forwardChaining()
 {
-    if( factors.length )
-        showmessage('Debe seleccionar por lo menos un factor.',1);
+    if( factors.length == 0 ) {
+        showmessage('Debe seleccionar por lo menos un factor.', 1);
+        return;
+    }
     var data = JSON.stringify(factors);
 
     $.ajax({
@@ -176,17 +178,9 @@ function forwardChaining()
     }).done(function(data) {
         if( data.success == 'true' )
         {
-            if( hasNotBeenAdded(data.data.id)  ){
-                factors.push(data.data.id);
-                var toAppend =
-                    '<tr data-factorId="'+data.data.id+'">' +
-                    '<td>'+data.data.name+'</td>'+
-                    '<td><button data-takeout class="btn btn-danger">Quitar</button></td>'+
-                    '</tr>';
-                $('#factorList').append(toAppend);
-            }
-            else
-                showmessage('El factor ya ha sido agregado a la lista.',1);
+            $.each(data.data,function(key,value){
+                showmessage(value.percentage+'%'+value.disease_name,0);
+            })
         }else
             showmessage(data.message,1);
     });

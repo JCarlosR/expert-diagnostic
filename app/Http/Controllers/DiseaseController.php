@@ -13,7 +13,7 @@ class DiseaseController extends Controller
 {
     public function index()
     {
-        $diseases = Disease::orderby('name','asc')->simplePaginate(3);
+        $diseases = Disease::orderby('name','asc')->simplePaginate(4);
         return view('diseases.index')->with(compact(['diseases']));
     }
     
