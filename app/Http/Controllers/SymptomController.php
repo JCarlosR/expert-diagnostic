@@ -122,4 +122,9 @@ class SymptomController extends Controller
 
     }
 
+    public function getSymptom($sintoma){
+        $symptom = Factor::where('name', $sintoma)->first(['id', 'name']);
+        return $symptom;
+    }
+
 }

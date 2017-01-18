@@ -17,19 +17,19 @@ class FactorsTableSeeder extends Seeder
             'name'=>'Prueba del torniquete',
             'descripcion'=>'',
             'type'=>'O',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Edad',
             'descripcion'=>'',
             'type'=>'O',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Género',
             'descripcion'=>'',
             'type'=>'O',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
 
         // SÍNTOMAS
@@ -37,50 +37,50 @@ class FactorsTableSeeder extends Seeder
             'name'=>'Fiebre mayor a 39°C',
             'descripcion'=>'Fiebre',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Fiebre mayor a 38°C',
             'descripcion'=>'Fiebre',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Fiebre mayor a 37°C',
             'descripcion'=>'Fiebre',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
 
         Factor::create([
             'name'=>'Artromialgia',
             'descripcion'=>'',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Rash',
             'descripcion'=>'',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Hemorragia',
             'descripcion'=>'',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Dolor de espalda difuso',
             'descripcion'=>'',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
 
         Factor::create([
             'name'=>'Erupción maculopapular',
             'descripcion'=>'',
             'type'=>'S',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
 
         //ANTECEDENTES
@@ -88,19 +88,19 @@ class FactorsTableSeeder extends Seeder
             'name'=>'Contacto con contagiados',
             'descripcion'=>'',
             'type' => 'A',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Viajes o Vivir a zonas endémicas',
             'descripcion'=>'',
             'type' => 'A',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
         Factor::create([
             'name'=>'Relaciones sexuales con contagiados',
             'descripcion'=>'',
             'type' => 'A',
-            'imagen'=>''
+            'imagen'=>'0.png'
         ]);
     }
 }

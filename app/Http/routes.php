@@ -20,6 +20,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('factores/{factorName}', 'DiagnosisController@factorNombresId');
 
+// General Factor routes
+    Route::get('/factor/nombre/{sintoma}', 'SymptomController@getSymptom');
+
 // Antecedente routes
     Route::post('/antecedente/registrar', 'FactorController@postAntecedent');
     Route::post('/antecedente/modificar', 'FactorController@putAntecedent');

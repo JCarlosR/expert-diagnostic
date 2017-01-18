@@ -14,6 +14,119 @@ function principal() {
     $('[data-assign]').on('click', mostrarAsignar);
     $('[data-assignMed]').on('click', mostrarAsignarMed);
     $('[data-watch]').on('click', mostrarVideo);
+
+    $('#symptom').on('click', addSymptom);
+    $('#antecedent').on('click', addAntecedent);
+    $('#other').on('click', addOther);
+    $(document).on('click', '[data-delete]', removeFactor);
+    $(document).on('click', '[data-delete]', removeFactor);
+    $('#btn-new').on('click', reloadPage);
+    
+}
+
+var factors = [];
+
+function addSymptom() {
+    var sintoma = $('#sintoma').val();
+    $.getJSON('../../factor/nombre/'+sintoma, function (data) {
+        console.log(data);
+        if (factors.length == 0) {
+            factors.push({nombre: data.name, id: data.id});
+            renderTemplateFactors(data.name, data.id);
+        }else{
+            if (dontRepeat(data.id)){
+                factors.push({nombre: data.name, id: data.id});
+                renderTemplateFactors(data.name, data.id);
+            }else{
+                alert('Ya a ingresado este sintoma como factor.')
+            }
+        }
+
+    });
+    console.log(factors);
+}
+
+function addAntecedent() {
+    var antecedente = $('#antecedente').val();
+    $.getJSON('../../factor/nombre/'+antecedente, function (data) {
+        console.log(data);
+        if (factors.length == 0) {
+            factors.push({nombre: data.name, id: data.id});
+            renderTemplateFactors(data.name, data.id);
+        }else{
+            if (dontRepeat(data.id)){
+                factors.push({nombre: data.name, id: data.id});
+                renderTemplateFactors(data.name, data.id);
+            }else{
+                alert('Ya a ingresado este antecedente como factor.')
+            }
+        }
+
+    });
+    console.log(factors);
+}
+
+function addOther() {
+    var otro = $('#otro').val();
+    $.getJSON('../../factor/nombre/'+otro, function (data) {
+        console.log(data);
+        if (factors.length == 0) {
+            factors.push({nombre: data.name, id: data.id});
+            renderTemplateFactors(data.name, data.id);
+        }else{
+            if (dontRepeat(data.id)){
+                factors.push({nombre: data.name, id: data.id});
+                renderTemplateFactors(data.name, data.id);
+            }else{
+                alert('Ya a ingresado este antecedente como factor.')
+            }
+        }
+
+    });
+    console.log(factors);
+}
+
+function removeFactor() {
+    console.log('ENTER');
+    var $tr = $(this).parents('tr');
+    var id = $(this).data('delete');
+    factorDelete(id);
+    $tr.remove();
+}
+
+function factorDelete(id) {
+    for (var i = 0; i<factors.length; ++i) {
+        if (factors[i].id == id) {
+            factors.splice(i, 1);
+            return;
+        }
+    }
+}
+
+function dontRepeat(factor) {
+    for (var i = 0; i<factors.length; ++i){
+        if ( factors[i].id == factor )
+            return false;
+    }
+    return true;
+}
+
+function reloadPage() {
+    location.reload();
+}
+
+function activateTemplate(id) {
+    var t = document.querySelector(id);
+    return document.importNode(t.content, true);
+}
+
+function renderTemplateFactors(name, id) {
+    var clone = activateTemplate('#template-factor');
+
+    clone.querySelector("[data-factor]").innerHTML = name;
+    clone.querySelector("[data-delete]").setAttribute('data-delete', id);
+
+    $('#table-factors').append(clone);
 }
 
 var asignados;

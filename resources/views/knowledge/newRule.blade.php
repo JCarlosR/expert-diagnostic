@@ -115,7 +115,7 @@
                                 </label><br><br>
                                 <div class="input-group col-md-9" style="margin-left: 10px">
                                     <div class="col-md-10"><input id="sintoma" name="sintoma" class="marco typeahead form-control" type="text"></div>
-                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                    <div class="col-md-2"><button class="btn btn-success" id="symptom"><i class="fa fa-check"></i></button></div>
                                 </div>
 
                             </div>
@@ -125,7 +125,7 @@
                                 </label><br><br>
                                 <div class="input-group col-md-9">
                                     <div class="col-md-10"><input id="antecedente" name="antecedente" class="marco typeahead form-control" type="text"></div>
-                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                    <div class="col-md-2"><a class="btn btn-success" id="antecedent"><i class="fa fa-check"></i></a></div>
                                 </div>
 
                             </div>
@@ -135,7 +135,7 @@
                                 </label><br><br>
                                 <div class="input-group col-md-9">
                                     <div class="col-md-10"><input id="otro" name="otro" class="marco typeahead form-control" type="text"></div>
-                                    <div class="col-md-2"><a class="btn btn-success"><i class="fa fa-check"></i></a></div>
+                                    <div class="col-md-2"><a class="btn btn-success" id="other"><i class="fa fa-check"></i></a></div>
                                 </div>
                             </div>
                         </div>
@@ -156,11 +156,11 @@
                                             <tr>
                                                 <td data-factor></td>
                                                 <td>
-                                                    <button data-delete type="button" class="btn btn-danger">Quitar</button>
+                                                    <a data-delete class="btn btn-danger">Quitar</a>
                                                 </td>
                                             </tr>
                                         </template>
-                                        <tbody id="table-items">
+                                        <tbody id="table-factors">
                                         {{-- Load with javascript --}}
 
                                         </tbody>
@@ -180,13 +180,13 @@
                         <br><br>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <button class="btn btn-primary">Nueva regla</button>
+                                <button id="btn-new" class="btn btn-primary">Nueva regla</button>
                             </div>
                             <div class="col-md-4 text-center">
                                 <button class="btn btn-success">Guardar regla</button>
                             </div>
                             <div class="col-md-4 text-center">
-                                <button class="btn btn-danger">Volver</button>
+                                <a href="{{ url('/conocimiento') }}" class="btn btn-danger">Volver</a>
                             </div>
                         </div>
                         {{--<div class="row">

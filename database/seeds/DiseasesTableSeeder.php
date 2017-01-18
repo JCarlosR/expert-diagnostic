@@ -14,28 +14,28 @@ class DiseasesTableSeeder extends Seeder
     {
         Disease::create([
             'name'=>'Dengue hemorrágico',
-            'image'=>'',
+            'image'=>'0.png',
             'video'=>'https://www.youtube.com/embed/m_spiNknXN0',
             'description'=>''
         ]);
 
         Disease::create([
             'name'=>'Dengue clásico',
-            'image'=>'',
+            'image'=>'0.png',
             'video'=>'https://www.youtube.com/embed/m_spiNknXN0',
             'description'=>''
         ]);
 
         Disease::create([
             'name'=>'Chikungunya',
-            'image'=>'',
+            'image'=>'0.png',
             'video'=>'https://www.youtube.com/embed/m_spiNknXN0',
             'description'=>''
         ]);
 
         Disease::create([
             'name'=>'Zika',
-            'image'=>'',
+            'image'=>'0.png',
             'video'=>'https://www.youtube.com/embed/m_spiNknXN0',
             'description'=>''
         ]);
