@@ -91,7 +91,7 @@ class FactorsTableSeeder extends Seeder
             'imagen'=>''
         ]);
         Factor::create([
-            'name'=>'Viajes/Vivir a zonas endémicas',
+            'name'=>'Viajes o Vivir a zonas endémicas',
             'descripcion'=>'',
             'type' => 'A',
             'imagen'=>''

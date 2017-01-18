@@ -18,6 +18,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/symptom/modificar', 'SymptomController@putSymptom');
     Route::post('/symptom/eliminar', 'SymptomController@deleteSymptom');
 
+    Route::get('factores/{factorName}', 'DiagnosisController@factorNombresId');
+
 // Antecedente routes
     Route::post('/antecedente/registrar', 'FactorController@postAntecedent');
     Route::post('/antecedente/modificar', 'FactorController@putAntecedent');
@@ -49,7 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('diagnostico/enfermedades','DiagnosisController@diseases');
     Route::get('enfermedades/medicamentos/{disease_id}','DiagnosisController@medication');
     Route::get('enfermedades/{id}/sintomas','DiagnosisController@symptomsByDisease');
-    
+
+    Route::post('diagnostico/forwardChaining','DiagnosisController@forwardChaining');
+
 // Knowledge-base routes
     Route::get('conocimiento','KnowledgeController@index');
     Route::get('asignar/sintomas/{id}','KnowledgeController@getAssign');
