@@ -14,4 +14,9 @@ class Medication extends Model
     {
         return $this->belongsToMany('App\Disease');
     }
+
+    public function rule_recommendations()
+    {
+        return $this->hasMany('App\RuleRecommendation');
+    }
 }

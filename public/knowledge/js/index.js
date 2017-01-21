@@ -1,15 +1,15 @@
 $(document).on('ready', principal);
 
 var $modalEliminar;
-var $modalAsignarMed;
-var $modalWatch;
+var $modalRecomendacion;
+var $modalFactor;
 
 function principal() {
     $('.mytable').footable();
 
     $modalEliminar = $('#modalEliminar');
-    $modalAsignarMed = $('#modalAsignarMed');
-    $modalWatch = $('#modalWatch');
+    $modalRecomendacion = $('#modalRecomendacion');
+    $modalFactor = $('#modalFactor');
 
     $('[data-assign]').on('click', mostrarAsignar);
     $('[data-assignMed]').on('click', mostrarAsignarMed);
@@ -20,6 +20,8 @@ function principal() {
     $('#other').on('click', addOther);
     $(document).on('click', '[data-delete]', removeFactor);
     $(document).on('click', '[data-eliminar]', showModalEliminar);
+    $(document).on('click', '[data-recommendation]', showModalRecomendacion);
+    $(document).on('click', '[data-factors]', showModalfactors);
     $('#btn-new').on('click', reloadPage);
     $('#btn-save').on('click', saveRule);
     $('[data-rules]').on('click', showRules);
@@ -28,6 +30,40 @@ function principal() {
 }
 
 var rules = [];
+var recommedations = [];
+var factores = [];
+
+function showModalRecomendacion() {
+    recommedations.length=0;
+    var rule = $(this).data('recommendation');
+    $.getJSON('recommendations/rule/'+rule, function (data) {
+        $('#table-recommendations').html("");
+        for ( var i=0; i<data.length; ++i ) {
+
+            recommedations.push({recomendacion: data[i].recommendations.name, descripcion: data[i].recommendations.description });
+            renderTemplateRecommendation(data[i].recommendations.name, data[i].recommendations.description);
+        }
+        console.log(data);
+    });
+
+    $modalRecomendacion.modal('show');
+}
+
+function showModalfactors() {
+    factores.length=0;
+    var factor = $(this).data('factors');
+    $.getJSON('factors/rule/'+factor, function (data) {
+        $('#table-factors').html("");
+        for ( var i=0; i<data.length; ++i ) {
+
+            factores.push({factor: data[i].factors.name });
+            renderTemplateFactor(data[i].factors.name);
+        }
+        console.log(data);
+    });
+
+    $modalFactor.modal('show');
+}
 
 function showModalEliminar() {
     console.log("ENTRE");
@@ -237,6 +273,25 @@ function renderTemplateRules(rule_id, disease_name, disease_id, porcentaje) {
     clone.querySelector("[data-eliminar]").setAttribute('data-porcentaje', porcentaje);
 
     $('#table-rules').append(clone);
+}
+
+function renderTemplateRecommendation(recomendacion, descripcion) {
+
+    var clone = activateTemplate('#template-recommendation');
+
+    clone.querySelector("[data-recomendacion]").innerHTML = recomendacion;
+    clone.querySelector("[data-descripcion]").innerHTML = descripcion;
+
+    $('#table-recommendations').append(clone);
+}
+
+function renderTemplateFactor(factor) {
+
+    var clone = activateTemplate('#template-factor');
+
+    clone.querySelector("[data-factor]").innerHTML = factor;
+
+    $('#table-factors').append(clone);
 }
 
 var asignados;
