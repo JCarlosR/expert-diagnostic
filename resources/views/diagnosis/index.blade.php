@@ -162,7 +162,7 @@
                                 <button class="btn btn-primary" id="newDiagnostic">Nuevo diagnostico</button>
                             </div>
                             <div class="col-md-3 text-center">
-                                <button class="btn btn-success" id="forwardChaining">Diagnosticar</button>
+                                <button class="btn btn-success" id="forwardChaining" data-timer="{{$time_start}}">Diagnosticar</button>
                             </div>
                             <div class="col-md-3 text-center">
                                 <button class="btn btn-success">Guardar diagnostico</button>

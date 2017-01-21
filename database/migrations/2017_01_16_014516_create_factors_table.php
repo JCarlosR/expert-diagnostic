@@ -15,7 +15,7 @@ class CreateFactorsTable extends Migration
         Schema::create('factors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->string('type');
             $table->string('imagen');
             $table->timestamps();

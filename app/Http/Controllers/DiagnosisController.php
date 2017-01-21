@@ -9,10 +9,12 @@ use App\Factor;
 use App\Http\Requests;
 use App\Medication;
 use App\Patient;
+use App\Rule;
+use App\RuleFactor;
 use App\Symptom;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Validator;
 
 class DiagnosisController extends Controller
 {
@@ -33,13 +35,22 @@ class DiagnosisController extends Controller
      */
     public function index( $patientId )
     {
+
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
+        $date->setTimezone('America/Lima');
+        $date = $date->format('d-m-Y H:i:s');
+        $data = ['Inicio de diagnóstico: '.$date];
+        File::append('timer/diagnosis.txt', $data);
+
+        $time_start = microtime(true);
+
         $patient = Patient::find($patientId);
         $patientName = $patient->surname.', '.$patient->name;
         $antecedents = Factor::where('type', 'A')->lists('name')->toJson();
         $symptoms = Factor::where('type', 'S')->lists('name')->toJson();
         $others = Factor::where('type', 'O')->lists('name')->toJson();
 
-        return view('diagnosis.index')->with(compact('patientName', 'antecedents', 'symptoms', 'others'));
+        return view('diagnosis.index')->with(compact('patientName', 'antecedents', 'symptoms', 'others','time_start'));
     }
 
     public function getAll(){
@@ -178,10 +189,76 @@ class DiagnosisController extends Controller
 
     public function forwardChaining( Request $request )
     {
-        $datos = json_decode($request->factors);
-        foreach ( $datos as $dato ) {
+        $factors = json_decode($request->factors);
+        $timer = json_decode($request->timer);
 
+        if( count($factors)==0 ) {
+            return ['success' => 'false', 'message' => 'Seleccione por menos un factor.'];
+        }
+
+        $ruleFactors = RuleFactor::where('factor_id',$factors[0])->get();
+        if( count($ruleFactors)==0 ) {
+            return ['success' => 'false', 'message' => 'No existen una enfermedad asociada con los factores seleccionados.'];
+            $time_end = microtime(true);
+            File::append('timer/diagnosis.txt', ($time_end -$timer));
+        }
+
+        // Getting all rules
+        $rules = [];
+        foreach ($ruleFactors as $ruleFactor )
+            $rules [] = $ruleFactor->rule_id;
+
+        // A rule with all their associated factors
+        $ruleWithFactors = [];
+        foreach ( $rules as $rule )
+            $ruleWithFactors[$rule] = $this->getFactors($rule);
+
+        // Rules associated with the selected factors
+        $possibleRules = [];
+        $i = 0;
+        foreach ( $ruleWithFactors as $ruleWithFactor ) {
+            if( $this->areFactorsInRule( $ruleWithFactor,$factors ) )
+                $possibleRules [] = $rules[$i];
+            $i++;
+        }
+
+        $time_end = microtime(true);
+        File::append('timer/diagnosis.txt', ($time_end -$timer));
+
+        if ( count($possibleRules) == 0 )
+            return ['success'=>'false','message'=>'No existe una enfermedad asociada a los factores seleccionados.'];
+        else {
+            $rules = collect();
+            foreach ( $possibleRules as $possibleRule ) {
+                $rule = Rule::find($possibleRule);
+                $rules->push($rule);
+            }
+            return ['success'=>'true','data'=>$rules];
         }
     }
 
+    public function getFactors( $ruleId )
+    {
+        $factors = [];
+        $ruleFactors = RuleFactor::where('rule_id',$ruleId)->get();
+        foreach ( $ruleFactors as $ruleFactor )
+            $factors [] =  $ruleFactor->factor_id;
+        return $factors;
+    }
+
+    public function areFactorsInRule( $ruleWithFactor,$factors )
+    {
+        for( $i=0;$i<count($factors);$i++ )
+            if( !$this->insideArray($ruleWithFactor,$factors[$i]) )
+                return false;
+        return true;
+    }
+
+    public function insideArray( $array,$element )
+    {
+        for( $i=0;$i<count($array);$i++ )
+            if( $array[$i] == $element )
+                return true;
+        return false;
+    }
 }

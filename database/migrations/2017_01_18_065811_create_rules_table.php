@@ -17,7 +17,7 @@ class CreateRulesTable extends Migration
             $table->integer('disease_id')->unsigned();
             $table->foreign('disease_id')->references('id')->on('diseases');
             $table->integer('percentage');
-            $table->integer('enable')->unsigned();
+            $table->integer('enable')->default(1)->unsigned();
             $table->timestamps();
         });
     }
