@@ -240,7 +240,7 @@
 
 @section('scripts')
     <!-- Promise.finally support -->
-    <script src="https://cdn.jsdelivr.net/promise.prototype.finally/1.0.1/finally.js"></script>
+    <script src="{{ asset('diagnosis/js/finally.js') }}"></script>
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead.bundle.js') }}"></script>
     <script src="{{ asset('diagnosis/js/forwardChaining.js') }}"></script>

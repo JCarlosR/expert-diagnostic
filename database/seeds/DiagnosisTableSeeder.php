@@ -16,19 +16,19 @@ class DiagnosisTableSeeder extends Seeder
         // DENGUE HEMORRÁGICO
         Rule::create([
             'disease_id'=>1,
-            'porcentage'=>90
+            'percentage'=>90
         ]);
 
         //ZIKA
         Rule::create([
             'disease_id'=>4,
-            'porcentage'=>95
+            'percentage'=>95
         ]);
 
         //CHIKUNGUNYA
         Rule::create([
             'disease_id'=>3,
-            'porcentage'=>99.9
+            'percentage'=>99.9
         ]);
 
         // DENGUE HEMORRÁGICO 90%
