@@ -31,5 +31,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(FactorsTableSeeder::class);
 
+        $this->call(DiagnosisTableSeeder::class);
+
     }
 }

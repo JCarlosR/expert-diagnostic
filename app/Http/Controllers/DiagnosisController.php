@@ -177,7 +177,6 @@ class DiagnosisController extends Controller
     }
 
     //  EXPERT SYSTEM MODIFIED
-
     public function factorNombresId($factorName)
     {
         $factor = Factor::where('name',$factorName)->get(['id','name'])->first();
@@ -192,6 +191,10 @@ class DiagnosisController extends Controller
         $factors = json_decode($request->factors);
         $timer = json_decode($request->timer);
 
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
+        $date->setTimezone('America/Lima');
+        $date = $date->format('d-m-Y H:i:s');
+
         if( count($factors)==0 ) {
             return ['success' => 'false', 'message' => 'Seleccione por menos un factor.'];
         }
@@ -200,7 +203,8 @@ class DiagnosisController extends Controller
         if( count($ruleFactors)==0 ) {
             return ['success' => 'false', 'message' => 'No existen una enfermedad asociada con los factores seleccionados.'];
             $time_end = microtime(true);
-            File::append('timer/diagnosis.txt', ($time_end -$timer));
+            File::append('timer/diagnosis.txt', '   Término de diagnóstico: '.$date);
+            File::append('timer/diagnosis.txt', '   Duración de diagnóstico: '.($time_end -$timer).' segundos');
         }
 
         // Getting all rules
@@ -222,11 +226,12 @@ class DiagnosisController extends Controller
             $i++;
         }
 
-        $time_end = microtime(true);
-        File::append('timer/diagnosis.txt', ($time_end -$timer));
-
-        if ( count($possibleRules) == 0 )
+        if ( count($possibleRules) == 0 ){
+            $time_end = microtime(true);
+            File::append('timer/diagnosis.txt', '   Término de diagnóstico: '.$date);
+            File::append('timer/diagnosis.txt', '   Duración de diagnóstico: '.($time_end - $timer).' segundos');
             return ['success'=>'false','message'=>'No existe una enfermedad asociada a los factores seleccionados.'];
+          }
         else {
             $rules = collect();
             foreach ( $possibleRules as $possibleRule ) {
@@ -260,5 +265,35 @@ class DiagnosisController extends Controller
             if( $array[$i] == $element )
                 return true;
         return false;
+    }
+
+
+    public function diseaseFactors($ruleId)
+    {
+        $ruleFactors = RuleFactor::where('rule_id',$ruleId)->get(['factor_id']);
+
+        return ['rule_id'=>$ruleId,'factorIds'=>$ruleFactors];
+    }
+
+    public function allFactors()
+    {
+        $factors = Factor::all();
+        return $factors;
+    }
+
+    public function writeTimer( Request $request )
+    {
+        $timer = json_decode($request->timer);
+        
+        $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
+        $date->setTimezone('America/Lima');
+        $date = $date->format('d-m-Y H:i:s');
+
+        $time_end = microtime(true);
+
+        File::append('timer/diagnosis.txt', '   Término de diagnóstico: '.$date);
+        File::append('timer/diagnosis.txt', '   Duración de diagnóstico: '.($time_end - $timer).' segundos');
+
+        return ['message'=>'Diagnóstico terminado.'];
     }
 }

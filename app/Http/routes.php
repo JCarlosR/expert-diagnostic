@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // General Factor routes
     Route::get('/factor/nombre/{sintoma}', 'SymptomController@getSymptom');
-    
+
 
 // Antecedente routes
     Route::post('/antecedente/registrar', 'FactorController@postAntecedent');
@@ -53,8 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('diagnostico-{patientId}','DiagnosisController@index');
     Route::get('diagnostico/all','DiagnosisController@getAll');
     Route::get('diagnostico/enfermedades','DiagnosisController@diseases');
+    Route::post('diagnostico/timer','DiagnosisController@writeTimer');
     Route::get('enfermedades/medicamentos/{disease_id}','DiagnosisController@medication');
     Route::get('enfermedades/{id}/sintomas','DiagnosisController@symptomsByDisease');
+    Route::get('enfermedades/factores/{ruleId}','DiagnosisController@diseaseFactors');
+    Route::get('enfermedades/factores','DiagnosisController@allFactors');
 
     Route::post('diagnostico/forwardChaining','DiagnosisController@forwardChaining');
 
@@ -63,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('asignar/sintomas/{id}','KnowledgeController@getAssign');
     Route::get('asignar/sintoma/{disease}/{symptom}','KnowledgeController@getAssignSymptom');
     Route::get('desasignar/sintoma/{disease}/{symptom}','KnowledgeController@getNotAssignSymptom');
-    
+
     Route::get('asignar/reglas/{disease}','KnowledgeController@getAssignRule');
 
     Route::get('asignar/medicamentos/{id}','KnowledgeController@getAssignMed');
@@ -82,4 +85,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('ayuda','HomeController@helpExpert');
 
 });
-

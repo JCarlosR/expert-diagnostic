@@ -1,7 +1,10 @@
 $(document).on('ready',principal);
 
 var factors= [];
-
+var ids = [];
+var names = [];
+var globalFactorsIds = [];
+var globalFactorsNames = [];
 function principal()
 {
     // SÍNTOMAS
@@ -17,6 +20,14 @@ function principal()
 
     $('#newDiagnostic').on('click',newDiagnostic);
     $('#forwardChaining').on('click',forwardChaining);
+
+    $.getJSON('./enfermedades/factores', function (data) {
+        $.each(data,function(key,value)
+        {
+            globalFactorsIds.push(value.id);
+            globalFactorsNames.push(value.name);
+        });
+    });
 }
 
 function sintomaAdd()
@@ -165,13 +176,12 @@ function forwardChaining()
         showmessage('Debe seleccionar por lo menos un factor.', 1);
         return;
     }
-    var timer = $(this).attr('data-timer');
     var data = JSON.stringify(factors);
 
     $.ajax({
         url: '../public/diagnostico/forwardChaining',
         method: 'POST',
-        data:{factors:data,timer:timer},
+        data:{factors:data},
         dataType:'json',
         headers : {
             'X-CSRF-TOKEN' : $('#_token').val()
@@ -179,11 +189,127 @@ function forwardChaining()
     }).done(function(data) {
         if( data.success == 'true' )
         {
+          ids   = [];
+          names = [];
             $.each(data.data,function(key,value){
-                showmessage(value.percentage+'%'+value.disease_name,0);
+                // Possible diseases
+                ids.push(value.id);
+                names.push(value.percentage+'%'+value.disease_name);
+
+                diagnose();
             })
+
         }else
             showmessage(data.message,1);
     });
 }
 
+// LOGIC EXPERT-DIAGNOSTIC
+
+// Associative array length
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+function diagnose() {
+    var diseaseFactors = [];
+    for (var i=0; i<ids.length; ++i) {
+        var disease_id = ids[i];
+        $.getJSON('./enfermedades/factores/'+disease_id, function (data) {
+            var arreglo = [];
+            $.each(data.factorIds,function(key,value)
+            {
+                arreglo.push(value.factor_id);
+            });
+
+            diseaseFactors[data.rule_id] = arreglo;
+            // When all the factors were loaded
+            if (Object.size(diseaseFactors) == ids.length) {
+                startDiagnoseQuestions(diseaseFactors);
+            }
+        });
+    }
+}
+
+function startDiagnoseQuestions(diseaseFactors) {
+    diagnoseDisease(0, diseaseFactors);
+}
+
+function diagnoseDisease(diagnose_position, diseaseFactors) {
+    if (diagnose_position == ids.length) {
+      var timer = $('#forwardChaining').attr('data-timer');
+
+      $.ajax({
+          url: '../public/diagnostico/timer',
+          method: 'POST',
+          data:{timer:timer},
+          dataType:'json',
+          headers : {
+              'X-CSRF-TOKEN' : $('#_token').val()
+          }
+      }).done(function(data) {
+          alert('Yes?');
+          return;
+      });
+      alert('yeah?');
+      return;
+    }
+    var disease_id = ids[diagnose_position];
+    var name = names[diagnose_position];
+    var symptoms = diseaseFactors[disease_id];
+
+    swal.setDefaults({
+        confirmButtonText: 'Sí, lo padezco',
+        cancelButtonText: 'No',
+        showCancelButton: true,
+        animation: false
+    });
+
+    var steps = [];
+    for (var i=0; i<symptoms.length; ++i) {
+        if (notSelectedSymptom(symptoms[i])) {
+            steps.push({
+                title: 'Usted presenta este factor?',
+                text: 'Factor: ' + factorName(symptoms[i])
+            });
+        }
+    }
+
+    swal.queue(steps).then(function () {
+        swal({
+            title: 'Usted presenta: '+name,
+            confirmButtonText: 'Entendido !',
+            showCancelButton: false
+        }).finally(function() {
+            swal.resetDefaults();
+            diagnoseDisease(diagnose_position+1, diseaseFactors);
+        });
+    }, function () {
+        swal({
+            title: 'Se ha descartado la enfermedad: '+name,
+            confirmButtonText: 'Entendido !',
+            showCancelButton: false
+        }).finally(function() {
+            swal.resetDefaults();
+            diagnoseDisease(diagnose_position+1, diseaseFactors);
+        });
+    })
+}
+
+function factorName(factorId) {
+    for (var i=0; i<globalFactorsIds.length; ++i) {
+        if (globalFactorsIds[i] == factorId)
+            return globalFactorsNames[i];
+    }
+}
+
+function notSelectedSymptom(symptom_id) {
+    for (var i=0; i<factors.length; ++i)
+        if (factors[i] == symptom_id)
+            return false;
+    return true;
+}
