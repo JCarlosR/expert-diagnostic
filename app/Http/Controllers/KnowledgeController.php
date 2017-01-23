@@ -131,6 +131,16 @@ class KnowledgeController extends Controller
         return $rules;
     }
 
+    public function getRecommendations($rule){
+        $recommendations = RuleRecommendation::where('rule_id', $rule)->with('rules')->with('recommendations')->get();
+        return $recommendations;
+    }
+
+    public function getFactors($rule){
+        $factors = RuleFactor::where('rule_id', $rule)->with('rules')->with('factors')->get();
+        return $factors;
+    }
+
     public function postDeleteRule(Request $request){
         //dd($request->get('nombreEliminar'));
         $rule = Rule::find($request->get('id'));

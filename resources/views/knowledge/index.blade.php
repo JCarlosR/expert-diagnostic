@@ -83,7 +83,7 @@
                                     <table class="table table-hover table-condensed">
                                         <thead>
                                         <tr>
-                                            <th>Regla</th>
+                                            <th>Enfermedad</th>
                                             <th>Porcentaje</th>
                                             <th>Acción</th>
                                         </tr>
@@ -114,55 +114,47 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <div id="modalAsignarMed" class="modal fade in">
+    <div id="modalRecomendacion" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 id="titulo" class="modal-title">Asignar medicamentos para la enfermedad <label id="diseaseMed"></label></h4>
+                    <h4 id="titulo" class="modal-title"> Recomendaciones de la enfermedad <label id="diseaseRec"></label></h4>
                 </div>
 
                 <div class="modal-body">
                     <div class="row">
                         <input type="hidden" data-diseasemed="" id="enfermedadMed">
-                        <div class="col-md-5">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Listado de Medicamentos</h4>
+                                    <h4 class="title">Listado de Recomendaciones</h4>
                                 </div>
                                 <div class="content">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                        <input type="text" id="search" value="" class="form-control" placeholder="Search...">
-                                    </div>
-                                    <div id="noAsignadosMed" class="panel-body">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="botones col-md-2">
-                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-left" onclick="asignarMed();">Mover
-                                <span class="btn-label"><i class="ti-angle-right"></i></span></button>
-                            <br>
-                            <br>
-                            <button type="button" class="btn btn-wd btn-default btn-fill btn-move-right" onclick="devolverMed();">
-                                <span class="btn-label"><i class="ti-angle-left"></i></span>  Remover</button>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">Medicamentos Agregados</h4>
-                                </div>
-                                <div class="content">
-                                    <div id="asignadosMed" class="panel-body">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Recomendación</th>
+                                            <th>Descripción</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-recommendation">
+                                            <tr>
+                                                <td data-recomendacion></td>
+                                                <td data-descripcion></td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-recommendations">
+                                        {{-- Load with javascript --}}
 
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -201,21 +193,44 @@
         </div>
     </div>
 
-    <div id="modalWatch" class="modal fade in">
+    <div id="modalFactor" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" name=""><span name="title"></span> </h4>
-                </div>
-                <div class="modal-body">
-                    <iframe width="854" id="iframe" height="480" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="modal-footer">
-                    <div class="form-group text-center">
-                        <button class="btn btn-primary" id="exit" ><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
-                    </div>
+                    <h4 id="titulo" class="modal-title"> Factores de la enfermedad <label id="diseaseRec"></label></h4>
                 </div>
 
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" data-diseasemed="" id="enfermedadMed">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Listado de Factores</h4>
+                                </div>
+                                <div class="content">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Factor</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-factor">
+                                            <tr>
+                                                <td data-factor></td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-factors">
+                                        {{-- Load with javascript --}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

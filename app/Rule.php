@@ -25,4 +25,16 @@ class Rule extends Model
         return $this->belongsTo('App\Disease', 'disease_id');
     }
 
+    public function rule_recommendations()
+    {
+        return $this->hasMany('App\RuleRecommendation', 'rule_id');
+    }
+
+    public function rule_factors()
+    {
+        return $this->hasMany('App\RuleFactor', 'rule_id');
+    }
+    
+    
+
 }

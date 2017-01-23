@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('guardar/regla','KnowledgeController@postNewRule');
     Route::post('eliminar/regla','KnowledgeController@postDeleteRule');
     Route::get('rules/enfermedad/{disease}','KnowledgeController@getRules');
+    Route::get('recommendations/rule/{rule}','KnowledgeController@getRecommendations');
+    Route::get('factors/rule/{rule}','KnowledgeController@getFactors');
 
     // Ayuda en línea
     Route::get('ayuda','HomeController@helpExpert');

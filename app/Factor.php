@@ -15,4 +15,9 @@ class Factor extends Model
         return $this->belongsToMany('App\Disease');
     }
 
+    public function rule_factors()
+    {
+        return $this->hasMany('App\RuleFactor', 'factor_id');
+    }
+
 }
