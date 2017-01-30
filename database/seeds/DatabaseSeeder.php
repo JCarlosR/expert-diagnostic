@@ -15,23 +15,19 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UsersTableSeeder::class);
 
-
-        //Juarez
-        $this->call(SymptomsTableSeeder::class);
-
         $this->call(DiseasesTableSeeder::class);
 
         $this->call(PatientsTableSeeder::class);
 
         $this->call(MedicationsTableSeeder::class);
 
-        //$this->call(DiseaseSymptomsTableSeeder::class);
-
-        //$this->call(DiseaseMedicationsSeeder::class);
-
         $this->call(FactorsTableSeeder::class);
 
-        $this->call(DiagnosisTableSeeder::class);
+        $this->call(RulesTableSeeder::class);
+
+        $this->call(RuleFactorsTableSeeder::class);
+
+        $this->call(RuleMedicationsTableSeeder::class);
 
     }
 }

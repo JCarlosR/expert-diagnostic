@@ -13,101 +13,150 @@ class FactorsTableSeeder extends Seeder
     public function run()
     {
         // OTROS FACTORES
+        // 1
         Factor::create([
             'name'=>'Prueba del torniquete',
             'descripcion'=>'La prueba de Rumpel-Leede, del lazo o de torniquete es una técnica que ofrece información sobre la fragilidad capilar, usada por ejemplo como diagnóstico diferencial para enfermedades como el dengue y otros trastornos hemorrágicos por aumento de la fragilidad.',
             'type'=>'O',
             'imagen'=>'1.jpg'
         ]);
+        
+        // 2
         Factor::create([
             'name'=>'Edad mayor a 50 años',
             'descripcion'=>'Edad mayor a 50 años',
             'type'=>'O',
             'imagen'=>'2.jpg'
         ]);
+        
+        // 3
         Factor::create([
             'name'=>'Género femenino',
             'descripcion'=>'Género femenino',
             'type'=>'O',
             'imagen'=>'3.jpg'
         ]);
+
+        // 4
         Factor::create([
             'name'=>'Género masculino',
-            'descripcion'=>'Género femenino',
+            'descripcion'=>'Género masculino',
+            'type'=>'O',
+            'imagen'=>'4.jpg'
+        ]);
+
+        // 5
+        Factor::create([
+            'name'=>'Leucopenia',
+            'descripcion'=>'Disminución del número de globulos blancos en la sangre, por debajo de 4 000 por milímetro cúbico.',
+            'type'=>'O',
+            'imagen'=>'4.jpg'
+        ]);
+
+        // 6
+        Factor::create([
+            'name'=>'Aumento hematocrito',
+            'descripcion'=>'Aumento de globulos blancos en la sangre.',
+            'type'=>'O',
+            'imagen'=>'4.jpg'
+        ]);
+
+        // 7
+        Factor::create([
+            'name'=>'Disminución plaquetas',
+            'descripcion'=>'Disminución plaquetas en la sangre.',
             'type'=>'O',
             'imagen'=>'4.jpg'
         ]);
 
         // SÍNTOMAS
+        // 8
         Factor::create([
             'name'=>'Fiebre mayor a 39°C',
             'descripcion'=>'Fiebre mayor a 39°C',
             'type'=>'S',
             'imagen'=>'5.jpg'
         ]);
+
+        // 9
         Factor::create([
-            'name'=>'Fiebre mayor a 38°C',
-            'descripcion'=>'Fiebre mayor a 38°C',
+            'name'=>'Artromialgia grave ',
+            'descripcion'=>'Dolor fuerte de las articulaciones',
             'type'=>'S',
             'imagen'=>'6.jpg'
         ]);
+
+        // 10
         Factor::create([
-            'name'=>'Fiebre mayor a 37°C',
-            'descripcion'=>'Fiebre mayor a 37°C',
+            'name'=>'Erupción máculopapular',
+            'descripcion'=>'Erupciones rojizas en la piel como sarpullido',
             'type'=>'S',
             'imagen'=>'7.jpg'
         ]);
 
+        // 11
         Factor::create([
-            'name'=>'Artromialgia',
-            'descripcion'=>'Se define como artromialgias a la presencia de dolor a nivel muscular y articular de carácter inespecífico, son de carácter intermitente, cambiantes, no asociadas a ningún esfuerzo físico o traumatismo.',
+            'name'=>'Dolor de espalda difuso',
+            'descripcion'=>'Dolor en la espalda que puede disminuir o aumentar paulatinamente.',
             'type'=>'S',
             'imagen'=>'8.jpg'
         ]);
+
+        // 12
         Factor::create([
             'name'=>'Rash',
-            'descripcion'=>'El rash es una erupción que se manifiesta con cambios en el color o la textura de la piel.',
+            'descripcion'=>'Erupción que se manifiesta con cambios en el color o la textura de la piel.',
             'type'=>'S',
             'imagen'=>'9.png'
         ]);
+
+        // 13
         Factor::create([
-            'name'=>'Hemorragia',
-            'descripcion'=>'Ees la salida de sangre desde el aparato circulatorio, provocada por la ruptura de vasos sanguíneos como venas, arterias o capilares.',
+            'name'=>'Temperatura superior a 38ºC',
+            'descripcion'=>'Temperatura superior a 38ºC.',
             'type'=>'S',
-            'imagen'=>'10.jpg'
-        ]);
-        Factor::create([
-            'name'=>'Dolor de espalda difuso',
-            'descripcion'=>'Se siente en un lado de la espalda o en el otro, aunque también puede ser bilateral. Los síntomas más frecuentes de la dorsalgia se encuentran en la zona superior de la espalda, entre los omóplatos, lo que muchos pacientes describen coloquialmente como "paletillas"',
-            'type'=>'S',
-            'imagen'=>'11.jpg'
+            'imagen'=>'12.jpg'
         ]);
 
+        // 14
         Factor::create([
-            'name'=>'Erupción maculopapular',
-            'descripcion'=>'Es un tipo de erupción, que no se eleva por encima de la superficie de la piel. Contiene máculas, que són unas mancha en la piel descoloridas y las pápulas, que són unas protuberancias pequeñas sólidas, que causan la inflamación de la piel. No contienen pús y són eritematosas, ya que hacen que la piel se vuelva de un color rojo.',
+            'name'=>'Hemorragias',
+            'descripcion'=>'Sangrado por diferentes ludares del cuerpo',
             'type'=>'S',
             'imagen'=>'12.jpg'
         ]);
 
         //ANTECEDENTES
+        // 15
         Factor::create([
             'name'=>'Contacto con contagiados',
             'descripcion'=>'Contacto con contagiados',
             'type' => 'A',
             'imagen'=>'13.jpg'
         ]);
+
+        // 16
         Factor::create([
             'name'=>'Viajes o Vivir a zonas endémicas',
             'descripcion'=>'Viajes o Vivir a zonas endémicas',
             'type' => 'A',
             'imagen'=>'14.jpg'
         ]);
+
+        // 17
         Factor::create([
             'name'=>'Relaciones sexuales con contagiados',
             'descripcion'=>'Relaciones sexuales con contagiados',
             'type' => 'A',
             'imagen'=>'15.jpg'
+        ]);
+
+        // 18
+        Factor::create([
+            'name'=>'Fiebre mayor a 37°C',
+            'descripcion'=>'Fiebre mayor a 37°C',
+            'type'=>'S',
+            'imagen'=>'5.jpg'
         ]);
     }
 }
