@@ -139,8 +139,10 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
+
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="input-group col-md-12">
                                     <table class="table table-hover table-condensed">
                                         <thead>
@@ -157,10 +159,10 @@
                                     <input type="hidden" id='_token' name="_token" value="{{ csrf_token() }}">
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Enfermedad</div>
-                                    <div class="panel-body text-center "  id="answers" >
+                            <div class="col-md-4 col-md-offset-1">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading text-center" style="font-size: 16px; font-weight: bold">Enfermedad</div>
+                                    <div class="panel-body text-center "  id="answer" >
 
                                     </div>
                                 </div>
@@ -186,52 +188,15 @@
         </div>
     </div>
 
-    <div id="modalDetalles" class="modal fade in">
+    <div id="modalRecommendation" class="modal fade in">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" ><span id="name_disease"></span></h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-10">
-                            <textarea name="description_disease" id="description_disease" class="form-control" rows="4"  readonly></textarea><br><br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-offset-4 col-md-4" id="image_disease">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <div class="text-center">
-                        <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-menu-up"></span> Salir</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalTratamiento" class="modal fade in">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"><span id="name_disease_treatment"></span></h4>
+                    <h3 class="modal-title">Recomendaciones</h3>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-offset-1 col-md-10">
-                            <iframe width="700" id="iframe" height="250" src="" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <h4>Prescripción médica</h4>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-8" id="medication">
+                        <div class="col-md-offset-2 col-md-8" id="recommendations">
 
                         </div>
                     </div>

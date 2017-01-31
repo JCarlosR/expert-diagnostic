@@ -10,6 +10,7 @@ use App\Medication;
 use App\Patient;
 use App\Rule;
 use App\RuleFactor;
+use App\RuleRecommendation;
 use App\Symptom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -283,6 +284,7 @@ class DiagnosisController extends Controller
     public function writeTimer( Request $request )
     {
         $timer = json_decode($request->timer);
+        $disease_id = json_decode($request->disease_id);
 
         $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
         $date->setTimezone('America/Lima');
@@ -294,5 +296,18 @@ class DiagnosisController extends Controller
         File::append('timer/diagnosis.txt', '   Duración de diagnóstico: '.($time_end - $timer).' segundos');
 
         return ['message'=>'Diagnóstico terminado.'];
+    }
+
+    public function diseaseRecommendations($ruleId)
+    {
+        $rules = RuleRecommendation::where('rule_id',$ruleId)->get();
+
+        $recommendations = collect();
+        foreach ( $rules as $rule ) {
+            $m = Medication::find($rule->medication_id);
+            $recommendations->push($m);
+        }
+
+        return $recommendations;
     }
 }

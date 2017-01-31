@@ -6,6 +6,7 @@ var names = [];
 var globalFactorsIds = [];
 var globalFactorsNames = [];
 var globalFactorsDescriptions = [];
+var $modalRecommendation;
 function principal()
 {
 
@@ -31,6 +32,9 @@ function principal()
 
     $('#newDiagnostic').on('click',newDiagnostic);
     $('#forwardChaining').on('click',forwardChaining);
+
+    $modalRecommendation = $('#modalRecommendation');
+    $('body').on('click','[data-recommendation]',modalRecommendation);
 }
 
 function sintomaAdd()
@@ -241,6 +245,7 @@ function diagnose() {
 }
 
 function startDiagnoseQuestions(diseaseFactors) {
+    $('#answer').html('');
     diagnoseDisease(0, diseaseFactors);
 }
 
@@ -257,9 +262,7 @@ function diagnoseDisease(diagnose_position, diseaseFactors) {
             headers : {
                 'X-CSRF-TOKEN' : $('#_token').val()
             }
-        }).done(function() {
-
-        });
+        }).done(function() { });
         return;
     }
 
@@ -302,7 +305,7 @@ function diagnoseDisease(diagnose_position, diseaseFactors) {
                     'X-CSRF-TOKEN' : $('#_token').val()
                 }
             }).done(function() {
-
+                $('#answer').append('<button class="btn btn-success" data-recommendation_name="'+name+'"  data-recommendation="'+disease_id+'">'+name+'</button>');
             });
             return;
             //diagnoseDisease(diagnose_position+1, diseaseFactors);
@@ -331,4 +334,21 @@ function notSelectedSymptom(symptom_id) {
         if (factors[i] == symptom_id)
             return false;
     return true;
+}
+
+function modalRecommendation()
+{
+    var recommendation = $(this).data('recommendation');
+    var recommendation_name = $(this).data('recommendation_name');
+    $('#name_recommendation').val(recommendation_name);
+    $('#recommendations').html('');
+
+    $.getJSON('./enfermedades/recomendaciones/'+recommendation, function (data) {
+        $.each(data,function(key,value)
+        {
+            $('#recommendations').append('<i class="fa fa-check"></i> '+value.description+'<br>');
+        });
+    });
+
+    $modalRecommendation.modal('show');
 }

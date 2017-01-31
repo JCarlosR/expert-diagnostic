@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('enfermedades/{id}/sintomas','DiagnosisController@symptomsByDisease');
     Route::get('enfermedades/factores/{ruleId}','DiagnosisController@diseaseFactors');
     Route::get('enfermedades/factores','DiagnosisController@allFactors');
+    Route::get('enfermedades/recomendaciones/{ruleId}','DiagnosisController@diseaseRecommendations');
 
     Route::post('diagnostico/forwardChaining','DiagnosisController@forwardChaining');
 
