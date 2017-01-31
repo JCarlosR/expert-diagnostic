@@ -6,7 +6,6 @@ use App\Disease;
 use App\DiseaseMedication;
 use App\DiseaseSymptom;
 use App\Factor;
-use App\Http\Requests;
 use App\Medication;
 use App\Patient;
 use App\Rule;
@@ -35,7 +34,6 @@ class DiagnosisController extends Controller
      */
     public function index( $patientId )
     {
-
         $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
         $date->setTimezone('America/Lima');
         $date = $date->format('d-m-Y H:i:s');
@@ -201,10 +199,10 @@ class DiagnosisController extends Controller
 
         $ruleFactors = RuleFactor::where('factor_id',$factors[0])->get();
         if( count($ruleFactors)==0 ) {
-            return ['success' => 'false', 'message' => 'No existen una enfermedad asociada con los factores seleccionados.'];
             $time_end = microtime(true);
             File::append('timer/diagnosis.txt', '   Término de diagnóstico: '.$date);
             File::append('timer/diagnosis.txt', '   Duración de diagnóstico: '.($time_end -$timer).' segundos');
+            return ['success' => 'false', 'message' => 'No existen una enfermedad asociada con los factores seleccionados.'];
         }
 
         // Getting all rules
@@ -230,7 +228,8 @@ class DiagnosisController extends Controller
             $time_end = microtime(true);
             File::append('timer/diagnosis.txt', '   Término de diagnóstico: '.$date);
             File::append('timer/diagnosis.txt', '   Duración de diagnóstico: '.($time_end - $timer).' segundos');
-            return ['success'=>'false','message'=>'No existe una enfermedad asociada a los factores seleccionados.'];
+
+            return ['success'=>'false','message'=>'No existe una enfermedad asociada a los factores seleccionados...'];
           }
         else {
             $rules = collect();
@@ -284,7 +283,7 @@ class DiagnosisController extends Controller
     public function writeTimer( Request $request )
     {
         $timer = json_decode($request->timer);
-        
+
         $date = Carbon::createFromFormat('Y-m-d H:i:s', new Carbon(), 'UTC');
         $date->setTimezone('America/Lima');
         $date = $date->format('d-m-Y H:i:s');

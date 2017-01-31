@@ -5,8 +5,19 @@ var ids = [];
 var names = [];
 var globalFactorsIds = [];
 var globalFactorsNames = [];
+var globalFactorsDescriptions = [];
 function principal()
 {
+
+    $.getJSON('./enfermedades/factores', function (data) {
+        $.each(data,function(key,value)
+        {
+            globalFactorsIds.push(value.id);
+            globalFactorsNames.push(value.name);
+            globalFactorsDescriptions.push(value.descripcion);
+        });
+    });
+
     // SÍNTOMAS
     $('#sintomaAdd').on('click',sintomaAdd);
 
@@ -20,14 +31,6 @@ function principal()
 
     $('#newDiagnostic').on('click',newDiagnostic);
     $('#forwardChaining').on('click',forwardChaining);
-
-    $.getJSON('./enfermedades/factores', function (data) {
-        $.each(data,function(key,value)
-        {
-            globalFactorsIds.push(value.id);
-            globalFactorsNames.push(value.name);
-        });
-    });
 }
 
 function sintomaAdd()
@@ -176,12 +179,14 @@ function forwardChaining()
         showmessage('Debe seleccionar por lo menos un factor.', 1);
         return;
     }
+
+    var timer = $('#forwardChaining').attr('data-timer');
     var data = JSON.stringify(factors);
 
     $.ajax({
         url: '../public/diagnostico/forwardChaining',
         method: 'POST',
-        data:{factors:data},
+        data:{factors:data,timer:timer},
         dataType:'json',
         headers : {
             'X-CSRF-TOKEN' : $('#_token').val()
@@ -241,23 +246,23 @@ function startDiagnoseQuestions(diseaseFactors) {
 
 function diagnoseDisease(diagnose_position, diseaseFactors) {
     if (diagnose_position == ids.length) {
-      var timer = $('#forwardChaining').attr('data-timer');
+        // CUANDO NO DETECTA NADA
+        var timer = $('#forwardChaining').attr('data-timer');
 
-      $.ajax({
-          url: '../public/diagnostico/timer',
-          method: 'POST',
-          data:{timer:timer},
-          dataType:'json',
-          headers : {
-              'X-CSRF-TOKEN' : $('#_token').val()
-          }
-      }).done(function(data) {
-          alert('Yes?');
-          return;
-      });
-      alert('yeah?');
-      return;
+        $.ajax({
+            url: '../public/diagnostico/timer',
+            method: 'POST',
+            data:{timer:timer},
+            dataType:'json',
+            headers : {
+                'X-CSRF-TOKEN' : $('#_token').val()
+            }
+        }).done(function() {
+
+        });
+        return;
     }
+
     var disease_id = ids[diagnose_position];
     var name = names[diagnose_position];
     var symptoms = diseaseFactors[disease_id];
@@ -274,7 +279,7 @@ function diagnoseDisease(diagnose_position, diseaseFactors) {
         if (notSelectedSymptom(symptoms[i])) {
             steps.push({
                 title: 'Usted presenta este factor?',
-                text: 'Factor: ' + factorName(symptoms[i])
+                text: factorName(symptoms[i])
             });
         }
     }
@@ -286,7 +291,21 @@ function diagnoseDisease(diagnose_position, diseaseFactors) {
             showCancelButton: false
         }).finally(function() {
             swal.resetDefaults();
-            diagnoseDisease(diagnose_position+1, diseaseFactors);
+            var timer = $('#forwardChaining').attr('data-timer');
+
+            $.ajax({
+                url: '../public/diagnostico/timer',
+                method: 'POST',
+                data:{timer:timer},
+                dataType:'json',
+                headers : {
+                    'X-CSRF-TOKEN' : $('#_token').val()
+                }
+            }).done(function() {
+
+            });
+            return;
+            //diagnoseDisease(diagnose_position+1, diseaseFactors);
         });
     }, function () {
         swal({
@@ -303,7 +322,7 @@ function diagnoseDisease(diagnose_position, diseaseFactors) {
 function factorName(factorId) {
     for (var i=0; i<globalFactorsIds.length; ++i) {
         if (globalFactorsIds[i] == factorId)
-            return globalFactorsNames[i];
+            return globalFactorsNames[i].bold()+'\n ('+globalFactorsDescriptions[i]+' )';
     }
 }
 

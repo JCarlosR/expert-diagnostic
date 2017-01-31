@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-8">
                                 <div class="input-group col-md-12">
                                     <table class="table table-hover table-condensed">
                                         <thead>
@@ -153,7 +153,16 @@
 
                                         </tbody>
                                     </table>
+
                                     <input type="hidden" id='_token' name="_token" value="{{ csrf_token() }}">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Enfermedad</div>
+                                    <div class="panel-body text-center "  id="answers" >
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
