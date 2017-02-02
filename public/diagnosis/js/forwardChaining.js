@@ -375,8 +375,8 @@ function save_diagnostic()
         url:'./diagnostico/guardar/'+patient+'/'+respuesta
     }).done( function (data) {
         if( data.success == 'true' )
-            showmessage(data.message);
+            showmessage(data.message,1);
         else
-            showmessage(data.message);
+            showmessage(data.message,0);
     });
 }
