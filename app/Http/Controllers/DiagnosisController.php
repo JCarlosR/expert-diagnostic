@@ -314,9 +314,9 @@ class DiagnosisController extends Controller
 
     public function saveDiagnostic( $patientId, $ruleId )
     {
-        $history = History::where('rule_id',$ruleId)->first();
-        if( $history == null )
-            return ['success'=>'true','message'=>'El paciente ya ha sido diagnosticado dicha enfermedad.'];
+        $history = History::where('rule_id',$ruleId)->where('patient_id',$patientId)->first();
+        if( $history <> null )
+            return ['success'=>'false','message'=>'El paciente ya ha sido diagnosticado dicha enfermedad.'];
 
         $date = new Carbon();
         $date = $date->format('Y-m-d');
