@@ -18,4 +18,9 @@ class History extends Model
         return $this->hasMany('App\Patient', 'id', 'patient_id');
     }
 
+    public function users()
+    {
+        return $this->hasMany('App\User', 'id', 'user_id');
+    }
+
 }

@@ -12,11 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Juan Ramos',
-            'email' => 'juancagb.17@gmail.com',
-            'password' => bcrypt('123123')
-        ]);
+
         User::create([
             'name' => 'Edilberto Soles',
             'email' => 'edilberto0905@gmail.com',
@@ -24,16 +20,11 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Jorge Gonzales',
+            'name' => 'Alejandro Correa',
             'email' => 'joryes1894@gmail.com',
             'password' => bcrypt('123456')
         ]);
 
-        User::create([
-            'name' => 'Miguel Juarez',
-            'email' => 'mjuarez.mj3@gmail.com',
-            'password' => bcrypt('123123')
-        ]);
 
     }
 }

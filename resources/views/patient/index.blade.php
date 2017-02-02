@@ -283,12 +283,14 @@
                                         <thead>
                                         <tr>
                                             <th>Diagnóstico</th>
+                                            <th>Médico</th>
                                             <th>Fecha</th>
                                         </tr>
                                         </thead>
                                         <template id="template-diagnosis">
                                             <tr>
                                                 <td data-diagnosis></td>
+                                                <td data-user></td>
                                                 <td data-date></td>
                                             </tr>
                                         </template>

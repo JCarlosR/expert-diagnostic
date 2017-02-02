@@ -20,7 +20,7 @@ class PatientController extends Controller
     }
 
     public function getDiagnosis($id){
-        $histories = History::where('patient_id', $id)->with('rules')->with('patients')->get();
+        $histories = History::where('patient_id', $id)->with('rules')->with('patients')->with('users')->get();
         //dd($histories[);
 
         return $histories;

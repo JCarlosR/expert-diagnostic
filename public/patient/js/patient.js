@@ -30,7 +30,7 @@ function showDiagnosticos() {
     $.getJSON('diagnosis/patient/'+id, function (data) {
         $('#table-diagnosis').html("");
         for ( var i=0; i<data.length; ++i ) {
-            renderTemplateDiagnosis(data[i].rules[0].disease_name, data[i].rules[0].percentage, data[i].created_at);
+            renderTemplateDiagnosis(data[i].rules[0].disease_name, data[i].rules[0].percentage, data[i].users[0].name, data[i].created_at);
         }
         console.log(data);
     });
@@ -42,10 +42,11 @@ function activateTemplate(id) {
     return document.importNode(t.content, true);
 }
 
-function renderTemplateDiagnosis(diagnosis, percentage, date) {
+function renderTemplateDiagnosis(diagnosis, percentage, user,date) {
     var clone = activateTemplate('#template-diagnosis');
 
     clone.querySelector("[data-diagnosis]").innerHTML = diagnosis + ' ' + percentage +' %';
+    clone.querySelector("[data-user]").innerHTML = user;
     clone.querySelector("[data-date]").innerHTML = date;
 
     $('#table-diagnosis').append(clone);
