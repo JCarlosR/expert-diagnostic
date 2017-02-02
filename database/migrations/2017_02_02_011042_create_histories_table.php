@@ -19,6 +19,8 @@ class CreateHistoriesTable extends Migration
             $table->string('date');
             $table->integer('rule_id')->unsigned();
             $table->foreign('rule_id')->references('id')->on('rules');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ use App\RuleRecommendation;
 use App\Symptom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class DiagnosisController extends Controller
@@ -319,11 +320,14 @@ class DiagnosisController extends Controller
             return ['success'=>'false','message'=>'El paciente ya ha sido diagnosticado dicha enfermedad.'];
 
         $date = new Carbon();
+        $date->tz = 'America/Lima';
         $date = $date->format('Y-m-d');
+
         $history = History::create([
             'patient_id'=>$patientId,
             'date'=>$date,
-            'rule_id'=>$ruleId
+            'rule_id'=>$ruleId,
+            'user_id'=>Auth()->user()->id
         ]);
 
         $history->save();
