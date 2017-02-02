@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\History;
 use App\Http\Requests;
 use App\Patient;
+use App\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +19,12 @@ class PatientController extends Controller
         return view('patient.index')->with(compact('patients'));;
     }
 
+    public function getDiagnosis($id){
+        $histories = History::where('patient_id', $id)->with('rules')->with('patients')->get();
+        //dd($histories[);
+
+        return $histories;
+    }
     public function store( Request $request )
     {
         $validator = Validator::make($request->all(), [ 'image'=>'image' ]);

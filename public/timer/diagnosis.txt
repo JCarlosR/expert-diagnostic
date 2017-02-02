@@ -27,3 +27,6 @@ Término de diagnóstico: 01-02-2017 10:05:25
 Duración de diagnóstico: 23.117602109909 segundos
 
 
+Inicio de diagnóstico: 01-02-2017 22:15:49
+Término de diagnóstico: 01-02-2017 22:16:08
+Duración de diagnóstico: 18.997069120407 segundosInicio de diagnóstico: 01-02-2017 23:49:05   Término de diagnóstico: 01-02-2017 23:49:27   Duración de diagnóstico: 21.610362052917 segundos
