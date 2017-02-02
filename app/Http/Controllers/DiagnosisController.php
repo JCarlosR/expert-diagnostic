@@ -316,7 +316,7 @@ class DiagnosisController extends Controller
     {
         $history = History::where('rule_id',$ruleId)->first();
         if( $history <> null )
-            return ['success'=>'true','message'=>'El paciente ya ha sido diagnosticado dicha enfermedad.'];
+            return ['success'=>'false','message'=>'El paciente ya ha sido diagnosticado dicha enfermedad.'];
 
         $date = new Carbon();
         $date = $date->format('Y-m-d');
