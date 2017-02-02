@@ -7,10 +7,12 @@ var globalFactorsIds = [];
 var globalFactorsNames = [];
 var globalFactorsDescriptions = [];
 var $modalRecommendation;
+var respuesta =0;
 function principal()
 {
-
-    $.getJSON('./enfermedades/factores', function (data) {
+    $.ajax({
+        url: './enfermedades/factores'
+    }).done(function (data) {
         $.each(data,function(key,value)
         {
             globalFactorsIds.push(value.id);
@@ -35,6 +37,8 @@ function principal()
 
     $modalRecommendation = $('#modalRecommendation');
     $('body').on('click','[data-recommendation]',modalRecommendation);
+
+    $('#save_diagnostic').on('click',save_diagnostic);
 }
 
 function sintomaAdd()
@@ -228,7 +232,9 @@ function diagnose() {
     var diseaseFactors = [];
     for (var i=0; i<ids.length; ++i) {
         var disease_id = ids[i];
-        $.getJSON('./enfermedades/factores/'+disease_id, function (data) {
+        $.ajax({
+            url:'./enfermedades/factores/'+disease_id
+        }).done(function (data) {
             var arreglo = [];
             $.each(data.factorIds,function(key,value)
             {
@@ -305,6 +311,7 @@ function diagnoseDisease(diagnose_position, diseaseFactors) {
                     'X-CSRF-TOKEN' : $('#_token').val()
                 }
             }).done(function() {
+                respuesta = disease_id;
                 $('#answer').append('<button class="btn btn-success" data-recommendation_name="'+name+'"  data-recommendation="'+disease_id+'">'+name+'</button>');
             });
             return;
@@ -343,7 +350,9 @@ function modalRecommendation()
     $('#name_recommendation').val(recommendation_name);
     $('#recommendations').html('');
 
-    $.getJSON('./enfermedades/recomendaciones/'+recommendation, function (data) {
+    $.ajax({
+        url:'./enfermedades/recomendaciones/'+recommendation
+    }).done( function (data) {
         $.each(data,function(key,value)
         {
             $('#recommendations').append('<i class="fa fa-check"></i> '+value.description+'<br>');
@@ -351,4 +360,23 @@ function modalRecommendation()
     });
 
     $modalRecommendation.modal('show');
+}
+
+function save_diagnostic()
+{
+    if( respuesta == 0 )
+    {
+        showmessage('El diagnóstico no se ha generado',1);
+        return;
+    }
+
+    var patient = $('#patienId').val();
+    $.ajax({
+        url:'./diagnostico/guardar/'+patient+'/'+respuesta
+    }).done( function (data) {
+        if( data.success == 'true' )
+            showmessage(data.message);
+        else
+            showmessage(data.message);
+    });
 }

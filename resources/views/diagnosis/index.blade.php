@@ -105,6 +105,7 @@
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Diagnosticando al paciente: {{ $patientName }}</h4>
+                            <input id="patienId" type="hidden" value="{{ $patientId  }}">
                         </div>
                         <br>
                         <div class="row">
@@ -176,7 +177,7 @@
                                 <button class="btn btn-success" id="forwardChaining" data-timer="{{$time_start}}">Diagnosticar</button>
                             </div>
                             <div class="col-md-3 text-center">
-                                <button class="btn btn-success">Guardar diagnostico</button>
+                                <button class="btn btn-success" id="save_diagnostic">Guardar diagnostico</button>
                             </div>
                             <div class="col-md-3 text-center">
                                 <a class="btn btn-danger" href="{{ url('pacientes') }}">Volver</a>

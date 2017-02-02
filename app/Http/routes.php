@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('enfermedades/factores','DiagnosisController@allFactors');
     Route::get('enfermedades/recomendaciones/{ruleId}','DiagnosisController@diseaseRecommendations');
 
+    // Guardar diagnóstico
+    Route::get('diagnostico/guardar/{patientId}/{ruleId}','DiagnosisController@saveDiagnostic');
+
     Route::post('diagnostico/forwardChaining','DiagnosisController@forwardChaining');
 
 // Knowledge-base routes

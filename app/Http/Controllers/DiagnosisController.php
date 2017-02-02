@@ -6,6 +6,7 @@ use App\Disease;
 use App\DiseaseMedication;
 use App\DiseaseSymptom;
 use App\Factor;
+use App\History;
 use App\Medication;
 use App\Patient;
 use App\Rule;
@@ -49,7 +50,7 @@ class DiagnosisController extends Controller
         $symptoms = Factor::where('type', 'S')->lists('name')->toJson();
         $others = Factor::where('type', 'O')->lists('name')->toJson();
 
-        return view('diagnosis.index')->with(compact('patientName', 'antecedents', 'symptoms', 'others','time_start'));
+        return view('diagnosis.index')->with(compact('patientName','patientId', 'antecedents', 'symptoms', 'others','time_start'));
     }
 
     public function getAll(){
@@ -309,5 +310,23 @@ class DiagnosisController extends Controller
         }
 
         return $recommendations;
+    }
+
+    public function saveDiagnostic( $patientId, $ruleId )
+    {
+        $history = History::where('rule_id',$ruleId)->first();
+        if( $history == null )
+            return ['success'=>'true','message'=>'El paciente ya ha sido diagnosticado dicha enfermedad.'];
+
+        $date = new Carbon();
+        $date = $date->format('Y-m-d');
+        $history = History::create([
+            'patient_id'=>$patientId,
+            'date'=>$date,
+            'rule_id'=>$ruleId
+        ]);
+
+        $history->save();
+        return ['success'=>'true','message'=>'Diagnóstico guardado correctamente.'];
     }
 }
