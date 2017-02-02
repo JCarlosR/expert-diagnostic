@@ -6,15 +6,50 @@ function principal(){
     $modalNuevo = $('#modalNuevo');
     $modalEditar = $('#modalEditar');
     $modalEliminar = $('#modalEliminar');
+    $modalDiagnosticos = $('#modalDiagnosticos');
 
     $('[data-id]').on('click', mostrarEditar);
     $('[data-delete]').on('click', mostrarEliminar);
+    $('[data-diagnosticos]').on('click', showDiagnosticos);
 
     $('#formEditar').on('submit', updatePatient);
     $('#formRegistrar').on('submit', registerPatient);
     $('#formEliminar').on('submit', deletePatient);
 
     $('#btnNew').on('click', mostrarNuevo);
+}
+
+var $modalDiagnosticos;
+
+function showDiagnosticos() {
+    var name = $(this).data('name');
+    var surname = $(this).data('surname');
+    var id = $(this).data('diagnosticos');
+    $modalDiagnosticos.find('[id="nombre"]').html(name+" "+surname);
+    
+    $.getJSON('diagnosis/patient/'+id, function (data) {
+        $('#table-diagnosis').html("");
+        for ( var i=0; i<data.length; ++i ) {
+            renderTemplateDiagnosis(data[i].rules[0].disease_name, data[i].rules[0].percentage, data[i].users[0].name, data[i].created_at);
+        }
+        console.log(data);
+    });
+    $modalDiagnosticos.modal('show');
+}
+
+function activateTemplate(id) {
+    var t = document.querySelector(id);
+    return document.importNode(t.content, true);
+}
+
+function renderTemplateDiagnosis(diagnosis, percentage, user,date) {
+    var clone = activateTemplate('#template-diagnosis');
+
+    clone.querySelector("[data-diagnosis]").innerHTML = diagnosis + ' ' + percentage +' %';
+    clone.querySelector("[data-user]").innerHTML = user;
+    clone.querySelector("[data-date]").innerHTML = date;
+
+    $('#table-diagnosis').append(clone);
 }
 
 function deletePatient() {

@@ -89,6 +89,7 @@
                                                     data-comment="{{ $patient->comment }}"><i class="fa fa-pencil" data-backdrop="false"></i></button>
                                             <button type="button"  class="btn btn-danger" data-delete="{{ $patient->id }}" data-name="{{ $patient->name }}" data-surname="{{ $patient->surname }}" data-backdrop="false"><i class="fa fa-trash"></i></button>
                                             <a href="{{url('diagnostico-'.$patient->id)}}" class="btn btn-info"><i class="fa fa-eye" data-backdrop="false"></i> Diagnosticar</a>
+                                            <button type="button"  class="btn btn-success" data-diagnosticos="{{ $patient->id }}" data-name="{{ $patient->name }}" data-surname="{{ $patient->surname }}" data-backdrop="false"><i class="fa fa-eye"></i>Historial</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -259,6 +260,56 @@
                         <button class="btn btn-primary"><span class="ti-save" aria-hidden="true"></span> Guardar paciente</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDiagnosticos" class="modal fade in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Diagnósticos del paciente:  <i id="nombre" ></i> </h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Listado de diagnósticos</h4>
+                                </div>
+                                <div class="content">
+                                    <table class="table table-hover table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <th>Diagnóstico</th>
+                                            <th>Médico</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                        </thead>
+                                        <template id="template-diagnosis">
+                                            <tr>
+                                                <td data-diagnosis></td>
+                                                <td data-user></td>
+                                                <td data-date></td>
+                                            </tr>
+                                        </template>
+                                        <tbody id="table-diagnosis">
+                                        {{-- Load with javascript --}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button class="btn btn-danger" data-dismiss="modal"><span class="ti-close"></span> Cancelar</button>
+                </div>
+
             </div>
         </div>
     </div>
