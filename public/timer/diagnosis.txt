@@ -1,38 +1,5 @@
+Inicio de diagnóstico: 02-02-2017 10:22:19
+Término de diagnóstico: 02-02-2017 10:24:22
+Duración de diagnóstico: 122.93350219727 segundos
 
-Inicio de diagnóstico: 01-02-2017 09:50:32
-Término de diagnóstico: 01-02-2017 09:51:14
-Duración de diagnóstico: 41.727038860321 segundos
-
-Inicio de diagnóstico: 01-02-2017 09:53:59
-Término de diagnóstico: 01-02-2017 09:54:59
-Duración de diagnóstico: 60.386499166489 segundos
-
-Inicio de diagnóstico: 01-02-2017 09:56:18
-Término de diagnóstico: 01-02-2017 09:56:44
-Duración de diagnóstico: 26.540825843811 segundos
-
-Inicio de diagnóstico: 01-02-2017 09:57:00
-Término de diagnóstico: 01-02-2017 09:57:35
-Duración de diagnóstico: 34.767956972122 segundos
-
-Inicio de diagnóstico: 01-02-2017 09:58:18
-Término de diagnóstico: 01-02-2017 09:58:52
-Duración de diagnóstico: 33.706008911133 segundos
-
-Inicio de diagnóstico: 01-02-2017 09:59:15
-Término de diagnóstico: 01-02-2017 10:00:17
-Duración de diagnóstico: 62.106607198715 segundos
-
-Inicio de diagnóstico: 01-02-2017 10:05:02
-Término de diagnóstico: 01-02-2017 10:05:25
-Duración de diagnóstico: 23.117602109909 segundos
-
-
-Inicio de diagnóstico: 01-02-2017 10:06:31
-Término de diagnóstico: 01-02-2017 10:07:40
-Duración de diagnóstico: 68.882480144501 segundosInicio de diagnóstico: 01-02-2017 10:12:25Inicio de diagnóstico: 01-02-2017 10:13:02Inicio de diagnóstico: 01-02-2017 10:14:12Inicio de diagnóstico: 01-02-2017 10:14:18Inicio de diagnóstico: 01-02-2017 10:16:01Inicio de diagnóstico: 01-02-2017 10:16:17Inicio de diagnóstico: 01-02-2017 10:18:17Inicio de diagnóstico: 01-02-2017 10:21:56   Término de diagnóstico: 01-02-2017 10:22:44
- Duración de diagnóstico: 48.07368183136 segundosInicio de diagnóstico: 01-02-2017 10:25:13   Término de diagnóstico: 01-02-2017 10:26:58
- Duración de diagnóstico: 104.97697710991 segundosInicio de diagnóstico: 01-02-2017 20:16:27   Término de diagnóstico: 01-02-2017 20:17:13   Duración de diagnóstico: 46.243656873703 segundosInicio de diagnóstico: 01-02-2017 20:21:10Inicio de diagnóstico: 01-02-2017 20:21:21Inicio de diagnóstico: 01-02-2017 20:21:57   Término de diagnóstico: 01-02-2017 20:22:48   Duración de diagnóstico: 50.7899081707 segundosInicio de diagnóstico: 01-02-2017 20:31:15Inicio de diagnóstico: 01-02-2017 20:31:49Inicio de diagnóstico: 01-02-2017 20:37:25Inicio de diagnóstico: 01-02-2017 20:38:26Inicio de diagnóstico: 01-02-2017 20:38:28Inicio de diagnóstico: 01-02-2017 20:41:05Inicio de diagnóstico: 01-02-2017 20:42:40   Término de diagnóstico: 01-02-2017 20:43:08   Duración de diagnóstico: 27.579567909241 segundosInicio de diagnóstico: 01-02-2017 21:51:30Inicio de diagnóstico: 01-02-2017 22:06:46Inicio de diagnóstico: 01-02-2017 22:07:03   Término de diagnóstico: 01-02-2017 22:07:38   Duración de diagnóstico: 35.539067983627 segundosInicio de diagnóstico: 01-02-2017 22:10:10   Término de diagnóstico: 01-02-2017 22:10:37   Duración de diagnóstico: 27.396670103073 segundosInicio de diagnóstico: 01-02-2017 22:12:49   Término de diagnóstico: 01-02-2017 22:13:14   Duración de diagnóstico: 25.048404932022 segundosInicio de diagnóstico: 01-02-2017 22:41:07Inicio de diagnóstico: 01-02-2017 22:42:29Inicio de diagnóstico: 01-02-2017 23:27:39   Término de diagnóstico: 01-02-2017 23:28:04   Duración de diagnóstico: 24.931429862976 segundos
-
-Inicio de diagnóstico: 02-02-2017 00:06:50   Término de diagnóstico: 02-02-2017 00:07:06   Duración de diagnóstico: 16.582971096039 segundosInicio de diagnóstico: 02-02-2017 00:07:11   Término de diagnóstico: 02-02-2017 00:07:42   Duración de diagnóstico: 30.775799036026 segundos   Término de diagnóstico: 02-02-2017 00:08:05   Duración de diagnóstico: 54.009128093719 segundosInicio de diagnóstico: 02-02-2017 00:10:37Inicio de diagnóstico: 02-02-2017 00:15:15   Término de diagnóstico: 02-02-2017 00:15:28   Duración de diagnóstico: 13.038289070129 segundos
-
+Inicio de diagnóstico: 02-02-2017 10:31:29
